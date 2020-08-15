@@ -152,7 +152,6 @@
 
                     {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
                     {%- assign tabletimg_url = block.settings.tabletimage | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                    {%- assign tabletimg_landscape_url = block.settings.tabletimagelandscape | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
                     {%- assign mobileimg_url = block.settings.mobileimage | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
                     <img class="desktop_banner image-fit hero__image hero__image--{{ block.id }} lazyload"
@@ -170,14 +169,6 @@
                       data-sizes="auto"
                       data-parent-fit="cover"
                       alt="{{ block.settings.tabletimage.alt | escape }}">
-
-                    <img class="tablet_banner_landscape image-fit hero__image hero__image--{{ block.id }} lazyload"
-                      src=""
-                      data-src="{{ tabletimg_landscape_url }}"
-                      data-aspectratio="{{ block.settings.tabletimagelandscape.aspect_ratio }}"
-                      data-sizes="auto"
-                      data-parent-fit="cover"
-                      alt="{{ block.settings.tabletimagelandscape.alt | escape }}">
 
                     <img class="mobile_banner image-fit hero__image hero__image--{{ block.id }} lazyload"
                       src=""
@@ -493,12 +484,7 @@
           {
             "type": "image_picker",
             "id": "tabletimage",
-            "label": "Image for tablet (Portrait)"
-          },
-          {
-            "type": "image_picker",
-            "id": "tabletimagelandscape",
-            "label": "Image for tablet (Landscape)"
+            "label": "Image for tablet"
           },
           {
             "type": "image_picker",

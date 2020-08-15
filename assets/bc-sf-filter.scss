@@ -6,11 +6,11 @@ $searchBoxMobileHeight: 50px;
 /* boostcommerce font */
 @font-face {
   font-family: bc-sf-filter-ico;
-  src: url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/40\/assets\/bc-sf-filter-ico.eot?1fx0e3\u0026v=7113362512250643457");
-  src: url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/40\/assets\/bc-sf-filter-ico.eot?1fx0e3%23iefix\u0026v=7113362512250643457") format('embedded-opentype'),
-  url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/40\/assets\/bc-sf-filter-ico.ttf?1fx0e3\u0026v=14909203515321520148") format('truetype'),
-  url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/40\/assets\/bc-sf-filter-ico.woff?1fx0e3\u0026v=15222002608926346383") format('woff'),
-  url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/40\/assets\/bc-sf-filter-ico.svg?1fx0e3%23icomoon\u0026v=11737008707679714487") format('svg');
+  src: url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/41\/assets\/bc-sf-filter-ico.eot?1fx0e3\u0026v=7113362512250643457");
+  src: url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/41\/assets\/bc-sf-filter-ico.eot?1fx0e3%23iefix\u0026v=7113362512250643457") format('embedded-opentype'),
+  url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/41\/assets\/bc-sf-filter-ico.ttf?1fx0e3\u0026v=14909203515321520148") format('truetype'),
+  url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/41\/assets\/bc-sf-filter-ico.woff?1fx0e3\u0026v=15222002608926346383") format('woff'),
+  url("\/\/cdn.shopify.com\/s\/files\/1\/2100\/2051\/t\/41\/assets\/bc-sf-filter-ico.svg?1fx0e3%23icomoon\u0026v=11737008707679714487") format('svg');
   font-weight: 400;
   font-style: normal;
 }
@@ -44,4 +44,126 @@ $searchBoxMobileHeight: 50px;
 .bc-hide { display: none !important; }
 @media screen and (max-width: 767px) {
     #bc-sf-filter-tree { display:block !important}
+}
+
+.bc-sf-filter-selection-wrapper {
+  display: none;
+}
+
+.bc-sf-filter-option-block {
+    margin: 0;
+    padding: 20px 0 15px;
+/*     border-bottom: none; */
+  
+  	.bc-sf-filter-block-title {
+      h3 {
+        span {
+          font-weight: 500;
+          font-size: 13px;
+          letter-spacing: 0.4px;
+          font-family: 'larsseitregular', sans-serif;
+          
+          &:before {
+            right: -8px;
+            border: 2px solid black;
+            border-left: none;
+            border-top: none;
+          }
+        }
+      }
+      
+      .bc-sf-filter-clear {
+        display: none;
+      }
+    }
+  
+    .bc-sf-filter-block-content {
+        ul {
+            li {
+              	margin-bottom: 18px;
+              	a {
+                  font-size: 14px;
+                  
+                    &.selected {
+                        >span {
+
+                            &:first-child {
+                                &:before {
+                                    content: '';
+                                    width: 10px !important;
+                                    height: 10px !important;
+                                    position: absolute;
+                                    top: 2px !important;
+                                    left: 2px !important;
+                                    border: none !important;
+                                    background: #000 !important;
+                                    transform: none !important;
+                                    -webkit-box-sizing: border-box;
+                                    box-sizing: border-box;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+  
+  	.bc-sf-filter-option-multiple-list {
+        li {
+            
+        }
+    }
+  
+}
+
+#bc-sf-filter-tree2 {
+  padding: 0 25px 0 20px;
+}
+
+.template-search .image-wrap img {opacity: 1;}
+
+.filter__title {
+  .bc-sf-filter-clear-all {
+    margin-top: -5px;
+    display: none;
+    
+    @media screen and (min-width: 767px) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    
+    @media screen and (max-width: 767px) {
+      margin-right: 20px;
+    }
+    
+    
+  }
+}
+
+#bc-sf-filter-load-more-total {
+  display: none;
+}
+
+.bc-sf-filter-load-more-button {
+  display: inline-block;
+  border: 1px solid #000;
+  padding: 12px 20px;
+  font-size: 14px;
+  min-width: 120px;
+}
+
+.bc-sf-filter-option-block .bc-sf-filter-block-content .bc-sf-filter-option-multiple-list li a>span:first-child {
+  top: 5px !important;
+}
+
+.products_count_mobile {
+  font-size: 14px;
+  margin-left: 10px;
+  margin-top: -10px;
+}
+
+#bc-sf-filter-load-more {
+  padding: 0;
 }

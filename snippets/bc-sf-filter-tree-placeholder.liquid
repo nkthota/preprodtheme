@@ -1,22 +1,87 @@
-{%- assign bc_settings = shop.metafields.bc-sf-filter.settings -%}
-{% if bc_settings contains 'showPlaceholder":' %}
-	{%- assign bc_placeholder_enable = bc_settings | split: 'showPlaceholder":' | last | split: ',' | first | split: '}' | first | strip -%}
-{% else %}
-	{%- assign bc_placeholder_enable = 'true' -%}
-{% endif %}
-
-{% if bc_placeholder_enable == 'true' %}
-  {% for i in (1..3) %}
-  <div class="bc-sf-filter-option-block bc-sf-filter-option-skeleton">
-    <div class="bc-sf-filter-block-title">
-      <h3><span></span></h3>
+<div id="bc-sf-filter-options-wrapper">
+    <div
+        class="bc-sf-filter-option-block bc-sf-filter-option-block-list bc-sf-filter-option-block-designer"
+        data-id="pf_v_designer"
+        data-type="vendor"
+        data-display-type="list"
+        data-select-type="multiple"
+        data-title="Designer"
+        data-block-id="bc-sf-filter-option-block-designer"
+        data-collapse-pc="true"
+        data-collapse-mobile="true"
+        data-show-search-box-pc="true"
+        data-show-search-box-mobile="true"
+        data-show-more-type="none"
+        data-filter-option='{"filterType":"vendor","label":"Designer","isCollapseMobile":true,"isCollapsePC":true,"tooltip":null,"displayAllValuesInUppercaseForm":false,"showSearchBoxFilterMobile":true,"showSearchBoxFilterPC":true,"showMoreType":"none","sortManualValues":false,"sortType":"key-asc","filterOptionId":"pf_v_designer","position":0,"selectType":"multiple","status":"active","valueType":"all","displayType":"list","manualValues":null,"removeTextFilterValues":"","replaceTextFilterValues":null,"excludedValues":[],"values":[{"key":"5X By Ajit Kumar","doc_count":14},{"key":"Aarbee by Ravi Bhalotia","doc_count":20},{"key":"Abhinav Mishra","doc_count":33},{"key":"Abhishek Vermaa","doc_count":18},{"key":"AGT By Amit GT","doc_count":46},{"key":"Aisha Rao","doc_count":58},{"key":"AM:PM","doc_count":158},{"key":"Anju Modi","doc_count":47},{"key":"Anupamaa Dayal","doc_count":54},{"key":"Asha Gautam","doc_count":27},{"key":"Bhumika Grover","doc_count":43},{"key":"Bhumika Sharma","doc_count":40},{"key":"BlushAndM","doc_count":17},{"key":"Charu &amp; Vasundhara","doc_count":21},{"key":"Charu Parashar","doc_count":19},{"key":"Chhavvi Aggarwal","doc_count":20},{"key":"Ekaya","doc_count":27},{"key":"House of Neha &amp; Tarun","doc_count":24},{"key":"Jasmine Bains","doc_count":21},{"key":"Joy Mitra","doc_count":19},{"key":"Jyothi Sachdev Iyer","doc_count":42},{"key":"K-Anshika","doc_count":34},{"key":"Kaia","doc_count":29},{"key":"Kanelle","doc_count":85},{"key":"Kavita Bhartia","doc_count":26},{"key":"Keerthi Kadire","doc_count":26},{"key":"Khalom","doc_count":17},{"key":"Kshitij Jalori","doc_count":14},{"key":"Label Earthen","doc_count":24},{"key":"Lavanya Ahuja","doc_count":14},{"key":"Madsam Tinzin","doc_count":7},{"key":"Mahima Mahajan","doc_count":131},{"key":"Maliha","doc_count":20},{"key":"Megha &amp; Jigar","doc_count":135},{"key":"Mishru","doc_count":93},{"key":"Monika Nidhii","doc_count":13},{"key":"Mrunalini Rao","doc_count":13},{"key":"Nadima Saqib","doc_count":19},{"key":"Nautanky","doc_count":33},{"key":"Nitika Kanodia Gupta","doc_count":27},{"key":"Ozel","doc_count":2},{"key":"O’Frida","doc_count":33},{"key":"Papa Don&apos;t Preach By Shubhika","doc_count":25},{"key":"Parul and Preyanka","doc_count":24},{"key":"Patine","doc_count":55},{"key":"Paulmi &amp; Harsh","doc_count":35},{"key":"Payal Pratap","doc_count":91},{"key":"Payal Singhal","doc_count":118},{"key":"Pernia Qureshi","doc_count":63},{"key":"Pink Peacock Couture","doc_count":70},{"key":"Pooja Sampat","doc_count":45},{"key":"Prathyusha Garimella","doc_count":69},{"key":"Preeti S Kapoor","doc_count":11},{"key":"Rabani &amp; Rakha","doc_count":22},{"key":"Rajdeep Ranawat","doc_count":73},{"key":"Rhea Pillai Rastogi","doc_count":25},{"key":"RI.RItu Kumar","doc_count":381},{"key":"Ridhi Mehra","doc_count":76},{"key":"Rishi &amp; Vibhuti","doc_count":22},{"key":"Ritu Kumar","doc_count":146},{"key":"Rozina","doc_count":42},{"key":"Ruchira Nangalia","doc_count":36},{"key":"Saaksha &amp; Kinni","doc_count":73},{"key":"Saksham &amp; Neharicka","doc_count":123},{"key":"Samant Chauhan","doc_count":20},{"key":"Sana Barreja","doc_count":51},{"key":"Shloka Khialani","doc_count":15},{"key":"Shruti Sancheti","doc_count":30},{"key":"Shyam Narayan Prasad","doc_count":202},{"key":"Siddhartha Bansal","doc_count":28},{"key":"Soup By Sougat Paul","doc_count":70},{"key":"Summer by Priyanka Gupta","doc_count":32},{"key":"Sureena Chowdhri","doc_count":30},{"key":"Taavare","doc_count":42},{"key":"The Little Black Bow","doc_count":24},{"key":"The Right Cut","doc_count":31},{"key":"Torani","doc_count":112},{"key":"Umbar By Payal Pratap","doc_count":21},{"key":"Umrao Couture","doc_count":15},{"key":"Varun Chakkilam","doc_count":18},{"key":"Vidushi Gupta","doc_count":17},{"key":"Vilasa","doc_count":19},{"key":"Vivek Patel","doc_count":19},{"key":"Vvani by Vani Vats","doc_count":22},{"key":"Zoraya","doc_count":14}],"showMoreDataDown":[],"firstBuild":[{"key":"5X By Ajit Kumar","doc_count":14},{"key":"Aarbee by Ravi Bhalotia","doc_count":20},{"key":"Abhinav Mishra","doc_count":33},{"key":"Abhishek Vermaa","doc_count":18},{"key":"AGT By Amit GT","doc_count":46},{"key":"Aisha Rao","doc_count":58},{"key":"AM:PM","doc_count":158},{"key":"Anju Modi","doc_count":47},{"key":"Anupamaa Dayal","doc_count":54},{"key":"Asha Gautam","doc_count":27},{"key":"Bhumika Grover","doc_count":43},{"key":"Bhumika Sharma","doc_count":40},{"key":"BlushAndM","doc_count":17},{"key":"Charu &amp; Vasundhara","doc_count":21},{"key":"Charu Parashar","doc_count":19},{"key":"Chhavvi Aggarwal","doc_count":20},{"key":"Ekaya","doc_count":27},{"key":"House of Neha &amp; Tarun","doc_count":24},{"key":"Jasmine Bains","doc_count":21},{"key":"Joy Mitra","doc_count":19},{"key":"Jyothi Sachdev Iyer","doc_count":42},{"key":"K-Anshika","doc_count":34},{"key":"Kaia","doc_count":29},{"key":"Kanelle","doc_count":85},{"key":"Kavita Bhartia","doc_count":26},{"key":"Keerthi Kadire","doc_count":26},{"key":"Khalom","doc_count":17},{"key":"Kshitij Jalori","doc_count":14},{"key":"Label Earthen","doc_count":24},{"key":"Lavanya Ahuja","doc_count":14},{"key":"Madsam Tinzin","doc_count":7},{"key":"Mahima Mahajan","doc_count":131},{"key":"Maliha","doc_count":20},{"key":"Megha &amp; Jigar","doc_count":135},{"key":"Mishru","doc_count":93},{"key":"Monika Nidhii","doc_count":13},{"key":"Mrunalini Rao","doc_count":13},{"key":"Nadima Saqib","doc_count":19},{"key":"Nautanky","doc_count":33},{"key":"Nitika Kanodia Gupta","doc_count":27},{"key":"Ozel","doc_count":2},{"key":"O’Frida","doc_count":33},{"key":"Papa Don&apos;t Preach By Shubhika","doc_count":25},{"key":"Parul and Preyanka","doc_count":24},{"key":"Patine","doc_count":55},{"key":"Paulmi &amp; Harsh","doc_count":35},{"key":"Payal Pratap","doc_count":91},{"key":"Payal Singhal","doc_count":118},{"key":"Pernia Qureshi","doc_count":63},{"key":"Pink Peacock Couture","doc_count":70},{"key":"Pooja Sampat","doc_count":45},{"key":"Prathyusha Garimella","doc_count":69},{"key":"Preeti S Kapoor","doc_count":11},{"key":"Rabani &amp; Rakha","doc_count":22},{"key":"Rajdeep Ranawat","doc_count":73},{"key":"Rhea Pillai Rastogi","doc_count":25},{"key":"RI.RItu Kumar","doc_count":381},{"key":"Ridhi Mehra","doc_count":76},{"key":"Rishi &amp; Vibhuti","doc_count":22},{"key":"Ritu Kumar","doc_count":146},{"key":"Rozina","doc_count":42},{"key":"Ruchira Nangalia","doc_count":36},{"key":"Saaksha &amp; Kinni","doc_count":73},{"key":"Saksham &amp; Neharicka","doc_count":123},{"key":"Samant Chauhan","doc_count":20},{"key":"Sana Barreja","doc_count":51},{"key":"Shloka Khialani","doc_count":15},{"key":"Shruti Sancheti","doc_count":30},{"key":"Shyam Narayan Prasad","doc_count":202},{"key":"Siddhartha Bansal","doc_count":28},{"key":"Soup By Sougat Paul","doc_count":70},{"key":"Summer by Priyanka Gupta","doc_count":32},{"key":"Sureena Chowdhri","doc_count":30},{"key":"Taavare","doc_count":42},{"key":"The Little Black Bow","doc_count":24},{"key":"The Right Cut","doc_count":31},{"key":"Torani","doc_count":112},{"key":"Umbar By Payal Pratap","doc_count":21},{"key":"Umrao Couture","doc_count":15},{"key":"Varun Chakkilam","doc_count":18},{"key":"Vidushi Gupta","doc_count":17},{"key":"Vilasa","doc_count":19},{"key":"Vivek Patel","doc_count":19},{"key":"Vvani by Vani Vats","doc_count":22},{"key":"Zoraya","doc_count":14}]}'
+    >
+        <div class="bc-sf-filter-block-title">
+            <h3 aria-label="designer" tabindex="0" role="button" aria-controls="bc-sf-filter-option-block-designer" aria-expanded="false"><span class="up">Designer</span></h3>
+            <a href="javascript:;" role="button" aria-label="Clear" class="bc-sf-filter-clear" onclick="clearFilterOption(event, this, 'pf_v_designer')">Clear</a>
+        </div>
+        <div class="bc-sf-filter-option-show-search-box-wrapper" style="display: none;">
+            <input aria-label="Search Options" data-show-search-box-parent-id="pf_v_designer" class="bc-sf-filter-option-show-search-box" onkeyup="buildShowSearchBoxEvent(this)" type="text" autocomplete="on" placeholder="Search options" />
+        </div>
+        
     </div>
-    <div class="bc-sf-filter-block-content">
-      <span class="bc-sf-filter-skeleton-text bc-sf-filter-skeleton-width3"></span>
-      <span class="bc-sf-filter-skeleton-text bc-sf-filter-skeleton-width4"></span>
-      <span class="bc-sf-filter-skeleton-text bc-sf-filter-skeleton-width2"></span>
-      <span class="bc-sf-filter-skeleton-text bc-sf-filter-skeleton-width1"></span>
+    <div
+        class="bc-sf-filter-option-block bc-sf-filter-option-block-list bc-sf-filter-option-block-type"
+        data-id="pf_t_type"
+        data-type="tag"
+        data-display-type="list"
+        data-select-type="multiple"
+        data-title="Type"
+        data-prefix=""
+        data-block-id="bc-sf-filter-option-block-type"
+        data-collapse-pc="true"
+        data-collapse-mobile="true"
+        data-show-search-box-pc="false"
+        data-show-search-box-mobile="false"
+        data-show-more-type="none"
+        data-filter-option='{"filterType":"tag","label":"Type","isCollapseMobile":true,"isCollapsePC":true,"tooltip":null,"displayAllValuesInUppercaseForm":false,"showSearchBoxFilterMobile":false,"showSearchBoxFilterPC":false,"showMoreType":"none","sortManualValues":false,"sortType":"key-asc","filterOptionId":"pf_t_type","position":"3","selectType":"multiple","status":"active","valueType":"specific","displayType":"list","manualValues":["Anarkali","Lehenga","Saree","Maxi Dress","Dress","Skirt","Traditional Gown","Modern Gown","Tunic","Kaftan","Jumpsuit","Jacket","Cape","Earring","Necklace","Bracelet","Ring","Hair","Brooche","Shoulder Bag","Clutch","Ballerina","Pump","Sandal","Flat","Sharara","Kaftans","Gown","Pant","Top","Scarf","Stole","Churidar","Kurta","Shirt","Crop","Dhoti","Angarkha","Palazzo","Garara","Salwar","Shorts","Dupatta"],"prefix":"","useAndCondition":false,"removeTextFilterValues":"","replaceTextFilterValues":null,"excludedValues":null,"values":[{"key":"Lehenga","doc_count":7},{"key":"Skirt","doc_count":1},{"key":"Tunic","doc_count":2},{"key":"Jacket","doc_count":2},{"key":"Gown","doc_count":8},{"key":"Pant","doc_count":1},{"key":"Kurta","doc_count":1},{"key":"Dupatta","doc_count":3}],"showMoreDataDown":[],"firstBuild":[{"key":"Lehenga","doc_count":7},{"key":"Skirt","doc_count":1},{"key":"Tunic","doc_count":2},{"key":"Jacket","doc_count":2},{"key":"Gown","doc_count":8},{"key":"Pant","doc_count":1},{"key":"Kurta","doc_count":1},{"key":"Dupatta","doc_count":3}]}'
+    >
+        <div class="bc-sf-filter-block-title">
+            <h3 aria-label="type" tabindex="0" role="button" aria-controls="bc-sf-filter-option-block-type" aria-expanded="false"><span class="up">Type</span></h3>
+        </div>
+        
     </div>
-  </div>
-  {% endfor %}
-{% endif %}
+    <div
+        class="bc-sf-filter-option-block bc-sf-filter-option-block-list bc-sf-filter-option-block-price"
+        data-id="pf_p_price"
+        data-type="price"
+        data-display-type="list"
+        data-title="Price"
+        data-block-id="bc-sf-filter-option-block-price"
+        data-collapse-pc="true"
+        data-collapse-mobile="true"
+        data-show-search-box-pc="false"
+        data-show-search-box-mobile="false"
+        data-show-more-type="scrollbar"
+        data-filter-option='{"filterType":"price","label":"Price","isCollapseMobile":true,"isCollapsePC":true,"tooltip":null,"showSearchBoxFilterMobile":false,"showSearchBoxFilterPC":false,"showMoreType":"scrollbar","sortManualValues":false,"sortType":"key-asc","filterOptionId":"pf_p_price","position":2,"status":"active","displayType":"list","sliderRange":4,"sliderStep":1,"manualValues":[":50","50:100","100:200","200:350","350:500","500:750","750:1000","1000:2000","2000:"],"values":[{"key":"*-50","to":50,"doc_count":0},{"key":"50-100","from":50,"to":100,"doc_count":0},{"key":"100-200","from":100,"to":200,"doc_count":0},{"key":"200-350","from":200,"to":350,"doc_count":1},{"key":"350-500","from":350,"to":500,"doc_count":3},{"key":"500-750","from":500,"to":750,"doc_count":2},{"key":"750-1000","from":750,"to":1000,"doc_count":7},{"key":"1000-2000","from":1000,"to":2000,"doc_count":7},{"key":"2000-*","from":2000,"doc_count":0}],"showMoreDataDown":[],"firstBuild":[{"key":"*-50","to":50,"doc_count":0},{"key":"50-100","from":50,"to":100,"doc_count":0},{"key":"100-200","from":100,"to":200,"doc_count":0},{"key":"200-350","from":200,"to":350,"doc_count":1},{"key":"350-500","from":350,"to":500,"doc_count":3},{"key":"500-750","from":500,"to":750,"doc_count":2},{"key":"750-1000","from":750,"to":1000,"doc_count":7},{"key":"1000-2000","from":1000,"to":2000,"doc_count":7},{"key":"2000-*","from":2000,"doc_count":0}]}'
+    >
+        <div class="bc-sf-filter-block-title">
+            <h3 aria-label="price" tabindex="0" role="button" aria-controls="bc-sf-filter-option-block-price" aria-expanded="false"><span class="up">Price</span></h3>
+        </div>
+        
+    </div>
+    <div
+        class="bc-sf-filter-option-block bc-sf-filter-option-block-list bc-sf-filter-option-block-color"
+        data-id="pf_t_color"
+        data-type="tag"
+        data-display-type="list"
+        data-select-type="multiple"
+        data-title="Color"
+        data-prefix=""
+        data-block-id="bc-sf-filter-option-block-color"
+        data-collapse-pc="true"
+        data-collapse-mobile="true"
+        data-show-search-box-pc="false"
+        data-show-search-box-mobile="false"
+        data-show-more-type="none"
+        data-filter-option='{"filterType":"tag","label":"Color","isCollapseMobile":true,"isCollapsePC":true,"tooltip":null,"displayAllValuesInUppercaseForm":false,"showSearchBoxFilterMobile":false,"showSearchBoxFilterPC":false,"showMoreType":"none","sortManualValues":false,"sortType":"key-asc","filterOptionId":"pf_t_color","position":"3","selectType":"multiple","status":"active","valueType":"specific","displayType":"list","manualValues":["Gray","Red","White","Pink","Silver","Black","Blue","Brown","Green","Purple","Beige","Gold","Ivory","Orange","Yellow","Navy","Peach","Maroon"],"prefix":"","useAndCondition":false,"removeTextFilterValues":"","replaceTextFilterValues":null,"excludedValues":null,"values":[{"key":"Gray","doc_count":1},{"key":"Red","doc_count":2},{"key":"White","doc_count":1},{"key":"Pink","doc_count":5},{"key":"Black","doc_count":2},{"key":"Blue","doc_count":4},{"key":"Green","doc_count":5},{"key":"Purple","doc_count":1},{"key":"Ivory","doc_count":3},{"key":"Navy","doc_count":2},{"key":"Maroon","doc_count":2}],"showMoreDataDown":[],"firstBuild":[{"key":"Gray","doc_count":1},{"key":"Red","doc_count":2},{"key":"White","doc_count":1},{"key":"Pink","doc_count":5},{"key":"Black","doc_count":2},{"key":"Blue","doc_count":4},{"key":"Green","doc_count":5},{"key":"Purple","doc_count":1},{"key":"Ivory","doc_count":3},{"key":"Navy","doc_count":2},{"key":"Maroon","doc_count":2}]}'
+    >
+        <div class="bc-sf-filter-block-title">
+            <h3 aria-label="color" tabindex="0" role="button" aria-controls="bc-sf-filter-option-block-color" aria-expanded="false"><span class="up">Color</span></h3>
+        </div>
+        
+    </div>
+</div>
