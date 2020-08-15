@@ -31,7 +31,7 @@
       {% endif %}
       collection_tags: {{ current_tags | json }},
       current_tags: {{ current_tags | json }},
-      default_sort_by: "{{ collection.default_sort_by }}",
+      default_sort_by: "manual",
       swatch_extension: "png",
       no_image_url: "{{ 'bc-sf-filter-no-image.gif' | asset_url }}",
       search_term: "{{ search.terms | default: '' }}",

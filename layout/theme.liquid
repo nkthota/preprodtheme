@@ -65,6 +65,10 @@
         display: none!important;
       }
 
+      .header-sticky-wrapper {
+        border-bottom: 5px solid black;
+      }
+
       .size_wrpper .custom_sizing_label {
         margin-bottom: 0!important;
       }
@@ -79,8 +83,8 @@
     .js-address-form .input-full:hover, 
     .js-address-form .input-full:active {
       appearance: none;
-      height: 40.046px;
-      padding: 9.940px 1.07rem;
+      height: 2.86rem;
+      padding: .71rem 1.07rem;
       width: 100%;
       border-radius: 0;
       background-color: #fff;
@@ -88,13 +92,8 @@
       font-size: 1rem!important;
     }
 
-    #AddressCountry_4370895929508,
-    #AddressProvince_4370895929508 {
-      padding: 0 1.07rem!important;
-    }
-
     .js-address-form label {
-        font-size: 0.85rem;
+        font-size: 1rem;
         font-weight: 600;
         line-height: 1.2;
         letter-spacing: .105em;
@@ -121,7 +120,10 @@
         vertical-align: bottom!important;
       }
 
-      @media only screen and (min-width : 768px) and (max-width : 1199px) { 
+      @media only screen 
+      and (min-device-width : 768px) 
+      and (max-device-width : 1024px) 
+      and (orientation : landscape) { 
 
         .site-header__search-btn {
             background: #000;
@@ -130,6 +132,11 @@
 
         .site-header__search-input {
           border-bottom: 1px solid black!important;
+        }
+
+        .slide-menu {
+          display: block!important;
+          width: 40%!important;
         }
 
         .header-item--left .site-nav {
@@ -152,6 +159,10 @@
           display: none!important;
         }
 
+        .header-sticky-wrapper {
+            border-bottom: 5px solid black!important;
+        }
+
         .header-item--icons .site-nav .header_right_part {
           margin-top: 15px!important;
         }
@@ -169,7 +180,6 @@
         }
       }
 
-      
       @media only screen 
       and (min-device-width : 1024px) 
       and (max-device-width : 1200px) {
@@ -210,18 +220,6 @@
       @media only screen and (min-width: 701px) and (max-width: 767px){
         .hero__text-wrap {
           height: 90%!important;
-        }
-      }
-
-      @media only screen and (min-width: 701px) and (max-width: 1024px) { 
-        .index-section--hero .slideshow-wrapper .image-fit {
-          object-fit: cover!important;
-        }
-      }
-
-      @media only screen and (min-width: 1025px) and (max-width: 1199px){ 
-        .index-section--hero .slideshow-wrapper .image-fit {
-          object-fit: cover!important;
         }
       }
   {% endstyle %}
@@ -278,6 +276,12 @@
   {% if template contains 'collection' %}
   <script src="{{ 'infinite-scroll.js' | asset_url }}"></script>
   {% endif %}
+
+<!--begin-bc-sf-filter-css-->
+  {% include 'bc-sf-filter-style' %}
+<!--end-bc-sf-filter-css-->
+
+
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" data-transitions="false">  
@@ -458,13 +462,6 @@
       $(".action_slide").on('click', function(){
         $(".slidemenu").slideToggle();
       });
-
-      // Reward Point Calculaiton
-
-      var price = $(".product__price span[class='money']").text();
-      var main_price = parseFloat(price.replace(/[^\d.]/g, ''));
-      $("#reward-point").text(main_price*5);
-      //console.log("Price: " + main_price*5);
     });
   </script>
 
@@ -473,5 +470,9 @@
   
   
   {% include 'modal-script' %}
+
+<!--begin-bc-sf-filter-js-->
+  {% include 'bc-sf-filter' %}
+<!--end-bc-sf-filter-js-->
 </body>
 </html>

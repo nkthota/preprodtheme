@@ -1,4 +1,3 @@
-{%- if section.settings.enable_sidebar -%}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
@@ -13,7 +12,7 @@
     
     <header class="section-header custom_section_header medium-up--hide">
       <h1 class="section-header__title d-flex justify-content-center align-items-center">
-        {{ collection.title }}<span class="products_count_mobile">({{ collection.products_count }})</span>
+        {{ collection.title }} <span class="products_count">({{ collection.products_count }} items)</span>
       </h1>
       
       {% include 'subcollections-list' %}
@@ -21,7 +20,7 @@
         
 
     {%- if section.settings.filter_style == 'sidebar' -%}
-    {%- assign sort_by = collection.sort_by -%}
+    {%- assign sort_by = collection.sort_by | default: 'manual' -%}
     <div class="collection-sidebar">
       <div class="filter_item">
         <h1 class="filter__title filter_order">
@@ -30,7 +29,7 @@
         </h1>
 
         <div class="form-horizontal toggle_div small--hide">
-          <div class="os_categoryFilterLinks" id="bc-sf-filter-top-sorting">
+          <div class="os_categoryFilterLinks">
             <ul>
               <li{% if sort_by == "manual" %} class="active"{% endif %}><a href="#sort" data-select="manual">Recommended</a></li>
               <li{% if sort_by == "price-descending" %} class="active"{% endif %}><a href="#sort" data-select="price-descending">Price High – Low</a></li>
@@ -45,13 +44,10 @@
       <div class="filter_item">
         <h1 class="filter__title filter_side">
           <span>FILTER BY</span>
-          <a href="javascript:;" aria-label="Reset filters" class="bc-sf-filter-clear-all" onclick="clearAllFilterOptions(event)">Reset filters</a>
           <img src="{{ 'filter.svg' | asset_url }}" />
          </h1>
         <div class="toggle_div small--hide">
-          <div id="bc-sf-filter-tree" class="bc-sf-filter-tree-mobile-open">
-            {% render 'bc-sf-filter-tree-placeholder' %}
-          </div>
+          {% include 'collection-sidebar-filters', location: 'CollectionSidebar' %}
         </div>        
       </div>
     </div>
@@ -71,7 +67,7 @@
       
       <h1 class="filter__title">Sort By</h1>
       <div class="form-horizontal toggle_div">
-        <div class="os_categoryFilterLinks" id="bc-sf-filter-top-sorting-mobile">
+        <div class="os_categoryFilterLinks">
           <ul>
             <li{% if sort_by == "manual" %} class="active"{% endif %}><a href="#sort" data-select="manual">Recommended</a></li>
             <li{% if sort_by == "price-descending" %} class="active"{% endif %}><a href="#sort" data-select="price-descending">Price High – Low</a></li>
@@ -91,18 +87,9 @@
         <button type="button" class="custom_drawer__close">x</button>
       </div>
 
-      <h1 class="filter__title">
-        <span>FILTER BY</span>
-        <a href="javascript:;" aria-label="Reset filters" class="bc-sf-filter-clear-all" onclick="clearAllFilterOptions(event)">Reset filters</a>
-      </h1>
-      
+      <h1 class="filter__title">FILTER BY</h1>
       <div class="toggle_div">
-        <div id="bc-sf-filter-tree2" class="bc-sf-filter-tree-mobile-open">
-          {% render 'bc-sf-filter-tree-placeholder' %}
-        </div>
-        {% comment %}
         {% include 'collection-sidebar-filters', location: 'CollectionSidebar' %}
-        {% endcomment %}
       </div>
       
       <button class="apply_btn">APPLY</button>
@@ -179,7 +166,6 @@
     
   }
 </script>
-{%- endif -%}
 
 
   {% comment %}

@@ -6143,27 +6143,6 @@ lazySizesConfig.expFactor = 4;
     }
   };
 
-
-  // Getting the URL 
-
-
-  //  $(document).ready(function(){
-  //   $("#user_has").css('display', 'none');
-
-  // //   //$("#test-menu-right").hide();
-
-  //   let url_string = window.location.href;
-  //   var url = new URL(url_string);
-  //   var c = url.searchParams.get("contact[context]");
-  //   // c = toString(c);
-  //   console.log("C: ", c);
-  //   if (c && c.trim() == 'section') {
-  //     // $(".user_has_class").css('display', 'block');
-  //     //alert("Oh FIne");
-  //     $("#user_has").css('display', 'block');
-  //   }
-  // });
-
   $(document).ready(function() {
     theme.init();
 

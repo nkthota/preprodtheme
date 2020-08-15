@@ -13,7 +13,7 @@
   
   {% if section.settings.img %}
   <div class="appoint_img text-center">
-      <img src="{{ section.settings.img | img_url: 'master' }}" alt="{{ section.settings.img.alt }}">
+  	<img src="{{ section.settings.img | img_url: 'master' }}" alt="{{ section.settings.img.alt }}">
   </div>
   {% endif %}
   
@@ -55,16 +55,7 @@
           <h3 class="heading faq_heading howwork_heading">{{ section.settings.form_title }}</h3>
         </div>
 
-        <!-- <div class="form-vertical contact_form appoint_vertical_form"> -->
-        <div class="contact_form appoint_vertical_form">
-
-          <!-- Calendly link widget begin -->
-          <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-          <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
-          <a href="" class="btn" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/indiaspopup/personal-appointment'});return false;">Schedule Personal Appointment</a>
-          <!-- Calendly link widget end -->
-
-          {% comment %}
+        <div class="form-vertical contact_form appoint_vertical_form">
           {% form 'contact' %}
 
           {% if form.posted_successfully? %}
@@ -77,6 +68,7 @@
 
           <div class="grid grid--small">
             <div class="grid__item medium-up--one-half">
+              {% comment %}<label for="ContactFormName">{{ 'contact.form.name' | t }}</label>{% endcomment %}
               <input type="text" 
                      id="ContactFormName" 
                      class="input-full text_14" 
@@ -87,6 +79,7 @@
             </div>
 
             <div class="grid__item medium-up--one-half">
+              {% comment %}<label for="ContactFormName">{{ 'contact.form.name' | t }}</label>{% endcomment %}
               <input type="text" 
                      id="ContactFormName" 
                      class="input-full text_14" 
@@ -97,6 +90,7 @@
             </div>
 
             <div class="grid__item medium-up--one-half">
+              {% comment %}<label for="ContactFormSubject">{{ 'contact.form.subject' | t }}</label>{% endcomment %}
               <input type="text" 
                      id="ContactFormSubject" 
                      class="input-full text_14" 
@@ -117,6 +111,7 @@
             </div>
 
             <div class="grid__item medium-up--one-whole email_whole">
+              {% comment %}<label for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>{% endcomment %}
               <input type="email" 
                      id="ContactFormEmail" 
                      class="input-full text_14" 
@@ -143,8 +138,6 @@
           </div>
 
           {% endform %}
-
-          {% endcomment %}
         </div>
       </div>
     </div>
@@ -159,9 +152,6 @@
 
 
 <style>
-  html, body {
-    height: auto !important;
-  }
   .input-full {
     padding: 20px 15px;    
     color: #c2c2c2;
@@ -187,7 +177,7 @@
 
 <script>
   $(window).on('load', function(){
-      $('.input__textarea').text('');
+  	$('.input__textarea').text('');
   })
 </script>
 
@@ -239,7 +229,7 @@
         "label": "form Title",
         "default": "REQUEST AND APPOINTMENT"
       }
-    ],
+	],
     "blocks": [
       {
         "type": "text_block",

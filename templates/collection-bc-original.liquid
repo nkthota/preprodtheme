@@ -1,0 +1,197 @@
+{% comment %}
+{% section 'collection-header' %}
+{% endcomment %}
+
+<div id="CollectionAjaxResult" class="collection-content">
+  <div id="CollectionAjaxContent">
+    <div class="page-width">
+      <div class="grid">        
+        <div class="grid__item medium-up--one-fifth grid__item--sidebar">
+          {% section 'collection-sidebar' %}
+        </div>        
+        <div class="grid__item medium-up--four-fifths grid__item--content">
+          {% comment %}
+          {% section 'collection-promotions' %}
+          {% endcomment %}
+          
+          <div class="collection-grid__wrapper">
+            {% section 'collection-template' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .image-wrap img:not([role="presentation"]) {
+    opacity: 1 !Important;
+  }
+</style>
+
+{{ 'slick.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'slick.min.js' | asset_url }}"></script>
+
+
+{% if collection.title == 'All Fashion Jewelry' or collection.title == 'Earrings' or collection.title == 'Necklaces' or collection.title == 'Bracelets' or collection.title == 'Rings' or collection.title == 'Hair Accessories' or collection.title == 'Brooches' %}
+<script>
+  $(document).ready(function(){
+    $('.subcollection_pull').slick({
+      dots: false,
+      arrows: false,
+      focusOnSelect: true,
+      slidesToShow: 7,
+      slidesToScroll: 1,
+      swipeToSlide:true,
+      responsive: [
+        {
+          breakpoint: 1280,
+          settings: {
+            slidesToShow: 6
+          }
+        },
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 5
+          }
+        },
+        {
+          breakpoint: 950,
+          settings: {
+            slidesToShow: 4
+          }
+        },
+        {
+          breakpoint: 810,
+          settings: {
+            slidesToShow: 5
+          }
+        },
+        {
+          breakpoint: 650,
+          settings: {
+            slidesToShow: 4
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 3
+          }
+        }
+      ]
+    });
+  })
+</script>
+
+{% elsif collection.title == 'All Bags' or collection.title == 'Clutches' or collection.title == 'Shoulder Bags' or collection.title == 'Pouch Bags' %}
+<script>
+  $(document).ready(function(){
+    $('.subcollection_pull').slick({
+      dots: false,
+      arrows: false,
+      focusOnSelect: true,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      swipeToSlide:true,
+      responsive: [
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 3
+          }
+        }
+      ]
+    });
+  })
+</script>
+
+{% elsif collection.title == 'Under $250' or collection.title == 'Under $500' or collection.title == 'Under $750' or collection.title == 'Under $1000' or collection.title == 'Over $1000' %}
+<script>
+  $(document).ready(function(){
+    $('.subcollection_pull').slick({
+      dots: false,
+      arrows: false,
+      focusOnSelect: true,
+      slidesToShow: 6,
+      slidesToScroll: 1,
+      swipeToSlide:true,
+      responsive: [
+        {
+          breakpoint: 950,
+          settings: {
+            slidesToShow: 4
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 3
+          }
+        }
+      ]
+    });
+  })
+</script>
+
+
+{% else %}
+
+<script>
+  $(document).ready(function(){
+  $('.subcollection_pull').slick({
+    dots: false,
+    arrows: false,
+    focusOnSelect: true,
+    slidesToShow: 9,
+  	slidesToScroll: 1,
+    swipeToSlide:true,
+    responsive: [
+      {
+        breakpoint: 1340,
+        settings: {
+          slidesToShow: 7
+        }
+      },
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 6
+        }
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5
+        }
+      },
+      {
+        breakpoint: 950,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 810,
+        settings: {
+          slidesToShow: 5
+        }
+      },
+      {
+        breakpoint: 650,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 3
+        }
+      }
+    ]
+  });
+  })
+</script>
+{% endif %}

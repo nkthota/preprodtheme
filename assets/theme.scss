@@ -631,7 +631,6 @@ $collapsible-content-close-transition: transform 0.3s cubic-bezier(.25,.46,.45,.
 html, body {
   padding: 0;
   margin: 0;
-  padding-bottom: 0!important;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
@@ -2492,7 +2491,7 @@ select,
   appearance: none;
   background-position: right center;
   background: {
-    image: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/ico-select.svg);
+    image: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/ico-select.svg);
     repeat: no-repeat;
     position: right 10px center;
     color: transparent;
@@ -2505,7 +2504,7 @@ select,
   color: inherit;
 
   .is-light & {
-    background-image: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/ico-select-white.svg);
+    background-image: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/ico-select-white.svg);
   }
 }
 
@@ -4208,7 +4207,7 @@ $color-blankstate-background: #e1e1e1;
 .site-footer {
   select,
   .faux-select {
-    background-image: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/ico-select-footer.svg);
+    background-image: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/ico-select-footer.svg);
   }
 }
 
@@ -4650,10 +4649,6 @@ $color-blankstate-background: #e1e1e1;
   position: relative;
   padding: 7px 0;
   background: $colorNav;
-  
-  @media screen and (max-width: 1199px) {
-    border-bottom: 10px solid black;
-  }
 
   @include media-query($medium-up) {
     padding: 20px 0;
@@ -12073,51 +12068,51 @@ ul.site-nav.site-navigation.small--hide {
 // fonts
 @font-face {
   font-family: 'larsseitregular';
-  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-webfont.woff2?v=9049094949613357439) format('woff2'),
-    url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-webfont.woff?v=4707178898667825940) format('woff');
+  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-webfont.woff2?v=9049094949613357439) format('woff2'),
+    url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-webfont.woff?v=4707178898667825940) format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'larsseit-bolduploaded_file';
-  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit_bold-webfont.woff2?v=8048563206939018519) format('woff2'),
-    url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit_bold-webfont.woff?v=1512902447208118573) format('woff');
+  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit_bold-webfont.woff2?v=8048563206939018519) format('woff2'),
+    url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit_bold-webfont.woff?v=1512902447208118573) format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'larsseitbold';
-  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-bold-webfont.woff2?v=3903837971142930131) format('woff2'),
-    url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-bold-webfont.woff?v=11754747807784216699) format('woff');
+  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-bold-webfont.woff2?v=3903837971142930131) format('woff2'),
+    url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-bold-webfont.woff?v=11754747807784216699) format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'larsseitlight';
-  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-light-webfont.woff2?v=7927317284526470637) format('woff2'),
-    url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-light-webfont.woff?v=3651688425546709479) format('woff');
+  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-light-webfont.woff2?v=7927317284526470637) format('woff2'),
+    url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-light-webfont.woff?v=3651688425546709479) format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'larsseitlight_italic';
-  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-lightitalic-webfont.woff2?v=13782805170166677580) format('woff2'),
-    url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-lightitalic-webfont.woff?v=7188739520214528215) format('woff');
+  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-lightitalic-webfont.woff2?v=13782805170166677580) format('woff2'),
+    url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-lightitalic-webfont.woff?v=7188739520214528215) format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'larsseitmedium';
-  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-medium-webfont.woff2?v=9823496393851365931) format('woff2'),
-    url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-medium-webfont.woff?v=9129251415062294739) format('woff');
+  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-medium-webfont.woff2?v=9823496393851365931) format('woff2'),
+    url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-medium-webfont.woff?v=9129251415062294739) format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'larsseitthin';
-  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-thin-webfont.woff2?v=2731035723069670701) format('woff2'),
-    url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/larsseit-thin-webfont.woff?v=401731902844471153) format('woff');
+  src: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-thin-webfont.woff2?v=2731035723069670701) format('woff2'),
+    url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/larsseit-thin-webfont.woff?v=401731902844471153) format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -12816,7 +12811,6 @@ h5.addi_title {
 }
 html, body {
   overflow-x: hidden;
-
 }
 .menu_designers .site-nav__dropdown.megamenu.text-left .grid__item > div:last-child {
   margin-top: 33px;
@@ -12895,16 +12889,11 @@ img.grid-product__image {
 .header-layout {
   padding-top: 20px;
   padding-bottom: 20px;
-
-  @media screen and (max-width: 1024px) {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
 }
 .wishlist_icon .ssw-faveit > i, 
 .wishlist_icon .ssw-faveiticon > i {
   font-size: 20px;
-  background-image: url(//cdn.shopify.com/s/files/1/2100/2051/t/40/assets/heart-lg.png?v=1337181173109334504);
+  background-image: url(//cdn.shopify.com/s/files/1/2100/2051/t/41/assets/heart-lg.png?v=1337181173109334504);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: contain;
@@ -13714,8 +13703,7 @@ min-height: unset;
 }
 
 .tablet_banner,
-.mobile_banner,
-.tablet_banner_landscape {
+.mobile_banner {
   display: none !important;
 }
 .mobile_icon_header{
@@ -14035,24 +14023,11 @@ min-height: unset;
   display: none;
 }
 
-@media only screen and (min-width: 769px) and (max-width: 1199px) {
-  .slide-menu {
-    width: 40%!important;
-  }
-}
-
-@media only screen and (min-width: 1200px) {
-  .slide-menu {
-     display: none!important;
-  }
-}
-
 // responsive
 @media only screen and (min-width: 769px){
   .slide-menu,
   .mobile_sidebar .filter__title img {
-    display: none;
-    width: 40%;
+    display: none !important;
   }
   header.site-header.site-header--stuck.site-header--opening .mobile_icon_header {
     filter:invert(100%);
@@ -14734,7 +14709,6 @@ min-height: unset;
   }
   .mobile_sidebar .filter__title img {
     margin-left: 40px;
-    max-height: 15px;
   }
   #CollectionAjaxContent .grid__item--sidebar {
     padding-right: 0;
@@ -15171,7 +15145,7 @@ min-height: unset;
     width: 100%;
     z-index: 9;
     background: #fff;
-    top: 69px;
+    top: 59px;
     left: 0;
   } 
   .share_btn .social-list>a {
@@ -15745,64 +15719,13 @@ min-height: unset;
   }
 }
 
-@media only screen and (min-width: 701px) and (max-width: 1024px) { 
+@media only screen and (min-width: 701px) and (max-width: 1199px) { 
   .desktop_banner,
-  .mobile_banner,
-  .tablet_banner_landscape
-   {
+  .mobile_banner {
     display: none !important;
   }
   .tablet_banner {
     display: block !important;
-  }
-
-  .index-section--hero .slideshow-wrapper .image-fit {
-    object-fit: cover!important;
-  }
-}
-
-
-@media only screen and (min-width: 1025px) and (max-width: 1199px){ 
-  .desktop_banner,
-  .mobile_banner,
-  .tablet_banner {
-    display: none !important;
-  }
-  .tablet_banner_landscape {
-    display: block !important;
-  }
-
-  .index-section--hero .slideshow-wrapper .image-fit {
-    object-fit: cover!important;
-  }
-}
-
-@media only screen and (min-width: 769px) and (max-width: 1199px) {
-  .doubly-wrapper.mobile_currency {
-    float: left !important;
-    padding-left: 0 !important;
-    padding-top: 4px !important;
-    border-top: 1px solid #e8e8e1;
-    width: 100% !important;
-    padding-top: 25px;
-    margin-top: 15px;
-    position: relative!important;
-    z-index: 99999;
-  }
-
-  .doubly-wrapper .doubly-nice-select.right {
-    float: left!important;
-  }
-
-  .doubly-wrapper.mobile_currency .doubly-nice-select.right .list {
-    width: 100%;
-    min-width: 300px;
-    margin-left: -20px!important;
-  }
-
-  .globe_img {
-    margin-left: 10px!important;
-    margin-top: 10px!important;
   }
 }
 
@@ -15888,7 +15811,7 @@ min-height: unset;
     height: 85vh;
   }
   .index-section--hero .slideshow-wrapper .image-fit {
-    object-fit: unset!important;
+    object-fit: unset !important;
     max-height: 85vh;
   }
 }
