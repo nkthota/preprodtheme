@@ -1,0 +1,93 @@
+<div class="page-width page-content">  
+  <div class="grid">
+    <div class="grid__item medium-up--one-whole">
+      <!--  Account Tab Start -->
+      <div class="account-tab-area">
+        <div class="account-tab-menu">
+          <div class="sticky hide_1023">
+            <div class="account-tab-menu-title">
+              <h3 class="account_heading">MY ACCOUNT</h3>
+            </div>
+            
+            <div class="tab">
+              <a href="{{ routes.account_url }}" class="tablinks">Overview</a>
+              <a href="/pages/order" class="tablinks my_order">My Orders</a>
+              <a href="/pages/measurements" class="tablinks my_order active">My Measurements</a>
+              <a href="/pages/wishlist" class="tablinks">Wish List</a>
+              <a href="{{ routes.account_addresses_url }}" class="tablinks">Registration Details</a>
+              <a href="{{ routes.account_logout_url }}" class="tablinks">Log out</a>
+            </div>
+          </div>
+          
+          <div class="show_1023">
+            <div class="menuitem">
+              <a href="/pages/measurements" class="tablinks my_order">My Measurements</a>
+              <i class="fa fa-caret-down action_slide"></i>
+            </div>
+
+            <div class="slidemenu" style="display: none;">
+              <div class="menuitem">
+                <a href="{{ routes.account_url }}" class="tablinks">Overview</a>
+              </div>
+              
+              <div class="menuitem">
+                <a href="/pages/order" class="tablinks my_order">My Orders</a>
+              </div>
+
+              <div class="menuitem">
+                <a href="/pages/wishlist" class="tablinks">Wish List</a>
+              </div>
+
+              <div class="menuitem">
+                <a href="{{ routes.account_addresses_url }}" class="tablinks">Registration Details</a>
+              </div>
+
+              <div class="menuitem">
+                <a href="{{ routes.account_logout_url }}" class="tablinks">Log out</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="account-tab-content">
+          <div class="grid">
+            <div class="grid-item medium-up--one-whole">
+              <div class="account-tab-content-title">
+                <h2 class="customer_name">Welcome {{ customer.name }}</h2>
+              </div>
+              
+              <div id="overview" class="tabcontent page_measure">
+                {% include 'flits_measurements_snippet' %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="{{ 'ScrollMagic.min.js' | asset_url }}"></script>
+<script>
+  if ( $(window).width() > 1023 ) {
+    $(function(){
+      // Binding Sticky Elements
+      var containerHeight = $('.tabcontent').height();
+      var offsetFromTop = 190;
+      var controller = new ScrollMagic.Controller();
+
+      console.log('containerHeight', containerHeight);
+      containerHeight = containerHeight / 1.3;
+      console.log('containerHeight', containerHeight);
+
+      new ScrollMagic.Scene({
+        duration: containerHeight,
+        offset: offsetFromTop
+      })
+      .setPin('.sticky')
+      .addTo(controller);
+    });
+  }
+</script>

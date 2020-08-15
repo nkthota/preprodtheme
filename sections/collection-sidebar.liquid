@@ -1,0 +1,512 @@
+{%- if section.settings.enable_sidebar -%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+  <div class="mobile_sidebar"
+    id="CollectionSidebar"
+    data-section-id="{{ section.id }}"
+    data-section-type="collection-sidebar"
+    data-combine-tags="{{ section.settings.tags_combine }}"
+    data-style="{{ section.settings.filter_style }}">
+
+    {% include 'sidebar-drawer' %}
+    
+    <header class="section-header custom_section_header medium-up--hide">
+      <h1 class="section-header__title d-flex justify-content-center align-items-center">
+        {{ collection.title }} <span class="products_count">({{ collection.products_count }} items)</span>
+      </h1>
+      
+      {% include 'subcollections-list' %}
+    </header>
+        
+
+    {%- if section.settings.filter_style == 'sidebar' -%}
+    {%- assign sort_by = collection.sort_by | default: 'manual' -%}
+    <div class="collection-sidebar">
+      <div class="filter_item">
+        <h1 class="filter__title filter_order">
+          <span>Sort By</span>
+          <img src="{{ 'refine.svg' | asset_url }}" />
+        </h1>
+
+        <div class="form-horizontal toggle_div small--hide">
+          <div class="os_categoryFilterLinks">
+            <ul>
+              <li{% if sort_by == "manual" %} class="active"{% endif %}><a href="#sort" data-select="manual">Recommended</a></li>
+              <li{% if sort_by == "price-descending" %} class="active"{% endif %}><a href="#sort" data-select="price-descending">Price High – Low</a></li>
+              <li{% if sort_by == "price-ascending" %} class="active"{% endif %}><a href="#sort" data-select="price-ascending">Price Low – High</a></li>
+              <li{% if sort_by == "created-descending" %} class="active"{% endif %}><a href="#sort" data-select="created-descending">Newest Arrivals</a></li>
+            </ul>
+          </div>
+        </div> 
+      </div>
+
+
+      <div class="filter_item">
+        <h1 class="filter__title filter_side">
+          <span>FILTER BY</span>
+          <img src="{{ 'filter.svg' | asset_url }}" />
+         </h1>
+        <div class="toggle_div small--hide">
+          {% include 'collection-sidebar-filters', location: 'CollectionSidebar' %}
+        </div>        
+      </div>
+    </div>
+    {%- endif -%}
+</div>
+
+
+
+
+
+<div id="open_os_categoryFilterLinks" class="drawer drawer--left medium-up--hide custom_drawer">
+  <div class="drawer__contents">
+    <div class="drawer__fixed-header">
+      <div class="drawer__close">
+        <button type="button" class="custom_drawer__close">x</button>
+      </div>
+      
+      <h1 class="filter__title">Sort By</h1>
+      <div class="form-horizontal toggle_div">
+        <div class="os_categoryFilterLinks">
+          <ul>
+            <li{% if sort_by == "manual" %} class="active"{% endif %}><a href="#sort" data-select="manual">Recommended</a></li>
+            <li{% if sort_by == "price-descending" %} class="active"{% endif %}><a href="#sort" data-select="price-descending">Price High – Low</a></li>
+            <li{% if sort_by == "price-ascending" %} class="active"{% endif %}><a href="#sort" data-select="price-ascending">Price Low – High</a></li>
+            <li{% if sort_by == "created-descending" %} class="active"{% endif %}><a href="#sort" data-select="created-descending">Newest Arrivals</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="custom_sidebar_filters" class="drawer drawer--left medium-up--hide custom_drawer">
+  <div class="drawer__contents">
+    <div class="drawer__fixed-header">
+      <div class="drawer__close">
+        <button type="button" class="custom_drawer__close">x</button>
+      </div>
+
+      <h1 class="filter__title">FILTER BY</h1>
+      <div class="toggle_div">
+        {% include 'collection-sidebar-filters', location: 'CollectionSidebar' %}
+      </div>
+      
+      <button class="apply_btn">APPLY</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  Shopify.queryParams = {};
+  if (location.search.length) {
+    for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+      aKeyValue = aCouples[i].split('=');
+      if (aKeyValue.length > 1) {
+        Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+      }
+    }
+  }
+
+  var $select = $('#SortBy');
+  $('a[href="#sort"]').click(function () {
+    $select.val( $(this).data('select') )
+    event.preventDefault();
+    Shopify.queryParams.sort_by = jQuery(this).data('select');
+    location.search = jQuery.param(Shopify.queryParams);           
+  });
+
+</script>
+
+
+<script>
+  $(document).ready(function(){
+    if( $(window).width() < 800 ){
+      var stickySelector = $('.collection-sidebar');
+
+      $(window).scroll(function(){
+        if ($(window).scrollTop() >= 151) {
+          stickySelector.addClass("sticky")
+        } else {
+          stickySelector.removeClass("sticky");
+        }
+      });
+    }
+  })
+</script>
+
+<script>
+  $('.collection-sidebar__group ul li').on('click', function(){
+  	var $this = $(this);
+    $this.toggleClass('active');
+    
+    if( $this.hasClass('active') && $(window).width() > 991 ){
+      $this.find('a').trigger('click');
+    }
+    
+  });
+
+  if( $(window).width() < 992 ){
+    $('.filter_order').on('click', function(){
+      	$('#open_os_categoryFilterLinks').addClass('drawer--is-open');
+    });
+    $('.filter_side').on('click', function(){
+      	$('#custom_sidebar_filters').addClass('drawer--is-open');
+    });
+    $('.custom_drawer__close').on('click', function(){
+      	$('#open_os_categoryFilterLinks, #custom_sidebar_filters').removeClass('drawer--is-open');
+    });       
+
+      
+    $('.apply_btn').on('click', function(){
+      $('.collection-sidebar__group ul li.active a').trigger('click');
+      $('.custom_drawer__close').trigger('click');
+    });
+    
+    
+  }
+</script>
+{%- endif -%}
+
+
+  {% comment %}
+{%- if section.settings.enable_sidebar == false or section.settings.filter_style == 'drawer' -%}
+  {% comment %}
+    Override grid styles if sidebar is disabled
+  {% endcomment %}
+  {% style %}
+    .collection-content .grid__item--sidebar { width: 0; }
+    .collection-content .grid__item--content { width: 100%; }
+    .grid__item--sidebar { position: static; overflow: hidden; }
+  {% endstyle %}
+{%- endif -%}
+
+  {% comment %}
+{%- if section.settings.enable_sidebar and section.settings.filter_style != 'drawer' -%}
+
+    Sidebar enabled but not in drawer mode, only show filter button on mobile
+  
+  {% style %}
+    @media screen and (min-width: 769px) {
+      .collection-filter__item--drawer {
+        display: none;
+      }
+      .collection-filter__item--count {
+        text-align: left;
+      }
+    }
+  {% endstyle %}
+{%- endif -%}
+{% endcomment %}
+
+{%- unless section.settings.enable_sidebar -%}
+  {% comment %}
+    Disable sidebar & filter features
+  {% endcomment %}
+  {% style %}
+    .collection-filter__item--drawer {
+      display: none;
+    }
+    .collection-filter__item--count {
+      text-align: left;
+    }
+  {% endstyle %}
+{%- endunless -%}
+
+{%- unless section.settings.enable_sort -%}
+  {% style %}
+    .collection-filter__sort-container {
+      display: none;
+    }
+  {% endstyle %}
+{%- endunless -%}
+
+{% endcomment %}
+
+{% schema %}
+  {
+    "name": "Collection filter",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_sidebar",
+        "label": "Enable filter",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "filter_style",
+        "label": "Filter style",
+        "default": "drawer",
+        "options": [
+          {
+            "value": "sidebar",
+            "label": "Sidebar"
+          },
+          {
+            "value": "drawer",
+            "label": "Drawer"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "tags_combine",
+        "label": "Enable tag combinations"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sort",
+        "label": "Show sort options",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "tags_group",
+        "name": "Tag group",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Tag Group"
+          },
+          {
+            "type": "textarea",
+            "id": "tag_list",
+            "label": "Tag list (one per line)",
+            "default": "First tag \nSecond tag \nThird tag",
+            "info": "Tags are case sensitive and must match your product tag exactly"
+          },
+          {
+            "type": "checkbox",
+            "id": "collapsed",
+            "label": "Collapsed",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "color_group",
+        "name": "Color swatches",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Color"
+          },
+          {
+            "type": "textarea",
+            "id": "tag_list",
+            "label": "Swatch list (one per line)",
+            "default": "Burgundy \nHeather grey \nGreen",
+            "info": "Products must be tagged with their color in order to appear here. Tags are case sensitive and must match your product tag exactly. Ex: 'Heather grey'. [Learn how to set up swatches](https://archetypethemes.co/blogs/impulse/how-do-i-set-up-color-swatches)."
+          },
+          {
+            "type": "checkbox",
+            "id": "collapsed",
+            "label": "Collapsed",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "tags_all",
+        "name": "All tags",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Tags"
+          },
+          {
+            "type": "checkbox",
+            "id": "collapsed",
+            "label": "Collapsed",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "menu",
+        "name": "Menu",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Choose a menu",
+            "default": "main-menu"
+          },
+          {
+            "type": "checkbox",
+            "id": "collapsed",
+            "label": "Collapsed",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "subcollections",
+        "name": "Subcollections",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "Links to collections from your menu will appear here. [Learn more](https://archetypethemes.co/blogs/impulse/how-do-i-create-subcollections)"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_subsubcollections",
+            "label": "Show third-level items",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_count",
+            "label": "Enable count"
+          },
+          {
+            "type": "checkbox",
+            "id": "collapsed",
+            "label": "Collapsed",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "subcollection_clothing",
+        "name": "Subcollection Clothing",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_anarkali",
+        "name": "Subcollection Anarkali",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_price",
+        "name": "Subcollection Price",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_accessories",
+        "name": "Subcollection Accessories",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_jewelry",
+        "name": "Subcollection Jewelry",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_bags",
+        "name": "Subcollection Bags",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_designers",
+        "name": "Subcollection Designers",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_featured",
+        "name": "Subcollection Featured",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_popular",
+        "name": "Subcollection Popular",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_emerging",
+        "name": "Subcollection Emerging",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      },
+      {
+        "type": "subcollection_sss",
+        "name": "Subcollection SSS",
+        "settings": [
+          {
+            "type": "text",
+            "id": "sst",
+            "label": "Colletion name"
+          },
+          {
+            "type": "link_list",
+            "id": "subcollection_menu",
+            "label": "Select menu"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

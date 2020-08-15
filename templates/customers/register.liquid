@@ -1,0 +1,189 @@
+<div class="register_page">
+  <div class="page-width page-content">
+    <div class="grid register_grid">
+
+      <div class="grid__item register_grid_item">
+
+        <header class="section-header">
+          <h1 class="section-header__title">{{ 'customer.register.title' | t }}</h1>
+        </header>
+
+        <div class="form-vertical">
+          {% form 'create_customer' %}
+
+          {{ form.errors | default_errors }}
+
+          <label for="FirstName">{{ 'customer.register.first_name' | t }}</label>
+          <input type="text" name="customer[first_name]" id="FirstName" class="input-full" {% if form.first_name %}value="{{ form.first_name }}"{% endif %} autocapitalize="words" autofocus>
+
+          <label for="LastName">{{ 'customer.register.last_name' | t }}</label>
+          <input type="text" name="customer[last_name]" id="LastName" class="input-full" {% if form.last_name %}value="{{ form.last_name }}"{% endif %} autocapitalize="words">
+
+
+          <label for="gender" class="label">Gender</label>
+          <select id="gender" name="customer[note][gender]" value="">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+
+          <label for="birthday" class="label">Birthday</label>
+          <input type="date" value="" name="customer[note][birthday]" id="birthday" class="text" size="30" />
+
+          <label for="Email">{{ 'customer.register.email' | t }}</label>
+          <input type="email" name="customer[email]" id="Email" class="input-full{% if form.errors contains 'email' %} error{% endif %}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
+
+
+          <label for="CreatePassword">{{ 'customer.register.password' | t }}</label>
+          <input type="password" name="customer[password]" id="CreatePassword" class="input-full{% if form.errors contains 'password' %} error{% endif %}">
+
+          <p>
+            <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn btn--full">
+          </p>
+
+          {% endform %}
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<style>
+  #create_customer select, #create_customer input {
+    width: 100%;
+  }
+  .register_grid_item {
+    width: 50%;
+  }
+  .grid.register_grid {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .ssw-social-login-widget {
+    margin-top: -30px;
+  }
+  .ssw-gdpr-subscribe-notify.ssw-muted {
+    margin-top: -20px;
+  }
+  .ssw-socialconnect > .ssw-fbconnect.ssw-social-btn > a {
+    background: #000;
+    border: none !important;
+    color: #fff !important;
+  }
+  .ssw-socialconnect > .ssw-gconnect > a,
+  .ssw-socialconnect > .ssw-azconnect > a,
+  .ssw-socialconnect > .ssw-gconnect > a:hover,
+  .ssw-socialconnect > .ssw-azconnect > a:hover {
+    box-shadow: none;
+    color: #fff !important;
+    background: #000;
+  }
+  .ssw-fbconnect.ssw-social-btn .ssw-icon-facebook::before {
+    background-color: transparent !important;
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a {
+    display: flex !important;
+    align-items: center;
+    height: 44px !important;
+    overflow: hidden;
+    background: #000 !important;
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a i,
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a svg {
+    margin-left: 3px;
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a i {
+    height: 52px;
+    width: 44px;
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a i.ssw-icon-facebook {
+    margin-top: -8px;  
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a span {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a i, 
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a svg {
+    position: relative;
+    z-index: 9;
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a {
+    position: relative;
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a:before {
+    content: "";
+    background: #393939;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 44px;
+    height: 52px;
+    z-index: 1;
+  }
+  .ssw-social-login-widget .ssw-socialconnect .ssw-fbconnect.ssw-social-btn a span {
+    font-size: 12px;
+    padding-left: 5px;
+  }
+    .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a svg {
+      width: 44px;
+    }
+
+  
+  @media only screen and (max-width: 1024px){
+    .ssw-socialconnect {
+      flex-wrap: wrap;
+    }
+    .ssw-social-btn {
+      margin-left: 0 !important;
+    }
+    .ssw-socialconnect > div.ssw-social-btn > a {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+    .ssw-social-btn {
+      margin-bottom: 0 !important;
+      margin-top: 10px !important;
+      margin-left: 0 !important;
+    }
+    .ssw-gdpr-subscribe-notify.ssw-muted {
+      margin-top: -5px;
+    }
+    .ssw-social-login-widget .ssw-socialconnect .ssw-social-btn a svg {
+      width: 44px;
+    }
+  }
+
+  @media only screen and (max-width: 768px){
+    .register_grid_item {
+      width: 75%;
+    }
+  }
+
+  @media only screen and (max-width: 610px){
+    .register_grid_item {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  $(document).ready(function() {
+    $(".ssw-fbconnect.ssw-social-btn a span").text('facebook');
+  });
+</script>

@@ -1,0 +1,88 @@
+<!-- custom size -->
+<div id="customSizeModal" class="common_modal">  
+  <div class="modal-content">
+    <span class="moadl_close" id="customSizeModalClose">x</span>
+    <div class="modal-body">
+      {% include 'custom-size' %}
+    </div>
+  </div>
+</div>
+
+<!-- size guide -->
+<div id="sizeGuideModal">  
+  <div class="modal-content">
+    <span class="moadl_close" id="sizeGuideModalClose">x</span>
+    <div class="modal-body">
+      {% include 'size-guide' %}
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  // custom size modal
+//   var csmodal = document.getElementById("customSizeModal");
+//   var csbtn = document.getElementById("custom_size_btn");
+//   var csspan = document.getElementById("customSizeModalClose");
+//   csbtn.onclick = function() {
+//     csmodal.style.display = "block";
+//   }
+
+//   csspan.onclick = function() {
+//     csmodal.style.display = "none";
+//   }
+
+//   window.onclick = function(event) {
+//     if (event.target == csmodal) {
+//       csmodal.style.display = "none";
+//     }
+//   }  
+
+  // size guide modal
+  var modal = document.getElementById("sizeGuideModal");
+  var btn = document.getElementById("size_guide");
+  var span = document.getElementById("sizeGuideModalClose");
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // modal tab
+  function openTab(evt, tabHandle) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontentCustom");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabHandle).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  
+  function openTabGuide(evt, tabHandle) {
+    var j, tabcontentGuide, tablinksguide;
+    tabcontentGuide = document.getElementsByClassName("tabcontentGuide");
+    for (j = 0; j < tabcontentGuide.length; j++) {
+      tabcontentGuide[j].style.display = "none";
+    }
+    tablinksguide = document.getElementsByClassName("tablinksguide");
+    for (j = 0; j < tablinksguide.length; j++) {
+      tablinksguide[j].className = tablinksguide[j].className.replace(" active", "");
+    }
+    document.getElementById(tabHandle).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>

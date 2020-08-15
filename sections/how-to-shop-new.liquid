@@ -1,0 +1,97 @@
+<div class="how_toshop_page_new faq_new_page appoint_new_page page-width page-content{% if section.blocks.size > 0 %} page-content--with-blocks{% endif %}">
+  {% if section.settings.title != blank or section.settings.quote != blank %}
+  <div class="section-header text-center about_header appoint_header howtoshop">
+    {% if section.settings.title != blank %}
+    <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+    
+    {% if section.settings.subtitle != blank %}
+    <p class="appoint_sub text_14">{{ section.settings.subtitle | newline_to_br }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
+  
+  {% if section.settings.img %}
+  <div class="appoint_img howtoshop_img text-center">
+    <img src="{{ section.settings.img | img_url: 'master' }}" alt="{{ section.settings.img.alt }}">
+  </div>
+  {% endif %}
+  
+  <div class="grid relative_grid">
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'text_block' %}
+    <div class="grid__item medium-up--four-twelfths">
+      <div class="howtoshp_flex">
+        <div class="faq_wrapper appoint_wrapper text-center">
+          {% if block.settings.text != blank %}
+          <p class="appoint_text text_14">{{ block.settings.text }}</p>
+          {% endif %}
+
+          {% if block.settings.title != blank %}
+          <h3 class="heading faq_heading appoint_heading">{{ block.settings.title | newline_to_br }}</h3>
+          {% endif %} 
+
+          {% if block.settings.desc != blank %}
+          <p class="appoint_desc text_14">{{ block.settings.desc | newline_to_br }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+{% schema %}
+  {
+    "name": "How to Shop",
+    "class": "position_relative",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "HOW TO SHOP"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "image_picker",
+        "id": "img",
+        "label": "Upload Image"
+      }
+	],
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Text Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Title",
+            "default": "(30-60 MINUTES)"
+          },
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Title",
+            "default": "THE NEW SEASON REFRESHER"
+          },
+          {
+            "type": "textarea",
+            "id": "desc",
+            "label": "Description"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

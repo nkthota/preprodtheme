@@ -1,0 +1,173 @@
+<div class="popinfomodule">
+  <div class="popinfomodule__title">
+    MADE TO YOUR PERFECT FIT
+  </div>
+  <div class="popinfomodule__info">
+
+    
+<div > 
+  <div style="width:100%;">
+        <span style="float:left;">We celebrate 'every body' and we want to make sure your garment fits perfectly. Just select "<b>Complimentary Custom Size</b>" while adding the item to your shopping bag. </span>
+    </div>
+
+</div>
+    
+    
+  </div>
+  <div class="popinfomodule__card">
+    <div class="popinfomodule__card-container">
+      HOW IT WORKS?
+      <div
+        style="position: relative; height: 12px; width: 12px;"
+        class="PdpInfoModule__icon-up"
+      >
+        <svg
+          style="
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            fill: currentcolor;
+          "
+          viewBox="0 0 12 12"
+        >
+          <path
+            d="M1.266 8.499l-.532-.53 5.222-5.236 5.307 5.234-.526.534-4.776-4.71z"
+          ></path>
+        </svg>
+      </div>
+      <div
+        style="position: relative; height: 12px; width: 12px;"
+        class="PdpInfoModule__icon-down hidden"
+      >
+        <svg
+          style="
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            fill: currentcolor;
+          "
+          viewBox="0 0 12 12"
+        >
+          <path
+            d="M1.266 3.735l-.532.53L5.956 9.5l5.307-5.234-.526-.534-4.776 4.71z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+<p>
+  After you place your order, you can share your measurements online by filling "<u><b><a href="/pages/measurements">My Measurements</a></b></u>" form under My Account section or you can "<u><b><a href={{'Indiaspopup.com_Measurement_Chart_3.docx' | file_url}}" download>Download</a></b></u>" our measurement form here and email completed form to info@indiaspopup.com 
+</p>
+
+  </div>
+</div>
+
+<style>
+  .popinfomodule {
+    height: 160px;
+    line-height: 1.67;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    background-color: #f5f5f5;
+    color: #000;
+    margin: 0 0 2em;
+    margin-top: 1.2em;
+  }
+
+.popinfomodule__title {
+    display: inline-block;
+    font-size: 12px;
+    margin: 1em 1.3em 0;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    font-family: 'larsseitmedium';
+}
+
+  .popinfomodule__info {
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    margin: 1em 1.2em;
+  }
+
+  .popinfomodule__card {
+    -webkit-tap-highlight-color: transparent;
+    font-size: 12px;
+    background-color: #eeeae7;
+    position: absolute;
+    bottom: -122px;
+    height: 160px;
+    width: 100%;
+    transition: bottom 0.5s ease;
+    cursor: pointer;
+  }
+
+  .popinfomodule__card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75em 1em;
+  }
+
+  .popinfomodule__card > p {
+    margin: 1em;
+  }
+
+  .popinfomodule__card.hovered {
+    bottom: 0;
+  }
+
+  .hidden {
+    display: none;
+  }
+  
+  
+  @media screen and (max-width: 600px) {
+  .popinfomodule {
+    height: 180px;
+    line-height: 1.67;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    background-color: #f5f5f5;
+    color: #000;
+    margin: 0 0 2em;
+    margin-top: 1.2em;
+  }
+  .popinfomodule__card {
+    -webkit-tap-highlight-color: transparent;
+    font-size: 12px;
+    background-color: #eeeae7;
+    position: absolute;
+    bottom: -142px;
+    height: 180px;
+    width: 100%;
+    transition: bottom 0.5s ease;
+    cursor: pointer;
+  }
+}
+  
+ 
+</style>
+
+<script>
+  $(".popinfomodule__card").on("click", function () {
+    if ($(this).hasClass("hovered")) {
+      $(".popinfomodule__card").removeClass("hovered");
+      $(".PdpInfoModule__icon-up").removeClass("hidden");
+      $(".PdpInfoModule__icon-down").addClass("hidden");
+    } else {
+      $(this).addClass("hovered");
+      $(".PdpInfoModule__icon-down").removeClass("hidden");
+      $(".PdpInfoModule__icon-up").addClass("hidden");
+    }
+  });
+</script>

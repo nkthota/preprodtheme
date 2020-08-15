@@ -1,0 +1,109 @@
+<div class="faq_new_page page-width page-content{% if section.blocks.size > 0 %} page-content--with-blocks{% endif %}">
+  {% if section.settings.title != '' or section.settings.page_subtitle != '' %}
+  <div class="section-header text-center faq_section_header">
+    {% if section.settings.title != blank %}
+    <h2 class="mb-0">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.page_subtitle != '' %}
+    <p class="help_content contact_page_subtitle text_14">{{ section.settings.page_subtitle | newline_to_br }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
+  
+  
+  <div class="grid">
+    {% if section.settings.content != '' %}
+    <div class="grid__item medium-up--one-whole" style="width: 100%;">
+      <div class="help_content text-center text_14">
+        {{ section.settings.content }}
+      </div>
+    </div>
+    {% endif %} 
+
+    <div class="grid__item medium-up--one-whole" style="width: 100%;">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'heading_block' %}
+      <div class="heading_block">
+        <div class="heading_content">
+          {% if block.settings.title != '' %}
+          <h4 class="title">{{ block.settings.title }}</h4>
+          {% endif %}
+
+          {% if block.settings.subtitle != '' %}
+          <p class="subtitle help_content text_14">{{ block.settings.subtitle }}</p>
+          {% endif %} 
+        </div>
+
+<!--         {% if block.settings.price != '' %}
+        <div class="heading_price">
+          <p class="heading_price help_content text_14">{{ block.settings.price }}</p>
+        </div>
+        {% endif %} -->
+      </div>
+
+      {% when 'content_block' %}
+      <div class="help_content text_14">
+        {{ block.settings.content }}
+      </div>
+
+      {% when 'accordion' %}
+      <div class="accordion_content heading_content">
+        <h4 class="title accordion">{{ block.settings.title }}</h4>
+        <p class="subtitle help_content text_14">{{ block.settings.subtitle }}</p>
+      </div>
+      
+      {% endcase %}
+      {% endfor %}
+    </div>
+    
+    
+    {% include 'help-center-navigation' %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Shipping-Returns",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Shipping & Returns"
+      },
+      {
+        "type": "textarea",
+        "id": "page_subtitle",
+        "label": "Sub-heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      }
+	],
+    "blocks": [
+      {
+        "type": "heading_block",
+        "name": "Content",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "STANDARD SHIPPING"
+          },
+          {
+            "type": "textarea",
+            "id": "subtitle",
+            "label": "Sub-title",
+            "default": "Delivery in 4-6 working days"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

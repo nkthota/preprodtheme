@@ -1,0 +1,127 @@
+{% include 'product-template',
+  description_style: section.settings.description_style,
+  image_position: section.settings.image_position,
+  image_container_width: section.settings.image_size,
+  section_id: product.id,
+  social: section.settings.social_enable,
+  thumbnail_position: section.settings.thumbnail_position,
+  thumbnail_arrows: section.settings.thumbnail_arrows
+%}
+
+<!-- start Recomatic code -->
+
+{{ shop.metafields.recomatic.script }}
+<style type="text/css">.recomatic-product-wrap { display: none; } .recomatic-wrap { visibility: hidden; }</style>
+<div class="recomatic-related-products page-width" style="padding-top: 30px;">
+  <header class="section-header"><h3 class="section-header__title">You May Also Like</h3></header>
+  <div recomatic="product" shop="{{shop.permanent_domain}}" product_id="{{product.id}}"></div>
+</div>
+
+<!-- end Recomatic code -->
+
+{% if settings.enable_product_reviews and settings.reviews_layout == 'full' %}
+  <hr id="Reviews-{{ product.id }}" class="hr--clear">
+  <div class="index-section product-reviews product-reviews--full">
+    <div class="page-width">
+      <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+    </div>
+  </div>
+{% endif %}
+
+{{ 'font-awesome.min.css' | asset_url | stylesheet_tag }}
+
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Images position",
+        "default": "right",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "image_size",
+        "label": "Image size",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "thumbnail_position",
+        "label": "Thumbnail position",
+        "default": "beside",
+        "options": [
+          {
+            "value": "beside",
+            "label": "Next to image"
+          },
+          {
+            "value": "below",
+            "label": "Below image"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Modal"
+      },
+      {
+        "type": "page",
+        "id": "shipping_page",
+        "label": "Select Page for Shipping and Returns"
+      },
+      {
+        "type": "checkbox",
+        "id": "thumbnail_arrows",
+        "label": "Show thumbnail arrows"
+      },
+      {
+        "type": "select",
+        "id": "description_style",
+        "label": "Description position",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "Next to images"
+          },
+          {
+            "value": "full",
+            "label": "Below images"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "social_enable",
+        "label": "Enable social sharing",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

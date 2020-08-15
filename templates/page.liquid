@@ -1,0 +1,27 @@
+<div class="faq_new_page page-width page-content" style="padding-bottom: 0 !important;">
+  {% comment %}
+  {%- include 'breadcrumbs' -%}
+  {% endcomment %}
+
+  <div class="grid">
+    <div class="grid__item medium-up--one-whole">
+      <header class="section-header">
+        <h1 class="section-header__title">{{ page.title }}</h1>
+      </header>
+      <div class="rte rte--nomargin">
+        {{ page.content }}
+      </div>
+    </div>
+    
+
+    {% if page.handle == 'shipping-returns' or page.handle == 'popup-perks' %}
+    {% include 'help-center-navigation' %}
+    {% endif %}
+  </div>
+</div>
+
+<style>
+  .faq_new_page .grid__item.medium-up--one-whole {
+    width: 100% !important;
+  }
+</style>

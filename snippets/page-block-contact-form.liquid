@@ -1,0 +1,127 @@
+{%- assign blockId = block.id -%}
+{% if product %}
+{%- assign blockId = block.id | append: product.id -%}
+{% endif %}
+
+<div class="contact_index">
+  <div class="page-width">
+
+    <div class="grid">
+      <div class="grid__item{% if block.settings.narrow_column %} medium-up--three-quarters medium-up--push-one-eighth{% endif %}">
+        {% if block.settings.title != blank %}
+        <div class="section-header">
+          <h2 class="section-header__title">
+            {{ block.settings.title }}
+          </h2>
+        </div>
+        {% endif %}
+
+        <div class="form-vertical contact_form">
+          {% form 'contact' %}
+
+          {% if form.posted_successfully? %}
+          <p class="note note--success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+          {% endif %}
+
+          {{ form.errors | default_errors }}
+
+          <div class="grid grid--small">
+            <div class="grid__item medium-up--one-half">
+              {% comment %}<label for="ContactFormName-{{ blockId }}">{{ 'contact.form.name' | t }}</label>{% endcomment %}
+              <input type="text" 
+                     id="ContactFormName-{{ blockId }}" 
+                     class="input-full text_14" 
+                     name="contact[name]" 
+                     autocapitalize="words" 
+                     value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" 
+                     placeholder="First Name">
+            </div>
+
+            <div class="grid__item medium-up--one-half">
+              {% comment %}<label for="ContactFormName-{{ blockId }}">{{ 'contact.form.name' | t }}</label>{% endcomment %}
+              <input type="text" 
+                     id="ContactFormName-{{ blockId }}" 
+                     class="input-full text_14" 
+                     name="contact[lname]" 
+                     autocapitalize="words" 
+                     value="{{ form.name }}" 
+                     placeholder="Last Name">
+            </div>
+
+            <div class="grid__item medium-up--one-whole">
+              {% comment %}<label for="ContactFormEmail-{{ blockId }}">{{ 'contact.form.email' | t }}</label>{% endcomment %}
+              <input type="email" 
+                     id="ContactFormEmail-{{ blockId }}" 
+                     class="input-full text_14" 
+                     name="contact[email]"
+                     autocapitalize="off" 
+                     value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" 
+                     placeholder="Enter Your E-Mail">
+            </div>
+
+            <div class="grid__item medium-up--one-whole">
+              {% comment %}<label for="ContactFormSubject-{{ blockId }}">{{ 'contact.form.subject' | t }}</label>{% endcomment %}
+              <input type="text" 
+                     id="ContactFormSubject-{{ blockId }}" 
+                     class="input-full text_14" 
+                     name="contact[subject]"
+                     autocapitalize="off" 
+                     placeholder="Subject">
+            </div>
+            
+            <div class="grid__item medium-up--one-whole">
+              <textarea rows="10" 
+                        id="ContactFormMessage-{{ blockId }}" 
+                        class="input-full input__textarea text_14" 
+                        name="contact[body]" 
+                        placeholder="Type your message here...">
+                {% if form.body %}{{ form.body }}{% endif %}
+              </textarea>
+
+              <button type="submit" class="btn text_14 contact_submit_btn">SUBMIT</button>
+            </div>
+          </div>
+
+          {% comment %}
+          {% if block.settings.show_phone %}
+          {% comment %}<label for="ContactFormPhone-{{ blockId }}">{{ 'contact.form.phone' | t }}</label>{% endcomment %}
+          <input type="tel" 
+                 id="ContactFormPhone-{{ blockId }}" 
+                 class="input-full text_14" 
+                 name="contact[phone]" 
+                 pattern="[0-9\-]*" 
+                 value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+          {% endif %}
+
+          <label for="ContactFormMessage-{{ blockId }}">{{ 'contact.form.message' | t }}</label>
+          {% endcomment %}
+          
+
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .input-full {
+    padding: 20px;    
+    color: #c2c2c2;
+    font-weight: 400;
+    border: 2px solid #EEEAE7;
+    font-size: 14px !important;
+  }
+  .input-full:focus, .input-full:hover {   
+    color: #000;
+    border: 2px solid #EEEAE7;
+  }
+</style>
+
+<script>
+  $(window).on('load', function(){
+  	$('.input__textarea').text('');
+  })
+</script>

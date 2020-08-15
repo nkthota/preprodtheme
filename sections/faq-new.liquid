@@ -1,0 +1,129 @@
+<div class="faq_new_page page-width page-content{% if section.blocks.size > 0 %} page-content--with-blocks{% endif %}">
+  {% if section.settings.title != '' or section.settings.page_subtitle != '' %}
+  <div class="section-header text-center faq_section_header">
+    {% if section.settings.title != blank %}
+    <h2 class="mb-0">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.page_subtitle != '' %}
+    <p class="help_content contact_page_subtitle text_14">{{ section.settings.page_subtitle | newline_to_br }}</p>
+    {% endif %}
+  </div>
+  {% endif %} 
+  
+  
+  <div class="grid">
+    {% if section.settings.content != '' %}
+    <div class="grid__item medium-up--one-whole" style="width: 100%;">
+      <div class="help_content text-center text_14">
+        {{ section.settings.content }}
+      </div>
+    </div>
+    {% endif %} 
+    
+    {% include 'help-center-navigation' %}
+    
+    
+    {% comment %}
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'text_block' %}
+    <div class="grid__item medium-up--three-twelfths">
+      <div class="faq_wrapper">
+        {% if block.settings.enable_modal %}
+            <div id="size_guide" style="display: block;">
+              <img class="faq_icon" src="{{ block.settings.image | img_url: '48x' }}" alt="{{ block.settings.image.alt }}">
+              {% if block.settings.title != blank %}
+              <h3 class="heading faq_heading">{{ block.settings.title }}</h3>
+              {% endif %}
+            </div>
+
+            <div id="sizeGuideModal">  
+              <div class="modal-content">
+                <span class="moadl_close">x</span>
+                <div class="modal-body">
+                  {% include 'size-guide' %}
+                </div>
+              </div>
+            </div>
+        
+        {% else %}
+            <a href="{{ block.settings.url }}">
+              <img class="faq_icon" src="{{ block.settings.image | img_url: '48x' }}" alt="{{ block.settings.image.alt }}">
+              {% if block.settings.title != blank %}
+              <h3 class="heading faq_heading">{{ block.settings.title }}</h3>
+              {% endif %}
+            </a>
+        {% endif %}
+      </div>
+    </div>
+    {% endcase %}
+    {% endfor %}
+    {% endcomment %}
+  </div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Page.faq page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "MAY WE HELP YOU?"
+      },
+      {
+        "type": "textarea",
+        "id": "page_subtitle",
+        "label": "Sub-heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      }
+	],
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Text Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Shipping & Returns"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Link"
+          },
+          {
+            "type": "header",
+            "content": "Modal"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_modal",
+            "label": "Enable Modal",
+            "default": false
+          },
+          {
+            "type": "page",
+            "id": "size_guide_page",
+            "label": "Select Page"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,155 @@
+<div class="page-width designer-section" data-section-id="{{ section.id }}">
+  <div class="section-header text-center about_header appoint_header">
+    <h2 class="desinger_t">{{ page.title }}</h2>
+  </div>  
+  
+  <div class="grid">
+    <div class="alpha_nav grid__item medium-up--one-whole">
+      <ul>
+        <li class="all_vendor cv--available_li">All</li>
+<!--         <li data-al="123">123</li>
+        <li data-al="A">A</li>
+        <li data-al="B">B</li>
+        <li data-al="C">C</li>
+        <li data-al="D">D</li>
+        <li data-al="E">E</li>
+        <li data-al="F">F</li>
+        <li data-al="G">G</li>
+        <li data-al="H">H</li>
+        <li data-al="I">I</li>
+        <li data-al="J">J</li>
+        <li data-al="K">K</li>
+        <li data-al="L">L</li>
+        <li data-al="M">M</li>
+        <li data-al="N">N</li>
+        <li data-al="O">O</li>
+        <li data-al="P">P</li>
+        <li data-al="Q">Q</li>
+        <li data-al="R">R</li>
+        <li data-al="S">S</li>
+        <li data-al="T">T</li>
+        <li data-al="U">U</li>
+        <li data-al="V">V</li>
+        <li data-al="W">W</li>
+        <li data-al="X">X</li>
+        <li data-al="Y">Y</li>
+        <li data-al="Z">Z</li> -->
+        
+        {% assign array = "A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z" | split: "|" %}
+
+        {% for item in array %}
+        <li data-al="{{item}}">{{item}}</li>
+        {% endfor %}
+              
+        
+        {% assign currentt = "" %}
+      {% for product_vendorr in shop.vendors %}
+                
+      {% assign first_letterr = product_vendorr | strip_html | upcase | truncate: 1, '' %}
+      {% unless first_letterr == currentt %}
+     
+     {% comment %} <li data-al="{{ first_letterr }}">{{ first_letterr }}</li> {% endcomment %}
+      {% endunless %}
+        
+      {% assign currentt = first_letterr %}
+        
+        
+        
+        
+        
+      {% endfor %}
+        
+        
+        
+      </ul>
+    </div>
+      <div class="grid__item">
+          <div class="product_vendor_list grid">
+            {% assign current = "" %}
+            {% for product_vendor in shop.vendors %}
+            {% assign first_letter = product_vendor | strip_html | upcase | truncate: 1, '' %}
+            {% unless first_letter == current %}
+            {% if current  != '' %} </ul> {%endif%} 
+          <ul data-alpha = "{{ first_letter }}" class="float-none grid__item medium-up--one-fifth vendor {{ first_letter }}">  
+            <li class="vendor-letter">{{ first_letter }}</li>
+            {% endunless %}
+            <li class="li_vendor" data-vendor="{{ product_vendor }}">{{ product_vendor | link_to_vendor  }}</li>
+            {% assign current = first_letter %}
+            {% endfor %}
+            </div>
+      </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Designer",
+    "settings": [
+   { 
+    "type": "image_picker",
+    "id": "image",
+    "label":"Banner Image"
+     }
+]
+ 
+  }
+{% endschema %}
+<script>
+  //   onclick on nav content hide show code start here
+  $('.alpha_nav ul li').click(function(){
+    var li_val = $(this).attr('data-al');
+    $('.product_vendor_list ul').each(function(){
+      var ul_val = $(this).attr('data-alpha');
+      if(li_val == ul_val){
+        $(this).show();
+      }
+      else{
+        $(this).hide();
+      }
+    });
+  });
+ $('.all_vendor').click(function(){
+$('.vendor').show();
+});
+    //   onclick on nav content hide show code end here
+    {% comment %}
+ // custom search code start  here
+  $('#vendor_search').on("input", function() {
+    var dInput = this.value.toLowerCase();
+    $('.product_vendor_list ul').each(function(){
+      $(this).find('.li_vendor').each(function(){
+        var check = $(this).attr('data-vendor').toLowerCase();
+        if(check.indexOf(dInput) > -1 && dInput != '' ){
+          $(this).addClass('highlight');
+        }
+        else{
+          $(this).removeClass('highlight');
+        }
+      });
+    });
+  });
+ 
+  // custom search code end  here
+//   collection dropdown code start here
+  $('#coll_first').change(function(){
+    var url = $(this).val();
+    if(url){
+      window.location = url;
+    }
+  });
+//   collection dropdown code end here
+   {% endcomment %}
+  
+  $(document).ready(function(){
+    $('.alpha_nav li').each(function(e){
+      var alpha_li = $(this).attr('data-al');
+      $('.product_vendor_list ul').each(function(){
+        var vendor_li  = $(this).attr('data-alpha');
+        if(alpha_li == vendor_li){
+          $('.alpha_nav li[data-al ='+vendor_li+']').addClass('cv--available_li');
+        }
+      });
+    });
+  });
+ </script>
+
+

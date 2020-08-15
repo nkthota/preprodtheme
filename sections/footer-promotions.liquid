@@ -1,0 +1,364 @@
+{%- assign fixed_aspect_ratio = false -%}
+{% unless section.settings.image_size == 'natural' %}
+  {%- assign fixed_aspect_ratio = true -%}
+{% endunless %}
+
+{%- assign show_section = true -%}
+{% if template == 'index' and section.settings.hide_homepage %}
+  {%- assign show_section = false -%}
+{% endif %}
+
+{% if show_section %}
+  {% if section.blocks.size > 0 %}
+    {% case section.settings.grid_item %}
+    {% when '1' %}
+    {%- assign grid_item_width = 'medium-up--one-whole' -%}
+    {% when '2' %}
+    {%- assign grid_item_width = 'medium-up--one-half' -%}
+    {% when '3' %}
+    {%- assign grid_item_width = 'medium-up--one-third' -%}
+    {% when '4' %}
+    {%- assign grid_item_width = 'medium-up--one-quarter' -%}
+    {% when '5' %}
+    {%- assign grid_item_width = 'medium-up--one-fifth' -%}
+    {% endcase %}
+
+    <div id="section-{{ section.id }}" class="footer-promo" style="background: {{ section.settings.bg_color }}; border-top: 2px solid rgba(187, 183, 180, 0.2);">
+      
+        <div class="page-width footer-promotions">
+          <div class="grid grid--flush-bottom">
+            {% for block in section.blocks %}
+            {% case block.type %}
+            {% when 'promotion' %}
+              <div class="grid__item mb-0 {{ grid_item_width }}" {{ block.shopify_attributes }} data-aos="row-of-3">
+                {% if block.settings.enable_image %}
+                  <a href="{{ block.settings.button_link }}" class="article__grid-image">
+                    {% if block.settings.image != blank %}
+                        <div class="image-wrap promo-icon">
+                            <img class="lazyloaded" src="{{ block.settings.image | img_url: '40x' }}" alt="{{ block.settings.title | escape }}">
+                        </div>
+                    {% else %}
+                      {% if fixed_aspect_ratio %}
+                        <div class="image-wrap">
+                          <div
+                            class="grid__image-ratio grid__image-ratio--cover grid__image-ratio--{{ section.settings.image_size }} lazyloaded">
+                            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                          </div>
+                        </div>
+                      {% else %}
+                        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {% endif %}
+                    {% endif %}
+                  </a>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <h3>{{ block.settings.title }}</h3>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                  <div class="rte-setting text-spacing">{{ block.settings.text }}</div>
+                {% endif %}
+                {% if block.settings.button_label != blank %}
+                  <a href="{{ block.settings.button_link }}" class="btn btn--secondary btn--small active_btn">
+                    {{ block.settings.button_label }}
+                  </a>
+                {% endif %}
+              </div>
+            {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+  {% endif %}
+{% endif %}
+
+
+{%- include 'section-style' -%}
+
+{% schema %}
+  {
+    "name": "Footer promotions",
+    "class": "index-section--footer",
+    "settings": [
+      {
+        "type": "select",
+        "id": "grid_item",
+        "label": "Grid column",
+        "default": "4",
+        "options": [
+          {
+            "value": "1",
+            "label": "Full"
+          },
+          {
+            "value": "2",
+            "label": "Half"
+          },
+          {
+            "value": "3",
+            "label": "Third"
+          },
+          {
+            "value": "4",
+            "label": "Quarter"
+          },
+          {
+            "value": "5",
+            "label": "Fifth"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_homepage",
+        "label": "Do not show on home page"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Section BG color",
+        "default": "#EEEAE7"
+      },
+      {
+        "type": "select",
+        "id": "image_size",
+        "label": "Image size",
+        "default": "wide",
+        "options": [
+          {
+            "value": "natural",
+            "label": "Natural"
+          },
+          {
+            "value": "square",
+            "label": "Square (1:1)"
+          },
+          {
+            "value": "landscape",
+            "label": "Landscape (4:3)"
+          },
+          {
+            "value": "portrait",
+            "label": "Portrait (2:3)"
+          },
+          {
+            "value": "wide",
+            "label": "Wide (16:9)"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "promotion",
+        "name": "Column",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "enable_image",
+            "label": "Show image",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Site-wide promotion"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Use this section to promote content throughout every page of your site. Add images for further impact.</p>"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label",
+            "default": "Optional button"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Link"
+          }
+        ]
+      },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "promotion"
+        },
+        {
+          "type": "promotion"
+        },
+        {
+          "type": "promotion"
+        }
+      ]
+    }
+  }
+{% endschema %}

@@ -1,0 +1,648 @@
+{%- assign main_menu = linklists[section.settings.main_menu_link_list] -%}
+{%- assign toolbar_menu = linklists[section.settings.toolbar_menu] -%}
+
+{%- assign logo_alignment = 'left' -%}
+{% if section.settings.main_menu_alignment == 'center-left' or section.settings.main_menu_alignment == 'center-split' or section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-drawer' %}
+  {%- assign logo_alignment = 'center' -%}
+{% endif %}
+
+{%- assign dropdown_alignment = 'left' -%}
+{% if section.settings.main_menu_alignment == 'left-center' or section.settings.main_menu_alignment == 'center-split' or section.settings.main_menu_alignment == 'center' %}
+  {%- assign dropdown_alignment = 'center' -%}
+{% endif %}
+
+
+{% comment %}
+{% include 'drawer-menu' %}
+{% endcomment %}
+
+{% include 'cart-drawer' %}
+
+{%- assign template_name = template | replace: '.', ' ' | truncatewords: 2, '' | handle -%}
+
+{%- assign sticky_header = false -%}
+{% if section.settings.header_style == 'sticky' %}
+  {%- assign sticky_header = true -%}
+{% endif %}
+{%- assign overlay_header = false -%}
+{%- assign has_logo = false -%}
+{% if template_name == 'index' and section.settings.sticky_index %}
+  {%- assign overlay_header = true -%}
+{% endif %}
+{% if template_name == 'collection' and collection.image and section.settings.sticky_collection %}
+  {%- assign overlay_header = true -%}
+{% endif %}
+
+{% style %}
+  .site-nav__link,
+  .site-nav__dropdown-link:not(.site-nav__dropdown-link--top-level) {
+    font-size: {{ settings.type_navigation_size }}px;
+  }
+  {% if settings.type_navigation_capitalize %}
+    .site-nav__link, .mobile-nav__link--top-level {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+    }
+    .mobile-nav__link--top-level {
+      font-size: 1.1em;
+    }
+  {% endif %}
+
+  {% if mainmenu.length > 6 %}
+    .site-nav__link {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  {% endif %}
+
+  {% unless section.settings.mega_menu_images %}
+    .megamenu__colection-image {
+      display: none;
+    }
+  {% endunless %}
+{% endstyle %}
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  {% if overlay_header or section.settings.announcement_above_header %}
+    {% include 'announcement-bar' %}
+  {% endif %}
+
+  {% unless overlay_header %}
+    {% if settings.enable_currencies or section.settings.toolbar_social or section.settings.toolbar_menu != blank %}
+      {% include 'toolbar',
+        overlay_header: overlay_header,
+        show_currency_flags: section.settings.show_currency_flags
+      %}
+    {% endif %}
+  {% endunless %}
+
+  {% unless overlay_header or section.settings.announcement_above_header %}
+  <div class="medium-up--hide announcement-bar-hide-on-mobile">
+    {% include 'announcement-bar' %}
+  </div>
+  {% endunless %}
+
+  <div class="header-sticky-wrapper">
+    <div class="header-wrapper{% if overlay_header %} header-wrapper--sticky is-light{% endif %}">
+
+      {% if overlay_header %}
+        {% if settings.enable_currencies or section.settings.toolbar_social or section.settings.toolbar_menu != blank %}
+          {% include 'toolbar',
+            overlay_header: overlay_header,
+            show_currency_flags: section.settings.show_currency_flags
+          %}
+        {% endif %}
+      {% endif %}
+      <header
+        class="site-header{% if settings.type_navigation_style == 'heading' %} site-header--heading-style{% endif %}"
+        data-sticky="{{ sticky_header }}">
+        <div class="page-width">
+          <div
+            class="header-layout header-layout--{{ section.settings.main_menu_alignment }}"
+            data-logo-align="{{ logo_alignment }}">
+
+            {% if logo_alignment == 'left' %}
+              <div class="header-item header-item--logo">
+                {% include 'header-logo-block' %}
+              </div>
+            {% endif %}
+
+            {% if logo_alignment == 'left' and section.settings.main_menu_alignment != 'left-drawer' %}
+              <div class="header-item header-item--navigation{% if section.settings.main_menu_alignment == 'left-center' %} text-center{% endif %}">
+                {% include 'header-desktop-nav' %}
+              </div>
+            {% endif %}
+
+            {% if logo_alignment == 'center' %}
+              <div class="header-item header-item--left header-item--navigation">
+                <div class="site-nav small--hide">
+                  {% comment %}
+                  <a href="{{ section.settings.unitedstates_url }}" class="icon_fix_wrap site-nav__link site-nav__link--icon">
+                    <div class="icon_fix">
+                      {% if section.settings.img_1 %}
+                      <img src="{{ section.settings.img_1 | img_url: '20x' }}" alt="{{ section.settings.img_1.alt }}">
+                      {% endif %}
+                      <span>{{ section.settings.text_1 }}</span>
+                    </div>
+                  </a>
+                  {% endcomment %}
+                  
+                  <div class="icon_fix_wrap site-nav__link site-nav__link--icon">
+                    <div class="icon_fix globe_img_fix">
+                      <svg class="tel_img globe_img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M19.5 9.93a8.89 8.89 0 01-2.81 6.72 9.38 9.38 0 01-13.25.17l-.09-.09A9.08 9.08 0 01.5 10a9.28 9.28 0 012.77-6.73 9.46 9.46 0 0113.34 0 8.79 8.79 0 012.89 6.66zm-.9-.08a8 8 0 00-2.59-6 8 8 0 00-6-2.44l-.9 1.91 1.05.23.84-.89 1.42.08.3.77-1 .91V5l.53.07.22-.38.9-.61v.38l.37.61-.37.46.22.23H13l.23.54-1.35.61.23.76h-.45l-.15-.76h-1l-.15.3L10 7l-.68.69.53.61V9l.52.38 3.22.38 1.05.77-.15 1.83-2.17 2.22a2.82 2.82 0 00-.45 1.22 5.7 5.7 0 00-.15 1.3l-.3.38c-.22-.53-.6-1.3-1-2.44-.07-.38-.15-.84-.22-1.46-.08-.45-.08-.91-.15-1.45L8.44 11l1.2-1.46-.52-.76a4.36 4.36 0 01-1.5-.46 5.82 5.82 0 01-1.2-1.07l.45 1-.3.16-.75-1.47L6 5.57l-.22-.92L5 4l-.53-.15-.47.27-.52.15A8.56 8.56 0 001.4 10 8.21 8.21 0 004 16.12a8.65 8.65 0 0014.6-6.27z" fill="#252525"></path></svg>
+                      <div class="doubly-wrapper ml-0"></div>
+                    </div>
+                  </div>
+                  
+                  <a href="tel:{{ section.settings.phone_url }}" class="icon_fix_wrap site-nav__link site-nav__link--icon">
+                    <div class="icon_fix">
+<!--                       {% if section.settings.img_2 %}
+                      <img src="{{ section.settings.img_2 | img_url: '20x' }}" alt="{{ section.settings.img_2.alt }}">
+                      {% endif %} -->
+                      {% comment %}
+                      <svg class="tel_img" id="Layer_1" enable-background="new 0 0 512.021 512.021" height="512" viewBox="0 0 512.021 512.021" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m367.988 512.021c-16.528 0-32.916-2.922-48.941-8.744-70.598-25.646-136.128-67.416-189.508-120.795s-95.15-118.91-120.795-189.508c-8.241-22.688-10.673-46.108-7.226-69.612 3.229-22.016 11.757-43.389 24.663-61.809 12.963-18.501 30.245-33.889 49.977-44.5 21.042-11.315 44.009-17.053 68.265-17.053 7.544 0 14.064 5.271 15.645 12.647l25.114 117.199c1.137 5.307-.494 10.829-4.331 14.667l-42.913 42.912c40.482 80.486 106.17 146.174 186.656 186.656l42.912-42.913c3.837-3.837 9.36-5.466 14.667-4.331l117.199 25.114c7.377 1.581 12.647 8.101 12.647 15.645 0 24.256-5.738 47.224-17.054 68.266-10.611 19.732-25.999 37.014-44.5 49.977-18.419 12.906-39.792 21.434-61.809 24.663-6.899 1.013-13.797 1.518-20.668 1.519zm-236.349-479.321c-31.995 3.532-60.393 20.302-79.251 47.217-21.206 30.265-26.151 67.49-13.567 102.132 49.304 135.726 155.425 241.847 291.151 291.151 34.641 12.584 71.867 7.64 102.132-13.567 26.915-18.858 43.685-47.256 47.217-79.251l-95.341-20.43-44.816 44.816c-4.769 4.769-12.015 6.036-18.117 3.168-95.19-44.72-172.242-121.772-216.962-216.962-2.867-6.103-1.601-13.349 3.168-18.117l44.816-44.816z"/><path d="m496.02 272c-8.836 0-16-7.164-16-16 0-123.514-100.486-224-224-224-8.836 0-16-7.164-16-16s7.164-16 16-16c68.381 0 132.668 26.628 181.02 74.98s74.98 112.639 74.98 181.02c0 8.836-7.163 16-16 16z"/><path d="m432.02 272c-8.836 0-16-7.164-16-16 0-88.224-71.776-160-160-160-8.836 0-16-7.164-16-16s7.164-16 16-16c105.869 0 192 86.131 192 192 0 8.836-7.163 16-16 16z"/><path d="m368.02 272c-8.836 0-16-7.164-16-16 0-52.935-43.065-96-96-96-8.836 0-16-7.164-16-16s7.164-16 16-16c70.58 0 128 57.42 128 128 0 8.836-7.163 16-16 16z"/></g></svg>
+                      <img class="mobile_icon_header user" src="{{ 'phone-call-32.png' | file_url }}" />
+                      {% endcomment %}
+                      <svg class="tel_img" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 513.64 513.64" style="enable-background:new 0 0 513.64 513.64;" xml:space="preserve"> <path d="M499.66,376.96l-71.68-71.68c-25.6-25.6-69.12-15.359-79.36,17.92c-7.68,23.041-33.28,35.841-56.32,30.72 c-51.2-12.8-120.32-79.36-133.12-133.12c-7.68-23.041,7.68-48.641,30.72-56.32c33.28-10.24,43.52-53.76,17.92-79.36l-71.68-71.68 c-20.48-17.92-51.2-17.92-69.12,0l-48.64,48.64c-48.64,51.2,5.12,186.88,125.44,307.2c120.32,120.32,256,176.641,307.2,125.44 l48.64-48.64C517.581,425.6,517.581,394.88,499.66,376.96z"/> </g> </svg>
+                      <span>{{ section.settings.text_2 }}</span>
+                    </div>
+                  </a>
+                </div>
+                
+                {% comment %}
+                {% if section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-split' %}
+                  {% if settings.search_enable %}
+                    <div class="site-nav small--hide">
+                      <a href="{{ routes.search_url }}" class="site-nav__link site-nav__link--icon js-search-header js-no-transition">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64"><path d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58zM54 54L41.94 42"/></svg>
+                        <span class="icon__fallback-text">{{ 'general.search.title' | t }}</span>
+                      </a>
+                    </div>
+                  {% endif %}
+                {% endif %}
+                {% endcomment %}                
+
+                {% if section.settings.main_menu_alignment == 'center-left' %}
+                  {% include 'header-desktop-nav' %}
+                {% endif %}
+
+                <div class="site-nav{% unless section.settings.main_menu_alignment == 'center-drawer' %} medium-up--hide{% endunless %}">
+                  {% comment %}
+                  <button
+                    type="button" 
+                    class="site-nav__link site-nav__link--icon js-drawer-open-nav"
+                    aria-controls="NavDrawer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50.8 31.8" aria-hidden="true" focusable="false" role="presentation" class="icon icon-hamburger mobile_nav_icon">
+                      <path d="M36 2H0V0h36v2zM0 31.8h36v-2H0v2zm21.9-16.9H0v2h21.9v-2zm27.5 16.9L41 23.4c-1.6 1.2-3.6 1.9-5.7 1.9-5.2 0-9.5-4.3-9.5-9.5s4.3-9.5 9.5-9.5 9.5 4.3 9.5 9.5c0 2.4-.9 4.5-2.3 6.2l8.3 8.3-1.4 1.5zm-14.1-8.4c4.1 0 7.5-3.4 7.5-7.5s-3.4-7.5-7.5-7.5-7.5 3.4-7.5 7.5 3.4 7.5 7.5 7.5z" fill="#252525">
+                      </path>
+                    </svg>
+                    <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+                  </button>
+                  {% endcomment %}
+                  
+                  <button
+                    type="button"  
+                    data-target="test-menu-right" 
+                    data-action="toggle" 
+                    class="slide-menu-control site-nav__link site-nav__link--icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50.8 31.8" aria-hidden="true" focusable="false" role="presentation" class="icon icon-hamburger mobile_nav_icon">
+                      <path d="M36 2H0V0h36v2zM0 31.8h36v-2H0v2zm21.9-16.9H0v2h21.9v-2zm27.5 16.9L41 23.4c-1.6 1.2-3.6 1.9-5.7 1.9-5.2 0-9.5-4.3-9.5-9.5s4.3-9.5 9.5-9.5 9.5 4.3 9.5 9.5c0 2.4-.9 4.5-2.3 6.2l8.3 8.3-1.4 1.5zm-14.1-8.4c4.1 0 7.5-3.4 7.5-7.5s-3.4-7.5-7.5-7.5-7.5 3.4-7.5 7.5 3.4 7.5 7.5 7.5z" fill="#252525">
+                      </path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              {% if section.settings.main_menu_alignment == 'center-split' %}
+                {% include 'header-split-nav' %}
+              {% endif %}
+
+              {% if section.settings.main_menu_alignment != 'center-split' %}
+                <div class="header-item header-item--logo">
+                  {% include 'header-logo-block' %}
+
+                  <div class="stciky_menu text-center menu_full">
+                    {% include 'header-split-nav' %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+
+            <div class="header-item header-item--icons">
+              {% include 'header-icons' %}
+            </div>
+          </div>
+        </div>
+        
+
+        {% comment %}
+        <div class="site-nav mobile_united medium-up--hide">
+          
+          <a href="{{ section.settings.unitedstates_url }}" class="icon_fix_wrap site-nav__link site-nav__link--icon">
+            <div class="icon_fix">
+              {% if section.settings.img_1_mobile %}
+              <img src="{{ section.settings.img_1_mobile | img_url: '17x' }}" alt="{{ section.settings.img_1.alt }}">
+              {% endif %}
+              <span>{{ section.settings.text_1 }}</span>
+            </div>
+          </a>
+          
+          <a href="tel:{{ section.settings.phone_url }}" class="icon_fix_wrap site-nav__link site-nav__link--icon">
+            <div class="icon_fix">
+<!--               {% if section.settings.img_2_mobile %}
+              <img src="{{ section.settings.img_2_mobile | img_url: '17x' }}" alt="{{ section.settings.img_2.alt }}">
+              {% endif %} -->
+              
+              <svg class="tel_img" id="Layer_1" enable-background="new 0 0 512.021 512.021" height="512" viewBox="0 0 512.021 512.021" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m367.988 512.021c-16.528 0-32.916-2.922-48.941-8.744-70.598-25.646-136.128-67.416-189.508-120.795s-95.15-118.91-120.795-189.508c-8.241-22.688-10.673-46.108-7.226-69.612 3.229-22.016 11.757-43.389 24.663-61.809 12.963-18.501 30.245-33.889 49.977-44.5 21.042-11.315 44.009-17.053 68.265-17.053 7.544 0 14.064 5.271 15.645 12.647l25.114 117.199c1.137 5.307-.494 10.829-4.331 14.667l-42.913 42.912c40.482 80.486 106.17 146.174 186.656 186.656l42.912-42.913c3.837-3.837 9.36-5.466 14.667-4.331l117.199 25.114c7.377 1.581 12.647 8.101 12.647 15.645 0 24.256-5.738 47.224-17.054 68.266-10.611 19.732-25.999 37.014-44.5 49.977-18.419 12.906-39.792 21.434-61.809 24.663-6.899 1.013-13.797 1.518-20.668 1.519zm-236.349-479.321c-31.995 3.532-60.393 20.302-79.251 47.217-21.206 30.265-26.151 67.49-13.567 102.132 49.304 135.726 155.425 241.847 291.151 291.151 34.641 12.584 71.867 7.64 102.132-13.567 26.915-18.858 43.685-47.256 47.217-79.251l-95.341-20.43-44.816 44.816c-4.769 4.769-12.015 6.036-18.117 3.168-95.19-44.72-172.242-121.772-216.962-216.962-2.867-6.103-1.601-13.349 3.168-18.117l44.816-44.816z"/><path d="m496.02 272c-8.836 0-16-7.164-16-16 0-123.514-100.486-224-224-224-8.836 0-16-7.164-16-16s7.164-16 16-16c68.381 0 132.668 26.628 181.02 74.98s74.98 112.639 74.98 181.02c0 8.836-7.163 16-16 16z"/><path d="m432.02 272c-8.836 0-16-7.164-16-16 0-88.224-71.776-160-160-160-8.836 0-16-7.164-16-16s7.164-16 16-16c105.869 0 192 86.131 192 192 0 8.836-7.163 16-16 16z"/><path d="m368.02 272c-8.836 0-16-7.164-16-16 0-52.935-43.065-96-96-96-8.836 0-16-7.164-16-16s7.164-16 16-16c70.58 0 128 57.42 128 128 0 8.836-7.163 16-16 16z"/></g></svg>
+              <span>{{ section.settings.text_2 }}</span>
+            </div>
+          </a>          
+        </div>
+        {% endcomment %}
+        
+        
+        {% if section.settings.main_menu_alignment == 'center' %}
+        <div class="text-center menu_full sticky_none">
+          {% include 'header-desktop-nav' %}
+        </div>
+        {% endif %}
+        
+        {% comment %}
+        <div class="site-header__search-container">
+          <div class="site-header__search">
+            <div class="page-width">
+              <form action="{{ routes.search_url }}" method="get" role="search"
+                id="HeaderSearchForm"
+                class="site-header__search-form">
+                <input type="hidden" name="type" value="{{ settings.search_type }}">
+                <button type="submit" class="text-link site-header__search-btn site-header__search-btn--submit">
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64"><path d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58zM54 54L41.94 42"/></svg>
+                  <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+                </button>
+                <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="site-header__search-input" aria-label="{{ 'general.search.placeholder' | t }}">
+              </form>
+              <button type="button" class="js-search-header-close text-link site-header__search-btn">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+                <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t | json }}</span>
+              </button>
+            </div>
+          </div>
+          {%- if settings.predictive_search_enabled -%}
+            <div class="predictive-results hide">
+              <div class="page-width">
+                <div id="PredictiveResults"></div>
+                <div class="text-center predictive-results__footer">
+                  <button type="button" class="btn btn--small" data-predictive-search-button>
+                    <small>
+                      {{ 'general.search.view_more' | t }}
+                    </small>
+                  </button>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+        {% endcomment %}
+      </header>
+    </div>
+  </div>
+  
+  {% unless overlay_header or section.settings.announcement_above_header %}
+  <div>
+    {% include 'announcement-bar' %}
+  </div>
+  {% endunless %}
+</div>
+
+
+{% include 'custom-mobilemenu' %}
+
+{{ 'slidemenu.scss.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'slidemenu.js' | asset_url }}"></script>
+
+<script>
+  (function ($) {
+    $(document).ready(function () {
+      var menuRight = $('#test-menu-right').slideMenu({
+        position: 'left',
+        submenuLinkAfter: ' >',
+        backLinkBefore: '< '
+      });
+
+      if ($(window).width() > 1199) {
+        menuRight.open(false);
+      }
+
+    });
+  })(jQuery);
+</script>
+
+
+<script>
+  $('.site-header__search-input').on('click', function(e) {
+    e.stopPropagation();
+  });
+
+  $('.custom_search_icon').on('click', function(e) {
+    e.stopPropagation();
+    $('.custom_search_area').toggleClass('expand_search');
+  });
+    
+  $('.custom_search_field form input').on('click', function() {
+    $('.custom_search_field').removeClass('overflow_visible');
+  });
+        
+  $('.custom_search_field form input').focus(function(){
+    $('.custom_search_field').addClass('overflow_visible');
+  });  
+  
+  
+  $('.header_cartt').on('click', function() {
+    $('.custom_search_area').removeClass('expand_search');
+    $('.custom_search_field').removeClass('overflow_visible');
+    $('.custom_search_field form input').val('');
+  });
+  
+  $(document).on('click', function() {
+    $('.custom_search_area').removeClass('expand_search');
+    $('.custom_search_field').removeClass('overflow_visible');
+    $('.custom_search_field form input').val('');
+  });  
+</script>
+
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Text 1"
+      },
+      {
+        "type": "text",
+        "id": "text_1",
+        "label": "Text 1",
+        "default": "United States"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_1",
+        "label": "Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_1_mobile",
+        "label": "Image 1 (Mobile)"
+      },
+      {
+        "type": "url",
+        "id": "unitedstates_url",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Text 2"
+      },
+      {
+        "type": "text",
+        "id": "text_2",
+        "label": "Text 2",
+        "default": "1.214245.5324"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_2",
+        "label": "Image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_2_mobile",
+        "label": "Image 2 (Mobile)"
+      },
+      {
+        "type": "text",
+        "id": "phone_url",
+        "label": "Link"
+      },
+      {
+        "type": "link_list",
+        "id": "main_menu_link_list",
+        "label": "Navigation",
+        "default": "main-menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "mega_menu_images",
+        "label": "Show mega menu images",
+        "default": true,
+        "info": "[How to create a mega menu](https://archetypethemes.co/blogs/impulse/how-do-i-create-a-mega-menu)"
+      },
+      {
+        "type": "select",
+        "id": "main_menu_alignment",
+        "label": "Header layout",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Logo left, menu left"
+          },
+          {
+            "value": "left-center",
+            "label": "Logo left, menu center"
+          },
+          {
+            "value": "left-drawer",
+            "label": "Logo left, menu drawer"
+          },
+          {
+            "value": "center-left",
+            "label": "Logo center, menu left"
+          },
+          {
+            "value": "center-split",
+            "label": "Logo center, menu split"
+          },
+          {
+            "value": "center",
+            "label": "Logo center, menu below"
+          },
+          {
+            "value": "center-drawer",
+            "label": "Logo center, menu drawer"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "header_style",
+        "label": "Header style",
+        "default": "normal",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "sticky",
+            "label": "Sticky"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_index",
+        "label": "Overlay header over home page",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_collection",
+        "label": "Overlay header over collection",
+        "info": "(if collection image is enabled)",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_compact",
+        "label": "Use compact style"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_above_header",
+        "label": "Always show above header",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Toolbar"
+      },
+      {
+        "type": "link_list",
+        "id": "toolbar_menu",
+        "label": "Navigation",
+        "info": "This menu won't show dropdown items"
+      },
+      {
+        "type": "checkbox",
+        "id": "toolbar_social",
+        "label": "Show social icons"
+      },
+      {
+        "type": "header",
+        "content": "Language selector",
+        "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_locale_selector",
+        "label": "Show language selector",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Currency selector",
+        "info": "To add a currency, go to your [currency settings.](/admin/settings/payments)"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_currency_selector",
+        "label": "Show currency selector",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_currency_flags",
+        "label": "Show currency flags",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo",
+        "name": "Logo",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo-inverted",
+            "label": "White logo",
+            "info": "Used when on top of an image"
+          },
+          {
+            "type": "range",
+            "id": "desktop_logo_width",
+            "label": "Desktop logo width",
+            "default": 200,
+            "min": 100,
+            "max": 400,
+            "step": 10,
+            "unit": "px"
+          },
+          {
+            "type": "range",
+            "id": "mobile_logo_width",
+            "label": "Mobile logo width",
+            "default": 140,
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "info": "Set as a max-width, may appear smaller"
+          }
+        ]
+      },
+      {
+        "type": "announcement",
+        "name": "Announcement",
+        "limit": 3,
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Heading",
+            "default": "Hassle-free returns"
+          },
+          {
+            "type": "text",
+            "id": "link_text",
+            "label": "Text",
+            "default": "30-day postage paid returns"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Link"
+          }
+        ]
+      },
+      {
+        "type": "mega_img",
+        "name": "Mega Menu Image",
+        "limit": 3,
+        "settings": [
+          {
+            "type": "text",
+            "id": "link_title",
+            "label": "Menu Handle"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "DISCOVER WHAT'S NEW"
+          },
+          {
+            "type": "text",
+            "id": "btn",
+            "label": "Button Label",
+            "default": "SHOP NOW"
+          },
+          {
+            "type": "url",
+            "id": "image_1_url",
+            "label": "Link"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "settings": {}
+    }
+  }
+{% endschema %}

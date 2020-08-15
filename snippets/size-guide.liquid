@@ -1,0 +1,212 @@
+<style>
+  .size-chart-container table{
+    width: 100%;
+    border-collapse:collapse;
+    overflow-x:auto;
+  }
+  .size-chart-container td{
+    padding: 4px 0px;
+    border:1px solid black;
+    word-break: break-word;
+    text-align: center;
+  }
+  .size-chart-container td.top{
+    width: 16%;
+    background-color:#000000;
+    color:#FFFFFF;
+  }
+  .size-chart-container td.bottom{
+    width: 16%;
+    border-bottom-color: #000000 !important;
+    background-color:#000000;
+    color:#FFFFFF;
+  }
+  .size-chart-container td.country{
+    width: 16%;
+    border-bottom:1px solid white;
+    background-color:#000000;
+    color:#FFFFFF;
+  }
+
+  .input-full {
+    padding: 20px;    
+    color: #c2c2c2;
+    font-weight: 400;
+    border: 2px solid #EEEAE7;
+    font-size: 14px !important;
+  }
+  .input-full:focus, .input-full:hover {   
+    color: #000;
+    border: 2px solid #EEEAE7;
+  }
+
+  /** CSS for Small breakpoint - tablets **/
+  @media screen and (max-width: 992px) and (min-width: 768px) {
+    .size-chart-container td {
+      padding: 0.4em;
+    }
+  }
+  /***** CSS for XS (mobile) breakpoint *****/
+  @media screen and (max-width:767px) {
+    .ml-size-chart-scroll .size-chart-container {
+      width: 100%;
+    }
+  }
+</style>
+<div class="customer-service-content-container">
+  <div class="tab myTab">
+    <button class="tablinksguide active" onclick="openTabGuide(event, 'sizeGuide')">SIZE GUIDE</button>
+    <button class="tablinksguide" onclick="openTabGuide(event, 'measure')">HOW TO MEASURE</button> 
+    <button class="tablinksguide" onclick="openTabGuide(event, 'quest')">ASK A QUESTION</button>
+  </div>
+  <div id="sizeGuide" class="tabcontent tabcontentGuide">
+    <div class="size-chart-container">
+      <p class="product-type"><span style="font-size: 11px;">Clothing Conversion Chart</span></p>
+      <div class="table-scroll">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tbody>
+            <tr>
+              <td class="country top">
+                <span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span> </td>
+              <td class="size"><span style="font-size: 11px;">S</span></td>
+              <td class="size"><span style="font-size: 11px;">M</span></td>
+              <td class="size"><span style="font-size: 11px;">L</span></td>
+              <td class="size"><span style="font-size: 11px;">XL</span></td>
+            </tr>
+            <tr>
+              <td class="country"><span style="font-size: 11px;">USA</span></td>
+              <td><span style="font-size: 11px;">6</span></td>
+              <td><span style="font-size: 11px;">8</span></td>
+              <td><span style="font-size: 11px;">10</span></td>
+              <td><span style="font-size: 11px;">12</span></td>
+            </tr>
+            <tr>
+              <td class="country"><span style="font-size: 11px;">UK</span></td>
+              <td><span style="font-size: 11px;">10</span></td>
+              <td><span style="font-size: 11px;">12</span></td>
+              <td><span style="font-size: 11px;">14</span></td>
+              <td><span style="font-size: 11px;">16</span></td>
+            </tr>
+            <tr>
+              <td class="country"><span style="font-size: 11px;">FRANCE</span></td>
+              <td><span style="font-size: 11px;">38</span></td>
+              <td><span style="font-size: 11px;">40</span></td>
+              <td><span style="font-size: 11px;">42</span></td>
+              <td><span style="font-size: 11px;">44</span></td>
+            </tr>
+            <tr>
+              <td class="country"><span style="font-size: 11px;">ITALY</span></td>
+              <td><span style="font-size: 11px;">42</span></td>
+              <td><span style="font-size: 11px;">44</span></td>
+              <td><span style="font-size: 11px;">46</span></td>
+              <td><span style="font-size: 11px;">48</span></td>
+            </tr>
+            <tr>
+              <td class="country"><span style="font-size: 11px;">AUS</span></td>
+              <td><span style="font-size: 11px;">8</span></td>
+              <td><span style="font-size: 11px;">10</span></td>
+              <td><span style="font-size: 11px;">12</span></td>
+              <td><span style="font-size: 11px;">14</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="product-type" style="padding-top: 5px;"><span style="font-size: 11px;">Clothing (Inches)</span></p>
+        <div class="table-scroll">
+          <table border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td class="country top">
+                  <span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span><span style="display: none;"> </span> </td>
+                <td class="size"><span style="font-size: 11px;">S</span></td>
+                <td class="size"><span style="font-size: 11px;">M</span></td>
+                <td class="size"><span style="font-size: 11px;">L</span></td>
+                <td class="size"><span style="font-size: 11px;">XL</span></td>
+              </tr>
+              <tr>
+                <td class="country"><span style="font-size: 11px;">BUST</span></td>
+                <td><span style="font-size: 11px;">34</span></td>
+                <td><span style="font-size: 11px;">36</span></td>
+                <td><span style="font-size: 11px;">38</span></td>
+                <td><span style="font-size: 11px;">40</span></td>
+              </tr>
+              <tr>
+                <td class="country"><span style="font-size: 11px;">WAIST</span></td>
+                <td><span style="font-size: 11px;">26</span></td>
+                <td><span style="font-size: 11px;">28</span></td>
+                <td><span style="font-size: 11px;">30</span></td>
+                <td><span style="font-size: 11px;">32</span></td>
+              </tr>
+              <tr>
+                <td class="country"><span style="font-size: 11px;">HIP</span></td>
+                <td><span style="font-size: 11px;">37</span></td>
+                <td><span style="font-size: 11px;">39</span></td>
+                <td><span style="font-size: 11px;">40</span></td>
+                <td><span style="font-size: 11px;">42</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="product-type" style="padding-top: 5px;"><span style="font-size: 11px;">Shoes</span></p>
+          <table border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td class="country"><span style="font-size: 11px;">INDIA</span></td>
+                <td><span style="font-size: 11px;">3</span></td>
+                <td><span style="font-size: 11px;">4</span></td>
+                <td><span style="font-size: 11px;">5</span></td>
+                <td><span style="font-size: 11px;">6</span></td>
+                <td><span style="font-size: 11px;">7</span></td>
+                <td><span style="font-size: 11px;">8</span></td>
+              </tr>
+              <tr>
+                <td class="country"><span style="font-size: 11px;">USA</span></td>
+                <td><span style="font-size: 11px;">6</span></td>
+                <td><span style="font-size: 11px;">7</span></td>
+                <td><span style="font-size: 11px;">8</span></td>
+                <td><span style="font-size: 11px;">9</span></td>
+                <td><span style="font-size: 11px;">10</span></td>
+                <td><span style="font-size: 11px;">11</span></td>
+              </tr>
+              <tr>
+                <td class="country"><span style="font-size: 11px;">UK</span></td>
+                <td><span style="font-size: 11px;">3</span></td>
+                <td><span style="font-size: 11px;">4</span></td>
+                <td><span style="font-size: 11px;">5</span></td>
+                <td><span style="font-size: 11px;">6</span></td>
+                <td><span style="font-size: 11px;">7</span></td>
+                <td><span style="font-size: 11px;">8</span></td>
+              </tr>
+              <tr>
+                <td class="country"><span style="font-size: 11px;">FRANCE</span></td>
+                <td><span style="font-size: 11px;">37</span></td>
+                <td><span style="font-size: 11px;">38</span></td>
+                <td><span style="font-size: 11px;">39</span></td>
+                <td><span style="font-size: 11px;">40</span></td>
+                <td><span style="font-size: 11px;">41</span></td>
+                <td><span style="font-size: 11px;">42</span></td>
+              </tr>
+              <tr>
+                <td class="country"><span style="font-size: 11px;">ITALY</span></td>
+                <td><span style="font-size: 11px;">36</span></td>
+                <td><span style="font-size: 11px;">37</span></td>
+                <td><span style="font-size: 11px;">38</span></td>
+                <td><span style="font-size: 11px;">39</span></td>
+                <td><span style="font-size: 11px;">40</span></td>
+                <td><span style="font-size: 11px;">41</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin: 0in 0in 0.0001pt;"> </p>
+          <p style="margin: 0in 0in 0.0001pt;"><span style="font-size: 11px;"><span style="font-family: Calibri,sans-serif;"> For further information or advice, please contact our customer care by Call/WhatsApp at 1.214.245.5324 or email us at <a href="mailto:info@indiaspopup.com?subject=Size%20Conversion">info@indiaspopup.com</a>.</span></span></p>
+          <p> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="measure" class="tabcontent tabcontentGuide" style="display: none;">
+    <video controls="controls" style="width: 100%; height: auto;">
+      <source src="https://cdn.shopify.com/s/files/1/2100/2051/files/sampleVideo.mp4?v=1591843825" type="video/mp4"></video>
+  </div>
+  <div id="quest" class="tabcontent tabcontentGuide" style="display: none;">
+    {% include 'contact-form' %}
+  </div>
+</div>

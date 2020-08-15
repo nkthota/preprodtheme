@@ -1,0 +1,511 @@
+{% if section.settings.divider %}<div class="section--divider">{% endif %}
+
+<div class="{% if section.settings.mobile_gutter_grid %}mobile_gutter_grid {% endif %}mosaic page-width custompage_width text_col" id="section-{{ section.id }}">
+  {% if section.settings.title != blank %}
+    <div class="section-header text-{{ section.settings.align_text }}">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+  {% endif %}
+
+  <div class="{% if section.settings.mobile_gutter_grid %}mobile_gutter_grid {% endif %}grid grid_50 {% unless section.blocks.size == 5 %}grid--uniform{% endunless %} grid--flush-bottom d-flex align-items-center flex-wrap">
+    {% case section.settings.grid_item %}
+    {% when '1' %}
+    {%- assign grid_item_width = 'medium-up--one-whole' -%}
+    {% when '2' %}
+    {%- assign grid_item_width = 'medium-up--one-half' -%}
+    {% when '3' %}
+    {%- assign grid_item_width = 'medium-up--one-third' -%}
+    {% when '4' %}
+    {%- assign grid_item_width = 'medium-up--one-quarter' -%}
+    {% when '5' %}
+    {%- assign grid_item_width = 'medium-up--one-fifth' -%}
+    {% endcase %}
+    
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'text_block' %}
+      {% comment %}
+        {% if section.blocks.size == 5 and forloop.index < 3 %}
+          {%- assign column_width = 'medium-up--one-half' -%}
+        {% else %}
+          {%- assign column_width = grid_item_width -%}
+        {% endif %}
+      {% endcomment %}
+    
+      <div class="{% if block.settings.mobile_gutter %}mobile_gutter_grid_item {% endif %}grid__item grid__item_50 {{ grid_item_width }} text-{{ section.settings.align_text }}" {{ block.shopify_attributes }} data-aos="row-of-3">
+        <div class="image__div">
+          {% if block.settings.enable_image %}
+          <div style="{% if section.settings.align_text == 'center' %}margin: 0 auto;{% endif %} max-width: {{ block.settings.image_width }}px;">
+            {% if block.settings.button_link != blank %}
+            <a href="{{ block.settings.button_link }}">
+              {% endif %}
+              {% if block.settings.image != blank %}
+              <div class="image-wrap text-spacing" style="height: 0; padding-bottom: {{ 100 | divided_by: block.settings.image.aspect_ratio }}%;">
+                {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="lazyload"
+                     data-src="{{ img_url }}"
+                     data-widths="[180, 360, 540, 720, 900, 1080]"
+                     data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                     data-sizes="auto"
+                     alt="{{ block.settings.image.alt }}">
+              </div>
+              {% else %}
+              <div class="image-wrap text-spacing">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+              {% endif %}
+              {% if block.settings.button_link != blank %}
+            </a>
+            {% endif %}
+          </div>
+          {% endif %}
+          {% if block.settings.title != blank %}
+          <h3 class="heading">{{ block.settings.title }}</h3>
+          {% endif %}
+          {% if block.settings.text != blank %}
+          <div class="rte-setting text-spacing custom_subtitle4">{{ block.settings.text }}</div>
+          {% endif %}
+          {% if block.settings.button_label != blank %}
+          <a href="{{ block.settings.button_link }}" class="btn btn--secondary btn--small active_btn">
+            {{ block.settings.button_label }} <i class="fa fa-caret-right shop_icon"></i>
+          </a>
+          {% endif %}
+        </div>
+        
+        {% if block.settings.enable_secondimage %}
+        <div class="image__div second_img">
+          <div style="{% if section.settings.align_text == 'center' %}margin: 0 auto;{% endif %} max-width: {{ block.settings.image_width_2 }}px;">
+            {% if block.settings.button_link_2 != blank %}
+            <a href="{{ block.settings.button_link_2 }}">
+              {% endif %}
+              {% if block.settings.image_2 != blank %}
+              <div class="image-wrap text-spacing" style="height: 0; padding-bottom: {{ 100 | divided_by: block.settings.image_2.aspect_ratio }}%;">
+                {%- assign img_url_2 = block.settings.image_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <img class="lazyload"
+                     data-src="{{ img_url_2 }}"
+                     data-widths="[180, 360, 540, 720, 900, 1080]"
+                     data-aspectratio="{{ block.settings.image_2.aspect_ratio }}"
+                     data-sizes="auto"
+                     alt="{{ block.settings.image_2.alt }}">
+              </div>
+              {% else %}
+              <div class="image-wrap text-spacing">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+              {% endif %}
+              {% if block.settings.button_link_2 != blank %}
+            </a>
+            {% endif %}
+          </div>
+
+          {% if block.settings.title_2 != blank %}
+          <h3 class="heading">{{ block.settings.title_2 }}</h3>
+          {% endif %}
+          {% if block.settings.text_2 != blank %}
+          <div class="rte-setting text-spacing custom_subtitle4">{{ block.settings.text_2 }}</div>
+          {% endif %}
+          {% if block.settings.button_label_2 != blank %}
+          <a href="{{ block.settings.button_link_2 }}" class="btn btn--secondary btn--small active_btn">
+            {{ block.settings.button_label_2 }} <i class="fa fa-caret-right shop_icon"></i>
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}        
+    </div>
+    {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% if section.settings.divider %}</div>{% endif %}
+
+
+
+{%- include 'section-style' -%}
+
+{%- style -%}
+#section-{{ section.id }} .image__div {
+	margin-top: {{ section.settings.mt_lg }}px;
+}
+
+@media (max-width: 991px) {
+  #section-{{ section.id }} .image__div {
+      margin-top: {{ section.settings.mt_md }}px;
+  }
+}
+@media (max-width: 767px) {
+  #section-{{ section.id }} .image__div {
+      margin-top: {{ section.settings.mt_sm }}px;
+  }
+}
+{%- endstyle -%}
+
+
+
+{% schema %}
+  {
+    "name": "Mosaic",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_gutter_grid",
+        "label": "Mobile Grid Gutter",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "grid_item",
+        "label": "Grid column",
+        "default": "3",
+        "options": [
+          {
+            "value": "1",
+            "label": "Full"
+          },
+          {
+            "value": "2",
+            "label": "Half"
+          },
+          {
+            "value": "3",
+            "label": "Third"
+          },
+          {
+            "value": "4",
+            "label": "Quarter"
+          },
+          {
+            "value": "5",
+            "label": "Fifth"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "align_text",
+        "label": "Alignment",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Centered"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "divider",
+        "label": "Show section divider",
+        "default": false
+      },
+            {
+			  "type": "header",
+			  "content": "Block Margin Top"
+			},
+			{
+			  "type": "number",
+			  "id": "mt_lg",
+			  "label": "Large/Desktop Device",
+			  "default": 42
+			},
+			{
+			  "type": "number",
+			  "id": "mt_md",
+			  "label": "Tablet Device",
+			  "default": 42
+			},
+			{
+			  "type": "number",
+			  "id": "mt_sm",
+			  "label": "Mobile Device",
+			  "default": 32
+			}
+    ],
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Column",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "mobile_gutter",
+            "label": "Mobile Gutter",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_image",
+            "label": "Show image",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "range",
+            "id": "image_width",
+            "label": "Image width",
+            "default": 650,
+            "min": 60,
+            "max": 650,
+            "step": 10,
+            "unit": "px"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Example title"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Use this section to explain a set of product features, to link to a series of pages, or to answer common questions about your products. Add images for emphasis.</p>"
+          },
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label",
+            "default": "Optional button"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Link"
+          },
+          {
+            "type": "header",
+            "content": "Second image"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_secondimage",
+            "label": "Show second image",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image"
+          },
+          {
+            "type": "range",
+            "id": "image_width_2",
+            "label": "Image width",
+            "default": 650,
+            "min": 60,
+            "max": 650,
+            "step": 10,
+            "unit": "px"
+          },
+          {
+            "type": "text",
+            "id": "title_2",
+            "label": "Heading",
+            "default": "Example title"
+          },
+          {
+            "type": "richtext",
+            "id": "text_2",
+            "label": "Text",
+            "default": "<p>Use this section to explain a set of product features, to link to a series of pages, or to answer common questions about your products. Add images for emphasis.</p>"
+          },
+          {
+            "type": "text",
+            "id": "button_label_2",
+            "label": "Button label",
+            "default": "Optional button"
+          },
+          {
+            "type": "url",
+            "id": "button_link_2",
+            "label": "Link"
+          }
+        ]
+      },
+	   {
+          "type": "section_padding",
+          "name": "Section Padding",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 100
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 80
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_padding_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Padding Bottom",
+			  "unit": "px",
+			  "default": 60
+			}
+          ]
+       },
+	   {
+          "type": "section_margin",
+          "name": "Section Margin",
+		  "limit": 1,
+          "settings": [
+            {
+			  "type": "header",
+			  "content": "Large/Desktop Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Tablet Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_md",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "header",
+			  "content": "Mobile Device"
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_top_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Top",
+			  "unit": "px",
+			  "default": 0
+			},
+			{
+			  "type": "range",
+			  "id": "section_margin_bottom_xs",
+			  "min": 0,
+			  "max": 150,
+			  "step": 5,
+			  "label": "Margin Bottom",
+			  "unit": "px",
+			  "default": 0
+			}
+          ]
+       }
+    ],
+    "presets": [
+      {
+        "name": "Mosaic",
+        "category": "Text",
+        "blocks": [
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "text_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

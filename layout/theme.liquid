@@ -1,0 +1,477 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_button }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="format-detection" content="telephone=no">
+
+  {%- if settings.favicon -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png" />
+  {%- endif -%}
+  
+  {% if template contains 'page.about' %}
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
+  {% endif %}
+  
+  {% include 'seo-title' %}
+  <title>{{ seo_title }}</title>
+
+  {%- if page_description -%}
+  <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  
+  <link rel="stylesheet" href="{{ 'font-awesome.min.css' | asset_url }}">
+
+  {% include 'social-meta-tags' %}
+
+  {% include 'font-face' %}
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+
+  {% style %}
+    .collection-item__title {
+      font-size: {{ settings.type_collection_size | times: 0.8 }}px;
+    }
+
+    @media screen and (min-width: 769px) {
+      .collection-item__title {
+        font-size: {{ settings.type_collection_size }}px;
+      }
+    }
+    @media screen and (min-width: 577px) {
+      .subcollection_scrollable {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width: 992px) {
+      .page-content--top {
+        margin-top: 40px;
+      }
+    }
+
+    .mobile-nav__link .right_icon:after {
+      display: none;
+    }
+
+    @media only screen and (max-width: 768px){
+      .template-collection nav.breadcrumb {
+          opacity: 1!important;
+          visibility: visible!important;
+      }
+      .announcement-bar-hide-on-mobile {
+        display: none!important;
+      }
+
+      .size_wrpper .custom_sizing_label {
+        margin-bottom: 0!important;
+      }
+
+      #size_guide {
+        width: auto!important;
+      }
+    }
+
+
+    .js-address-form .input-full, 
+    .js-address-form .input-full:hover, 
+    .js-address-form .input-full:active {
+      appearance: none;
+      height: 40.046px;
+      padding: 9.940px 1.07rem;
+      width: 100%;
+      border-radius: 0;
+      background-color: #fff;
+      border: 1px solid #767676;
+      font-size: 1rem!important;
+    }
+
+    #AddressCountry_4370895929508,
+    #AddressProvince_4370895929508 {
+      padding: 0 1.07rem!important;
+    }
+
+    .js-address-form label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: .105em;
+        text-transform: uppercase;
+    }
+
+    @media screen and (min-width: 768px) {
+      .d-flexx {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .d-flexx .item:not(:last-child){
+        margin-right: 15px;
+      }
+
+      .w-100 {
+        width: 100%;
+      }
+    }
+
+    .icon-close {
+        vertical-align: bottom!important;
+      }
+
+      @media only screen and (min-width : 768px) and (max-width : 1199px) { 
+
+        .site-header__search-btn {
+            background: #000;
+            color: #fff;
+        }
+
+        .site-header__search-input {
+          border-bottom: 1px solid black!important;
+        }
+
+        .header-item--left .site-nav {
+          display: block!important;
+        }
+
+        .header-item--left .small--hide {
+          display: none!important;
+        }
+
+        .header_right_part .custom_search_area {
+          display: none!important;
+        }
+
+        .header_right_part .small--hide {
+          display: none!important;
+        }
+
+        .site-header .menu_full {
+          display: none!important;
+        }
+
+        .header-item--icons .site-nav .header_right_part {
+          margin-top: 15px!important;
+        }
+
+        .hero .slideshow__slide {
+          height: 100vh!important;
+        }
+
+        .index-section--hero .slideshow-wrapper .image-fit {
+          max-height: 100vh!important;
+        }
+
+        .hero .slideshow__slide, .hero .slick-list, .hero .slick-track, .index-section--hero:first-child [data-align-top] .slideshow-wrapper, .slideshow_natural>div {
+          height: 100vh!important;
+        }
+      }
+
+      
+      @media only screen 
+      and (min-device-width : 1024px) 
+      and (max-device-width : 1200px) {
+
+        .hero .slideshow__slide {
+          height: 100vh!important;
+        }
+
+        .index-section--hero .slideshow-wrapper .image-fit {
+          max-height: 100vh!important;
+        }
+
+        .hero .slideshow__slide, .hero .slick-list, .hero .slick-track, .index-section--hero:first-child [data-align-top] .slideshow-wrapper, .slideshow_natural>div {
+          height: 100vh!important;
+        }
+      }
+      @media only screen 
+      and (min-device-width : 768px) 
+      and (max-device-width : 1024px) 
+      and (orientation : portrait) { 
+        .hero .slideshow__slide {
+          height: 85vh!important;
+        }
+
+        .index-section--hero .slideshow-wrapper .image-fit {
+          max-height: 85vh!important;
+        }
+
+        .hero .slideshow__slide, .hero .slick-list, .hero .slick-track, .index-section--hero:first-child [data-align-top] .slideshow-wrapper, .slideshow_natural>div {
+          height: 85vh!important;
+        }
+
+        .hero__text-wrap {
+          height: 90%!important;
+        }
+      }
+
+      @media only screen and (min-width: 701px) and (max-width: 767px){
+        .hero__text-wrap {
+          height: 90%!important;
+        }
+      }
+
+      @media only screen and (min-width: 701px) and (max-width: 1024px) { 
+        .index-section--hero .slideshow-wrapper .image-fit {
+          object-fit: cover!important;
+        }
+      }
+
+      @media only screen and (min-width: 1025px) and (max-width: 1199px){ 
+        .index-section--hero .slideshow-wrapper .image-fit {
+          object-fit: cover!important;
+        }
+      }
+  {% endstyle %}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+    window.theme = window.theme || {};
+    theme.strings = {
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }},
+      stockLabel: {{ 'products.product.stock_label' | t: count: '[count]' | json }},
+      willNotShipUntil: {{ 'products.product.will_not_ship_until' | t: date: '[date]' | json }},
+      willBeInStockAfter: {{ 'products.product.will_be_in_stock_after' | t: date: '[date]' | json }},
+      waitingForStock: {{ 'products.product.waiting_for_stock' | t | json }},
+      savePrice: {{ 'products.general.save_html' | t: saved_amount: '[saved_amount]' | json }},
+      cartEmpty: {{ 'cart.general.empty' | t | json }},
+      cartTermsConfirmation: {{ 'cart.general.terms_confirm' | t | json }}
+    };
+    theme.settings = {
+      dynamicVariantsEnable: true,
+      dynamicVariantType: {{ settings.variant_type | json }},
+      cartType: {{ settings.cart_type | json }},
+      moneyFormat: {{ shop.money_format | json }},
+      saveType: {{ settings.product_save_type | json }},
+      recentlyViewedEnabled: false,
+      predictiveSearch: {{ settings.predictive_search_enabled }},
+      predictiveSearchType: {{ settings.search_type | json }},
+      inventoryThreshold: {{ settings.inventory_threshold }},
+      quickView: {{ settings.quick_shop_enable }},
+      themeName: 'Impulse',
+      themeVersion: "2.7.0"
+    };
+  </script>
+
+  {{ content_for_header }}
+
+  <script src="{{ 'vendor-scripts-v6.js' | asset_url | split: '?' | first }}" defer="defer"></script>
+
+  {% if shop.enabled_currencies.size > 1 %}
+    <link rel="stylesheet" href="{{ 'currency-flags.css' | asset_url }}">
+  {% endif %}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+  {%- if request.page_type contains 'customers/' -%}
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+  {%- endif -%}
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% include 'hulkcode_common' %}{% if template contains 'product' or template contains 'cart' %}<script src='https://productoption.hulkapps.com/hulkcode.js' defer='defer'></script>{% endif %}
+
+  {% if template contains 'collection' %}
+  <script src="{{ 'infinite-scroll.js' | asset_url }}"></script>
+  {% endif %}
+</head>
+
+<body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" data-transitions="false">  
+  {% capture the_snippet_content %}{% render 'socialshopwave-helper' %}{% endcapture %}
+  {% unless the_snippet_content contains 'Liquid error' %}
+  {{ the_snippet_content }}
+  {% endunless %}
+  
+  {% comment %}
+    Enable below script if page transitions enabled
+  {% endcomment %}
+  {% comment %}
+  <script type="text/javascript">window.setTimeout(function() { document.body.className += " loaded"; }, 25);</script>
+  {% endcomment %}
+
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+  <div id="PageContainer" class="page-container">
+    <div class="transition-body">
+
+    {% section 'header' %}
+      
+      {% unless template == 'index' or template contains 'customers/' or page.handle == 'measurements' or page.handle == 'order' or template contains 'page.contact' or template contains 'page.how-to-shop' or template contains 'page.faq' or template contains 'page.about'  or template contains 'page.personal-appointment' %}
+      <div class="page-width page-content page-content--top">
+        <header class="section-header section-header--flush">
+          {%- include 'breadcrumbs' -%}
+        </header>
+      </div>
+      {% endunless %}
+
+      <main class="main-content" id="MainContent">
+        {% if page.handle == 'wishlist' %}
+        <div class="page-width page-content">
+          <div class="grid">
+            <div class="grid__item medium-up--one-whole">
+              <!--  Account Tab Start -->
+              <div class="account-tab-area">
+                <div class="account-tab-menu">
+                  <div class="sticky hide_1023">
+                    <div class="account-tab-menu-title">
+                      <h3 class="account_heading">MY ACCOUNT</h3>
+                    </div>
+                    <div class="tab">
+                      <a href="{{ routes.account_url }}" class="tablinks">Overview</a>
+                      <a href="/pages/order" class="tablinks my_order">My Orders</a>
+                      <a href="/pages/measurements" class="tablinks my_order">My Measurements</a>
+                      <a href="/pages/wishlist" class="tablinks active">Wish List</a>
+                      <a href="{{ routes.account_addresses_url }}" class="tablinks">Registration Details</a>
+                      <a href="{{ routes.account_logout_url }}" class="tablinks">Log out</a>
+                    </div>
+                  </div>
+                  
+                  <div class="show_1023">
+                    <div class="menuitem">
+                       <a href="/pages/wishlist" class="tablinks active">Wish List</a>
+                      <i class="fa fa-caret-down action_slide"></i>
+                    </div>
+
+                    <div class="slidemenu" style="display: none;">
+                      <div class="menuitem">
+                         <a href="{{ routes.account_url }}" class="tablinks">Overview</a>
+                      </div>
+                      
+                      <div class="menuitem">
+                        <a href="/pages/order" class="tablinks my_order">My Orders</a>
+                      </div>
+
+                      <div class="menuitem">
+                        <a href="/pages/measurements" class="tablinks my_order">My Measurements</a>
+                      </div>
+
+                      <div class="menuitem">
+                        <a href="{{ routes.account_addresses_url }}" class="tablinks">Registration Details</a>
+                      </div>
+
+                      <div class="menuitem">
+                        <a href="{{ routes.account_logout_url }}" class="tablinks">Log out</a>
+                      </div>
+                    </div>
+                  </div> 
+                </div>
+
+                <div class="account-tab-content">
+                  <div class="account-tab-content-title">
+                    <h2 class="customer_name">Welcome {{ customer.name }}</h2>
+                  </div>
+                  <div id="orders" class="tabcontent">
+                    {{ content_for_layout }}
+                  </div>
+                </div>
+              </div>
+              <!--  Account Tab End -->
+            </div>
+          </div>
+        </div>
+        
+        <script src="{{ 'ScrollMagic.min.js' | asset_url }}"></script>
+        <script>
+          if ( $(window).width() > 1023 ) {
+            $(function(){
+              // Binding Sticky Elements
+              var containerHeight = $('.tabcontent').height();
+              var offsetFromTop = 90;
+              var controller = new ScrollMagic.Controller();
+
+              console.log('containerHeight', containerHeight);
+              containerHeight = containerHeight / 1.3;
+              console.log('containerHeight', containerHeight);
+
+              new ScrollMagic.Scene({
+                duration: containerHeight,
+                offset: offsetFromTop
+              })
+              .setPin('.sticky')
+              .addTo(controller);
+            });
+          }
+        </script>
+        {% else %}
+        {{ content_for_layout }}
+        {% endif %}
+      </main>
+
+      <a href="javascript:void(0)" id="back_top" class="footer_back_top">
+        <span>Back to Top</span>
+      </a>
+      
+      {% section 'footer-promotions' %}
+      {% section 'footer-newsletter' %}
+      {% section 'footer' %}
+
+    </div>
+  </div>
+
+  {% section 'newsletter-popup' %}
+
+  {%- if settings.cart_type == 'drawer' -%}
+    {%- include 'ajax-cart-template' -%}
+  {%- endif -%}
+
+  {% comment %}
+    Custom markup for slider arrows using theme icons
+  {% endcomment %}
+  <div class="hide">
+    <button id="prevArrowTemplate" class="slick-prev" aria-label="{{ 'general.pagination.previous' | t }}" type="button">
+      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-left" viewBox="0 0 284.49 498.98"><path d="M249.49 0a35 35 0 0 1 24.75 59.75L84.49 249.49l189.75 189.74a35.002 35.002 0 1 1-49.5 49.5L10.25 274.24a35 35 0 0 1 0-49.5L224.74 10.25A34.89 34.89 0 0 1 249.49 0z"/></svg>
+      <span class="icon__fallback-text">{{ 'general.pagination.previous' | t }}</span>
+    </button>
+    <button id="nextArrowTemplate" class="slick-next" aria-label="{{ 'general.pagination.next' | t }}" type="button">
+      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-right" viewBox="0 0 284.49 498.98"><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98z"/></svg>
+      <span class="icon__fallback-text">{{ 'general.pagination.next' | t }}</span>
+    </button>
+  </div>
+
+  {%- if settings.predictive_search_enabled -%}
+    {%- include 'predictive-template' -%}
+  {%- endif -%}
+
+  {% include 'video-modal' %}
+  {% include 'photoswipe-template' %}
+  {% if template contains 'product' %}
+    {% include 'recently-viewed-product-template' %}
+  {% endif %}
+ {% include 'smile-initializer' %}
+  
+  <script>
+    // back to top
+    var mybutton = document.getElementById("back_top");
+    mybutton.addEventListener('click', topFunction)
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  </script>
+  
+  <script>
+    $(document).ready(function(){
+      $(".action_slide").on('click', function(){
+        $(".slidemenu").slideToggle();
+      });
+
+      // Reward Point Calculaiton
+
+      var price = $(".product__price span[class='money']").text();
+      var main_price = parseFloat(price.replace(/[^\d.]/g, ''));
+      $("#reward-point").text(main_price*5);
+      //console.log("Price: " + main_price*5);
+    });
+  </script>
+
+  
+  {% include 'ajax-search-bar' %}
+  
+  
+  {% include 'modal-script' %}
+</body>
+</html>

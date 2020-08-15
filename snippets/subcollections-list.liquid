@@ -1,0 +1,159 @@
+{% for block in section.blocks %}
+    {% if block.type == 'subcollection_clothing' %}
+        {% if collection.title == 'Clothing' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_anarkali' %}
+        {% if collection.title == 'Anarkalis & Kurtas' or collection.title == 'Lehengas' or collection.title == 'Dresses' or collection.title == 'Sarees' or collection.title == 'Kaftans' or collection.title == 'Abaya' or collection.title == 'Gowns' or collection.title == 'Jumpsuits' or collection.title == 'Jackets & Capes' or collection.title == 'Bottoms' or collection.title == 'Scarves & Stoles' or collection.title == 'Tops & Shirts' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_price' %}
+        {% if collection.title == 'Under $250' or collection.title == 'Under $500' or collection.title == 'Under $750' or collection.title == 'Under $1000' or collection.title == 'Over $1000' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_accessories' %}
+        {% if collection.title == 'Accessories' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_jewelry' %}
+        {% if collection.title == 'All Fashion Jewelry' or collection.title == 'Earrings' or collection.title == 'Necklaces' or collection.title == 'Bracelets' or collection.title == 'Rings' or collection.title == 'Hair Accessories' or collection.title == 'Brooches' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_bags' %}
+        {% if collection.title == 'All Bags' or collection.title == 'Clutches' or collection.title == 'Shoulder Bags' or collection.title == 'Pouch Bags' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_designers' %}
+        {% if collection.title == 'Designers' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_featured' %}
+        {% if collection.title == 'Abhinav Mishra' or collection.title == 'Anju Modi' or collection.title == 'AM:PM' or collection.title == 'Anupamaa Dayal' or collection.title == 'Bhumika Sharma' or collection.title == 'Ekaya' or collection.title == 'Mahima Mahajan' or collection.title == 'Papa Dont Preach by Shubhika' or collection.title == 'Patine' or collection.title == 'Payal Pratap' or collection.title == 'Rabani & Rakha' or collection.title == 'Ridhi Mehra' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_popular' %}
+        {% if collection.title == 'Aisha Rao' or collection.title == 'Vvani by Vani Vats' or collection.title == 'Monika Nidhii' or collection.title == 'Outhouse Jewellery' or collection.title == 'SANA BARREJA' or collection.title == 'Torani' or collection.title == 'Khalom' or collection.title == 'Lovetobag' or collection.title == 'Preeti Mohan' or collection.title == 'Mishru' or collection.title == 'Prathyusha Garimella' or collection.title == 'Mrunalini Rao' or collection.title == 'Outhouse' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_emerging' %}
+        {% if collection.title == 'Summer by Priyanka Gupta' or collection.title == 'Rhea Pillai Rastogi' or collection.title == 'ESME' or collection.title == 'O’Frida' or collection.title == 'kanelle' or collection.title == 'Lavanya Ahuja' or collection.title == 'Nadima Saqib' or collection.title == 'Preeti S Kapoor' or collection.title == 'Saaksha & Kinni' or collection.title == 'Siddhartha Bansal' or collection.title == 'Sureena Chowdhri' or collection.title == 'Soup By Sougat Paul' %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if block.type == 'subcollection_sss' %}
+        {% assign collection_title = collection.title | downcase %}
+        {% assign title = block.settings.sst | downcase %}
+
+        {% if title == collection_title %}
+            <div class="subcollection_scrollable">
+              <div class="subcollection_pull">     
+                {% for link in linklists[block.settings.subcollection_menu].links %}
+                <a class="subcollection_list{% if link.active %} active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+                {% endfor %}
+              </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+{% endfor %} 

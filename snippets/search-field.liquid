@@ -1,0 +1,13 @@
+<div class="custom_search_field" id="search_action">
+  <div class="search_field_flex">
+    <form action="{{ routes.search_url }}" method="get" role="search"
+          id="HeaderSearchForm"
+          class="site-header__search-form">
+
+      <div class="search_input">
+        <input type="hidden" name="type" value="{{ settings.search_type }}">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="site-header__search-input" aria-label="{{ 'general.search.placeholder' | t }}">
+      </div>      
+    </form>
+  </div>
+</div>

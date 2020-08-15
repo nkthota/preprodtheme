@@ -1,0 +1,149 @@
+{% paginate customer.orders by 20 %}
+<div class="order_page_new">
+  <div class="page-width page-content">
+    <div class="grid">
+      <div class="grid__item medium-up--one-whole">
+        <!--  Account Tab Start -->
+        <div class="account-tab-area">
+          <div class="account-tab-menu">
+            <div class="sticky hide_1023">
+              <div class="account-tab-menu-title">
+                <h3 class="account_heading">MY ACCOUNT</h3>
+              </div>
+
+              <div class="tab">
+                <a href="{{ routes.account_url }}" class="tablinks">Overview</a>
+                <a href="/pages/order" class="tablinks my_order active">My Orders</a>
+                <a href="/pages/measurements" class="tablinks my_order">My Measurements</a>
+                <a href="/pages/wishlist" class="tablinks">Wish List</a>
+                <a href="{{ routes.account_addresses_url }}" class="tablinks">Registration Details</a>
+                <a href="{{ routes.account_logout_url }}" class="tablinks">Log out</a>
+              </div>
+            </div>
+
+            <div class="show_1023">
+              <div class="menuitem">
+                <a href="/pages/order" class="tablinks my_order active">My Orders</a>
+                <i class="fa fa-caret-down action_slide"></i>
+              </div>
+
+              <div class="slidemenu" style="display: none;">
+                <div class="menuitem">
+                  <a href="{{ routes.account_url }}" class="tablinks">Overview</a>
+                </div>
+              
+                <div class="menuitem">
+                  <a href="/pages/measurements" class="tablinks my_order">My Measurements</a>
+                </div>
+
+                <div class="menuitem">
+                  <a href="/pages/wishlist" class="tablinks">Wish List</a>
+                </div>
+
+                <div class="menuitem">
+                  <a href="{{ routes.account_addresses_url }}" class="tablinks">Registration Details</a>
+                </div>
+
+                <div class="menuitem">
+                  <a href="{{ routes.account_logout_url }}" class="tablinks">Log out</a>
+                </div>
+              </div>
+            </div> 
+          </div>
+
+          <div class="account-tab-content">
+            <div class="account-tab-content-title">
+              <h2 class="customer_name">Welcome {{ customer.name }}</h2>
+            </div>
+
+
+            <div id="orders" class="tabcontent">
+              {% if customer.orders_count > 0 %}
+              <div class="grid">
+
+                <div class="grid__item medium-up--two-thirds">
+                  <h6 class="add_book">{{ 'customer.orders.title' | t }}</h6>
+
+                  {% if customer.orders.size != 0 %}
+
+                  <table class="table--responsive table--small-text">
+                    <thead>
+                      <tr>
+                        <th>{{ 'customer.orders.order_number' | t }}</th>
+                        <th>{{ 'customer.orders.date' | t }}</th>
+                        <th>{{ 'customer.orders.payment_status' | t }}</th>
+                        <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                        <th>{{ 'customer.orders.total' | t }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for order in customer.orders %}
+                      <tr class="table__section">
+                        <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
+                        <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | time_tag: format: 'date' }}</td>
+                        <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                        <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+                        <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+
+                  <hr class="hr--clear">
+
+                  {% else %}
+
+                  <p>{{ 'customer.orders.none' | t }}</p>
+
+                  {% endif %}
+                </div>
+
+                <div class="grid__item medium-up--one-third">
+                  <h6 class="add_book">{{ 'customer.account.details' | t }}</h6>
+
+                  {{ customer.default_address | format_address }}
+
+                  <p><a href="{{ routes.account_addresses_url }}" class="text-link">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
+                </div>
+
+              </div>
+              {% else %}
+              <p>You have not previously ordered as a registered user.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <!--  Account Tab End -->
+      </div>
+    </div>
+
+
+    {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+    {% endif %}
+  </div>
+</div>
+{% endpaginate %}
+
+<script src="{{ 'ScrollMagic.min.js' | asset_url }}"></script>
+<script>
+  if ( $(window).width() > 1023 ) {
+    $(function(){
+      // Binding Sticky Elements
+      var containerHeight = $('.tabcontent').height();
+      var offsetFromTop = 90;
+      var controller = new ScrollMagic.Controller();
+
+      console.log('containerHeight', containerHeight);
+      containerHeight = containerHeight / 1.3;
+      console.log('containerHeight', containerHeight);
+
+      new ScrollMagic.Scene({
+        duration: containerHeight,
+        offset: offsetFromTop
+      })
+      .setPin('.sticky')
+      .addTo(controller);
+    });
+  }
+</script>

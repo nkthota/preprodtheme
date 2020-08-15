@@ -1,0 +1,53 @@
+<div class="contact_index">
+  <div class="page-width">
+
+    <div class="grid">
+      <div class="grid__item">
+        <div class="form-vertical contact_form">
+          {% form 'contact' %}
+
+          {% if form.posted_successfully? %}
+          <p class="note note--success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+          {% endif %}
+
+          {{ form.errors | default_errors }}
+
+          <div class="grid grid--small">
+            <div class="grid__item medium-up--one-half">
+              <input type="text" id="ContactFormName" class="input-full text_14" name="contact[name]" autocapitalize="words" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" placeholder="First Name">
+            </div>
+
+            <div class="grid__item medium-up--one-half">
+              <input type="text" id="ContactFormName" class="input-full text_14" name="contact[lname]" autocapitalize="words" value="{{ form.name }}" placeholder="Last Name">
+            </div>
+
+            <div class="grid__item medium-up--one-whole">
+              <input type="email" id="ContactFormEmail" class="input-full text_14" name="contact[email]" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" placeholder="Enter Your E-Mail">
+            </div>
+
+            <div class="grid__item medium-up--one-whole">
+              <input type="text" id="ContactFormSubject" class="input-full text_14" name="contact[subject]" autocapitalize="off" placeholder="Subject">
+            </div>
+
+            <div class="grid__item medium-up--one-whole">
+              <textarea rows="10" id="ContactFormMessage" class="input-full input__textarea text_14" name="contact[body]" placeholder="Type your message here...">
+                {% if form.body %}{{ form.body }}{% endif %}
+              </textarea>
+
+              <button type="submit" class="btn text_14 contact_submit_btn">SUBMIT</button>
+            </div>
+          </div>         
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script> 
+  $(document).on('click', function(){
+    $('.input__textarea').text('');
+  });
+</script>

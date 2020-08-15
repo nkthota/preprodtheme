@@ -1,0 +1,284 @@
+<div class="page-width page-content cart_page_content">
+  <div class="grid">
+    <div class="grid__item">
+      {% if cart.item_count > 0 %}
+        <header class="section-header cart_header">
+          <h1 class="section-header__title cart_title">SHOPPING CART</h1>
+        </header>
+
+        <form action="{{ routes.cart_url }}" method="post" novalidate class="cart">         
+          <div class="cart__row small--hide">
+            <div class="grid grid--full">             
+              <div class="grid__item medium-up--three-fifths">
+                <div class="grid__item one-third small--half text-left cart_table_title">
+                  PRODUCT
+                </div>
+              </div>
+              <div class="grid__item medium-up--two-fifths">
+                <div class="grid grid--full">
+                  <div class="grid__item one-third small--half text-right cart_table_title">
+                    PRICE
+                  </div>
+                  <div class="grid__item one-third small--half text-right cart_table_title">
+                    UNITS
+                  </div>
+                  <div class="grid__item one-third small--half text-right cart_table_title">
+                    TOTAL
+                  </div>
+                </div>
+              </div>              
+            </div>
+          </div>
+          
+
+
+          {% for item in cart.items %}
+            <div class="cart__row">
+              <div class="grid grid--full cart__row--table-large">
+                <div class="grid__item medium-up--three-fifths">
+                  <div class="grid">
+                    <div class="grid__item one-quarter">
+                      <a href="{{ item.url }}" class="cart__image">
+                        <img class="" src="{{ item | img_url: '210x' }}" alt="{{ item.title | escape }}">
+                      </a>
+                    </div>
+
+                    <div class="grid__item three-quarters cart_info_box">
+                      <a href="{{ item.url }}" class="h4 cart__product-name">
+                        {{ item.product.title }}
+                      </a>                      
+                      
+                      {%- if item.product.has_only_default_variant != true -%}
+                      {%- assign variant_options = item.options_with_values -%}
+                      {%- endif -%}
+
+                      {%- assign property_size = item.properties | size -%}
+                      {%- unless item.product.has_only_default_variant -%}
+                          {%- for option in variant_options -%}
+                          <p class="cart__product-meta">
+                            <span class="option_name">{{ option.name }}:</span> <span class="option_value">{{ option.value }}</span>
+                          </p>
+                          {%- endfor -%}
+                          {% if property_size > 0 %}
+                            {%- for p in item.properties -%}
+                              {%- unless p.last == blank -%}
+                                <li class="product-details__item product-details__item--property{%if property_size == 0%} hide{% endif %}" data-cart-item-property>
+                                  <span class="product-details__item-label" data-cart-item-property-name>{{ p.first }}: </span>
+                                  {%- comment -%}
+                                    Check if there was an uploaded file associated
+                                  {%- endcomment -%}
+                                  <span data-cart-item-property-value>
+                                    {%- if p.last contains "uploads" -%}
+                                      <a href="{{ p.last }}">Uploaded File</a>
+                                    {%- else -%}
+                                      {{ p.last }}
+                                    {%- endif -%}
+                                  </span>
+                                </li>
+                              {%- endunless -%}
+                            {%- endfor -%}
+                            <button type="button" class="edit_cart_option btn btn--primary button" data-product_id="{{item.product_id}}" data-key="{{item.key}}" data-variant_id="{{item.variant_id}}" data-quantity="{{item.quantity}}">Edit Options</button>
+                          {% endif %}
+                      {%- endunless -%}
+
+                      <p class="cart__product-meta">
+                        <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0">
+                          <span class="option_value">x Remove</span>
+                        </a>
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="grid__item medium-up--two-fifths cart_grid__item_sm">
+                  <div class="grid grid--full cart__row--table-large">
+                    <div class="grid__item one-third medium-up--text-right">
+                      <label class="medium-up--hide cart_table_title">
+                        {{ 'cart.label.price' | t }}
+                      </label>
+                      {% if item.original_price != item.final_price %}
+                        <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                        <small class="cart__price cart__price--strikethrough"><span class='hulkapps-cart-item-price' data-key='{{item.key}}'>{{ item.original_price | money }}</span></small>
+                        <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                        <span class="cart__price cart__discount">{{ item.final_price | money }}</span>
+                      {% else %}
+                        <span class="cart__price cart_price_lg"><span class='hulkapps-cart-item-price' data-key='{{item.key}}'>{{ item.original_price | money }}</span></span>
+                      {% endif %}
+
+                      {%- if item.line_level_discount_allocations != blank -%}
+                        {%- for discount_allocation in item.line_level_discount_allocations -%}
+                          <small class="cart__discount">{{ discount_allocation.discount_application.title }} (-{{ discount_allocation.amount | money }})</small>
+                        {%- endfor -%}
+                      {%- endif -%}
+
+                      {%- if item.unit_price_measurement -%}
+                        {%- capture unit_price_base_unit -%}
+                          <span class="unit-price-base--{{ section_id }}">
+                            {%- if item.unit_price_measurement -%}
+                              {%- if item.unit_price_measurement.reference_value != 1 -%}
+                                {{ item.unit_price_measurement.reference_value }}
+                              {%- endif -%}
+                              {{ item.unit_price_measurement.reference_unit }}
+                            {%- endif -%}
+                          </span>
+                        {%- endcapture -%}
+
+                        <div class="product__unit-price">{{ item.unit_price | money }}/{{ unit_price_base_unit }}</div>
+                      {%- endif -%}
+                    </div>
+
+                    <div class="grid__item one-third text-right cart_item_units">
+                      <label for="updates_{{ item.key }}" class="medium-up--hide cart_table_title">UNITS</label>
+                      <label for="updates_{{ item.key }}" class="visually-hidden cart_table_title">UNITS</label>
+                      <input type="number" name="updates[]" id="updates_{{ item.key }}" class="cart__product-qty" value="{{ item.quantity }}" min="0" data-id="{{ item.key }}">
+                    </div>
+
+                    <div class="grid__item one-third text-right">
+                      <label class="medium-up--hide cart_table_title">
+                        {{ 'cart.label.total' | t }}
+                      </label>
+                      {% if item.original_line_price != item.final_line_price %}
+                        <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                        <small class="cart__price cart__price--strikethrough"><span class='hulkapps-cart-item-line-price' data-key='{{item.key}}'>{{ item.original_line_price | money }}</span></small>
+                        <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                        <span class="cart__price cart__discount">{{ item.final_line_price | money }}</span>
+                      {% else %}
+                        <span class="cart__price"><span class='hulkapps-cart-item-line-price' data-key='{{item.key}}'>{{ item.original_line_price | money }}</span></span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          {% endfor %}
+          
+          
+          <div class="cart__row">
+            <div class="cart_wrapper d-flex justify-content-between flex-wrap">             
+              <div class="shipping_wrapper">
+                <p class="tax_text text_14">Tax included and shipping calculated at checkout</p>
+              </div> 
+
+              <div class="calc_wrapper">
+                <div class="cart_calculate cart__tot">
+                  <div class="calculate_item_title">
+                    <p class="h4 text_14">SUBTOTAL:</p>
+                  </div>
+                  <div class="calculate_item">
+                    <p class="h4 text_14"><span class='hulkapps-cart-original-total'>{{ cart.total_price | money }}</span></p>
+                  </div>
+                </div>
+                
+                <div class="cart_calculate cart__tot">
+                  <div class="calculate_item_title">
+                    <p class="h4 text_14">ESTIMATED SHIPPING COSTS:</p>
+                  </div>
+                  <div class="calculate_item">
+                    <p class="h4 text_14">Free</p>
+                  </div>
+                </div>
+                
+                <div class="cart_calculate">
+                  <div class="calculate_item_title">
+                    <p class="h4 text_14">TOTAL:</p>
+                  </div>
+                  <div class="calculate_item">
+                    <p class="h4 text_14"><span class='hulkapps-cart-original-total'>{{ cart.total_price | money }}</span></p>
+                  </div>
+                </div>
+                
+                <div class="cart_calculate checkout_box_wrap">
+                  <div class="checkout_box">
+                    <a href="/checkout" class="btn cart__checkout text_14">CHECKOUT</a>
+                    <a href="/collections/all" class="continue_shopping text-right text_14">
+                      <span class="option_value">CONTINUE SHOPPING</span>
+                    </a>
+                  </div>
+                </div>                
+              </div>
+            </div>
+          </div>
+          
+          
+
+          {% comment %}
+          <div class="cart__row">
+            <div class="grid">             
+              <div class="grid__item medium-up--three-fifths">
+                <p class="tax_text text_14">Tax included and shipping calculated at checkout</p>
+              </div>
+              
+              <div class="grid__item medium-up--two-fifths medium-up--push-one-fifths">                
+                <div class="grid grid--full cart__row--table cart_calculate">
+                  <div class="grid__item one-half">
+                    <p class="h4 text_14">{{ 'cart.general.subtotal' | t }}:</p>
+                  </div>
+                  <div class="grid__item one-half">
+                    <p class="h4 text_14"><span class='hulkapps-cart-original-total'>{{ cart.total_price | money }}</span></p>
+                  </div>
+                </div>  
+                
+                <div class="grid grid--full cart__row--table cart_calculate">
+                  <div class="grid__item one-half">
+                    <p class="h4 text_14">Estimated shipping costs:</p>
+                  </div>
+                  <div class="grid__item one-half">
+                    <p class="h4 text_14">Free</p>
+                  </div>
+                </div>
+                                
+                <div class="grid grid--full cart__row--table cart_calculate">
+                  <div class="grid__item one-half">
+                    <p class="h4 text_14">TOTAL:</p>
+                  </div>
+                  <div class="grid__item one-half">
+                    <p class="h4 text_14"><span class='hulkapps-cart-original-total'>{{ cart.total_price | money }}</span></p>
+                  </div>
+                </div>
+
+                {% if settings.cart_terms_conditions_enable %}
+                  <p class="ajaxcart__note ajaxcart__note--terms">
+                    <input type="checkbox" id="CartPageAgree" />
+                    <label for="CartPageAgree">
+                      {% if settings.cart_terms_conditions_link != blank %}
+                        {{ 'cart.general.terms_html' | t: url: settings.cart_terms_conditions_link }}
+                      {% else %}
+                        {{ 'cart.general.terms' | t }}
+                      {% endif %}
+                    </label>
+                  </p>
+                {% endif %}
+
+                <div class="cart__checkout-wrapper">
+                  <button type="submit" name="update" class="btn btn--secondary cart__update">
+                    {{ 'cart.general.update' | t }}
+                  </button>
+                  <button type="submit" name="checkout" class="btn cart__checkout{% if settings.cart_terms_conditions_enable %} cart__checkout--page{% endif %}">
+                    {{ 'cart.general.checkout' | t }}
+                  </button>
+
+                  {% if additional_checkout_buttons and settings.cart_additional_buttons %}
+                    <div class="additional-checkout-buttons">{{ content_for_additional_checkout_buttons }}</div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endcomment %}
+
+        </form>
+
+      {% else %}
+        <header class="section-header section-header--404">
+          <h1 class="section-header__title">{{ 'cart.general.title' | t }}</h1>
+          <div class="rte text-spacing">
+            <p>{{ 'cart.general.empty' | t }}</p>
+            <p>{{ 'cart.general.continue_browsing_html' | t: url: routes.all_products_collection_url }}</p>
+          </div>
+        </header>
+      {% endif %}
+    </div>
+  </div>
+</div>

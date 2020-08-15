@@ -1,0 +1,130 @@
+<style>
+  .input-full {
+    padding: 20px;    
+    color: #c2c2c2;
+    font-weight: 400;
+    border: 2px solid #EEEAE7;
+    font-size: 14px !important;
+  }
+  .input-full:focus, .input-full:hover {   
+    color: #000;
+    border: 2px solid #EEEAE7;
+  }
+</style>
+<div class="customer-service-content-container control_hulk">
+  <div class="tab myTab">
+    <button class="tablinks active" onclick="openTab(event, 'knowsize')">I KNOW MY SIZE</button>
+    <button class="tablinks" onclick="openTab(event, 'dontknowsize')">I DON'T KNOW MY SIZE</button>
+    <button class="tablinks" onclick="openTab(event, 'measurevideo')">HOW TO MEASURE</button> 
+  </div>
+  <div id="knowsize" class="tabcontent tabcontentCustom">
+    <div class="size-chart-container">
+      <form id="custom-sizing-form" class="form-vertical">
+        <div class="grid grid--small">
+          <div class="grid__item medium-up--one-third">
+              <label for="">My Height</label>
+              <input type="text" class="input-full textbox_selected" placeholder="My Height (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Shoulder</label>
+              <input type="text" class="input-full textbox_selected" placeholder="Shoulder (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Upper Bust</label>
+              <input type="text" class="input-full" placeholder="Upper Bust (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Bust</label>
+              <input type="text" class="input-full" placeholder="Bust (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Under Bust</label>
+              <input type="text" class="input-full" placeholder="Under Bust (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Arm Hole</label>
+              <input type="text" class="input-full" placeholder="Arm Hole (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Sleeve Length</label>
+              <input type="text" class="input-full" placeholder="Sleeve Length (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Bicep</label>
+              <input type="text" class="input-full" placeholder="Bicep (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Elbow Round</label>
+              <input type="text" class="input-full" placeholder="Elbow Round (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Wrist</label>
+              <input type="text" class="input-full" placeholder="Wrist (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Waist</label>
+              <input type="text" class="input-full" placeholder="Waist (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Lower Waist</label>
+              <input type="text" class="input-full" placeholder="Lower Waist (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Hips</label>
+              <input type="text" class="input-full" placeholder="Hips (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Full Length</label>
+              <input type="text" class="input-full" placeholder="Full Length (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Bottom Length</label>
+              <input type="text" class="input-full" placeholder="Bottom Length (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Blouse Yoke Length</label>
+              <input type="text" class="input-full" placeholder="Blouse Yoke Length (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Front Next Depth</label>
+              <input type="text" class="input-full" placeholder="Front Next Depth (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Back Neck Depth</label>
+              <input type="text" class="input-full" placeholder="Back Neck Depth (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Crotch Length</label>
+              <input type="text" class="input-full" placeholder="Crotch Length (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Thigh Round</label>
+              <input type="text" class="input-full" placeholder="Thigh Round (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Knee Round</label>
+              <input type="text" class="input-full" placeholder="Knee Round (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Calf</label>
+              <input type="text" class="input-full" placeholder="Calf (inches)">
+          </div>
+          <div class="grid__item medium-up--one-third">
+              <label for="">Ankle Round</label>
+              <input type="text" class="input-full" placeholder="Ankle Round (inches)">
+          </div>  
+        </div>
+        <button type="submit" class="btn text_14 contact_submit_btn">SUBMIT</button>
+      </form>
+    </div>
+  </div>
+  
+  <div id="dontknowsize" class="tabcontent tabcontentCustom" style="display: none;">
+    {% include 'dont-know-form' %}
+  </div>
+  
+  <div id="measurevideo" class="tabcontent tabcontentCustom" style="display: none;">
+    <video controls="controls" style="width: 100%; height: auto;">
+      <source src="https://cdn.shopify.com/s/files/1/2100/2051/files/sampleVideo.mp4?v=1591843825" type="video/mp4"></video>
+  </div>
+</div>

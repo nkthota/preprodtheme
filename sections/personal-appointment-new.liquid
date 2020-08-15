@@ -1,0 +1,269 @@
+<div class="faq_new_page appoint_new_page page-width page-content{% if section.blocks.size > 0 %} page-content--with-blocks{% endif %}">
+  {% if section.settings.title != blank or section.settings.quote != blank %}
+  <div class="section-header text-center about_header appoint_header">
+    {% if section.settings.title != blank %}
+    <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+    
+    {% if section.settings.subtitle != blank %}
+    <p class="appoint_sub text_14">{{ section.settings.subtitle | newline_to_br }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
+  
+  {% if section.settings.img %}
+  <div class="appoint_img text-center">
+      <img src="{{ section.settings.img | img_url: 'master' }}" alt="{{ section.settings.img.alt }}">
+  </div>
+  {% endif %}
+  
+  <div class="grid relative_grid">
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'text_block' %}
+    <div class="grid__item medium-up--four-twelfths">
+      <div class="faq_wrapper appoint_wrapper text-center">
+        {% if block.settings.text != blank %}
+        <p class="appoint_text text_14">{{ block.settings.text }}</p>
+        {% endif %}
+        
+        {% if block.settings.title != blank %}
+        <h3 class="heading faq_heading appoint_heading">{{ block.settings.title | newline_to_br }}</h3>
+        {% endif %} 
+
+        {% if block.settings.desc != blank %}
+        <p class="appoint_desc text_14">{{ block.settings.desc | newline_to_br }}</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endcase %}
+    {% endfor %}
+  </div>
+
+  <div class="grid">
+    <div class="grid__item medium-up--four-twelfths how_wooork">
+      <div class="appoint_howworks text-left">
+        <h3 class="heading faq_heading howwork_heading">{{ section.settings.howwork_title }}</h3>
+
+        {{ section.settings.howwork_text }}
+      </div>
+    </div>
+
+    <div class="grid__item medium-up--eight-twelfths how_wooork_form">
+      <div class="appoint_form">
+        <div class="appoint_howworks text-left">
+          <h3 class="heading faq_heading howwork_heading">{{ section.settings.form_title }}</h3>
+        </div>
+
+        <!-- <div class="form-vertical contact_form appoint_vertical_form"> -->
+        <div class="contact_form appoint_vertical_form">
+
+          <!-- Calendly link widget begin -->
+          <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+          <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+          <a href="" class="btn" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/indiaspopup/personal-appointment'});return false;">Schedule Personal Appointment</a>
+          <!-- Calendly link widget end -->
+
+          {% comment %}
+          {% form 'contact' %}
+
+          {% if form.posted_successfully? %}
+          <p class="note note--success">
+            {{ 'contact.form.post_success' | t }}
+          </p>
+          {% endif %}
+
+          {{ form.errors | default_errors }}
+
+          <div class="grid grid--small">
+            <div class="grid__item medium-up--one-half">
+              <input type="text" 
+                     id="ContactFormName" 
+                     class="input-full text_14" 
+                     name="contact[name]" 
+                     autocapitalize="words" 
+                     value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" 
+                     placeholder="First Name">
+            </div>
+
+            <div class="grid__item medium-up--one-half">
+              <input type="text" 
+                     id="ContactFormName" 
+                     class="input-full text_14" 
+                     name="contact[lname]" 
+                     autocapitalize="words" 
+                     value="{{ form.name }}" 
+                     placeholder="Last Name">
+            </div>
+
+            <div class="grid__item medium-up--one-half">
+              <input type="text" 
+                     id="ContactFormSubject" 
+                     class="input-full text_14" 
+                     name="contact[subject]" 
+                     autocorrect="off" 
+                     autocapitalize="off" 
+                     placeholder="Subject">
+            </div>
+
+            <div class="grid__item medium-up--one-half">              
+              <select class="input-full text_14">
+                <option value="" disabled="" selected="">Select Your Service</option>
+                <option value="free">Free</option>
+                <option value="basic">Basic</option>
+                <option value="professional">Professional</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </div>
+
+            <div class="grid__item medium-up--one-whole email_whole">
+              <input type="email" 
+                     id="ContactFormEmail" 
+                     class="input-full text_14" 
+                     name="contact[email]" 
+                     autocorrect="off" 
+                     autocapitalize="off" 
+                     value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" 
+                     placeholder="Enter Your E-Mail">
+            </div>
+          </div>
+
+          <textarea rows="10" 
+                    id="ContactFormMessage" 
+                    class="input-full input__textarea text_14" 
+                    name="contact[body]" 
+                    placeholder="Type your message here...">
+            {% if form.body %}{{ form.body }}{% endif %}
+          </textarea>
+
+          <div class="grid grid--small">
+            <div class="grid__item medium-up--one-half btn_grid_item">
+              <button type="submit" class="btn text_14 contact_submit_btn appoint_submit_btn">SUBMIT</button>
+            </div>
+          </div>
+
+          {% endform %}
+
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="faq_new_page fix_help_nav">
+    <div class="grid">
+      {% include 'help-center-navigation' %}
+    </div>
+  </div>
+</div>
+
+
+<style>
+  html, body {
+    height: auto !important;
+  }
+  .input-full {
+    padding: 20px 15px;    
+    color: #c2c2c2;
+    font-weight: 400;
+    border: 2px solid #EEEAE7;
+    font-size: 14px !important;
+  }
+  .input-full:focus, .input-full:hover {   
+    color: #000;
+    border: 2px solid #EEEAE7;
+  }
+  select {
+    background-image: url({{ 'dropdown.png' | asset_url }});
+    background-position: right 20px center;
+    background-size: auto;
+  }
+  .form-vertical input, 
+  .form-vertical select, 
+  .form-vertical textarea {
+    margin-bottom: 22px;
+  }
+</style>
+
+<script>
+  $(window).on('load', function(){
+      $('.input__textarea').text('');
+  })
+</script>
+
+
+
+{% schema %}
+  {
+    "name": "Personal Appointment",
+    "class": "position_relative",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Personal Shopping"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "Subtitle"
+      },
+      {
+        "type": "image_picker",
+        "id": "img",
+        "label": "Upload Image"
+      },
+      {
+        "type": "header",
+        "content": "How it works"
+      },
+      {
+        "type": "text",
+        "id": "howwork_title",
+        "label": "Title",
+        "default": "HOW IT WORKS"
+      },
+      {
+        "type": "richtext",
+        "id": "howwork_text",
+        "label": "Content"
+      },
+      {
+        "type": "header",
+        "content": "Form"
+      },
+      {
+        "type": "text",
+        "id": "form_title",
+        "label": "form Title",
+        "default": "REQUEST AND APPOINTMENT"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Text Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Title",
+            "default": "(30-60 MINUTES)"
+          },
+          {
+            "type": "textarea",
+            "id": "title",
+            "label": "Title",
+            "default": "THE NEW SEASON REFRESHER"
+          },
+          {
+            "type": "textarea",
+            "id": "desc",
+            "label": "Description"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

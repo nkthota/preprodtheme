@@ -1,0 +1,124 @@
+<div class="grid__item medium-up--three-twelfths">
+  <div class="faq_wrapper{% if page.handle == 'shipping-and-returns' %} active{% endif %}">
+    <a href="{% if page.handle == 'shipping-and-returns' %}javascript:void(0){% else %}/pages/shipping-and-returns{% endif %}">
+      <img class="faq_icon" src="{{ 'return.png' | asset_url }}" alt="return">
+      <h3 class="heading faq_heading">Shipping & Returns</h3>
+    </a>
+  </div>
+</div>
+
+<div class="grid__item medium-up--three-twelfths">
+  <div class="faq_wrapper{% if page.handle == 'personal-shopping' %} active{% endif %}">
+    <a href="{% if page.handle == 'personal-shopping' %}javascript:void(0){% else %}/pages/personal-shopping{% endif %}">
+      <img class="faq_icon" src="{{ 'shopping-bag.png' | asset_url }}" alt="shopping-bag">
+      <h3 class="heading faq_heading">Personal Shopping</h3>
+    </a>
+  </div>
+</div>
+
+<div class="grid__item medium-up--three-twelfths">
+  <div class="faq_wrapper">
+    <a href="/products/gift-card">
+      <img class="faq_icon" src="{{ 'gift-card.png' | asset_url }}" alt="gift-card">
+      <h3 class="heading faq_heading">Gift Cards</h3>
+    </a>
+  </div>
+</div>
+
+<div class="grid__item medium-up--three-twelfths">
+  <div class="faq_wrapper{% if page.handle == 'popup-perks' %} active{% endif %}">
+    <a href="{% if page.handle == 'popup-perks' %}javascript:void(0){% else %}/pages/popup-perks{% endif %}">
+      <img class="faq_icon" src="{{ 'gift.png' | asset_url }}" alt="rewards">
+      <h3 class="heading faq_heading">Rewards</h3>
+    </a>
+  </div>
+</div>
+
+<div class="grid__item medium-up--three-twelfths">
+  <div class="faq_wrapper">
+    <a href="/account">
+      <img class="faq_icon" src="{{ 'user.png' | asset_url }}" alt="user">
+      <h3 class="heading faq_heading">My Account</h3>
+    </a>
+  </div>
+</div>
+
+<div class="grid__item medium-up--three-twelfths">
+  <div class="faq_wrapper">    
+    <div id="size_guide" style="display: block;">
+      <img class="faq_icon" src="{{ 'sizing-guide.png' | asset_url }}" alt="sizing-guide">
+      <h3 class="heading faq_heading">Sizing Guide</h3>
+    </div>
+
+    <div id="sizeGuideModal">  
+      <div class="modal-content">
+        <span class="moadl_close">x</span>
+        <div class="modal-body">
+          {% include 'size-guide' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid__item medium-up--three-twelfths">
+  <div class="faq_wrapper">
+    <a href="/pages/contact">
+      <img class="faq_icon" src="{{ 'phone-call.png' | asset_url }}" alt="phone-call">
+      <h3 class="heading faq_heading">Contact US</h3>
+    </a>
+  </div>
+</div>
+
+<div class="grid__item medium-up--three-twelfths">
+  <div class="faq_wrapper">
+    {% assign track_url = '/account/login' %}
+    {% if customer  and shop.customer_accounts_enabled %}    
+    {% assign track_url = '/pages/order' %}
+    {% endif %}
+    
+    <a href="{{ track_url }}">
+      <img class="faq_icon" src="{{ 'truck.png' | asset_url }}" alt="truck">
+      <h3 class="heading faq_heading">Track your order</h3>
+    </a>
+  </div>
+</div>
+
+<style>
+  .faq_wrapper img {
+    max-width: 48px;
+  }
+</style>
+
+<script>
+  var modal = document.getElementById("sizeGuideModal");
+  var btn = document.getElementById("size_guide");
+  var span = document.getElementsByClassName("moadl_close")[0];
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  function openTabGuide(evt, tabHandle) {
+    var j, tabcontentGuide, tablinksguide;
+    tabcontentGuide = document.getElementsByClassName("tabcontentGuide");
+    for (j = 0; j < tabcontentGuide.length; j++) {
+      tabcontentGuide[j].style.display = "none";
+    }
+    tablinksguide = document.getElementsByClassName("tablinksguide");
+    for (j = 0; j < tablinksguide.length; j++) {
+      tablinksguide[j].className = tablinksguide[j].className.replace(" active", "");
+    }
+    document.getElementById(tabHandle).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>

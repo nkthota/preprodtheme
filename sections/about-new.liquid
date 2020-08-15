@@ -1,0 +1,110 @@
+<div class="about_page_new page-width page-content">
+  {% if section.settings.title != blank or section.settings.quote != blank %}
+  <div class="section-header text-center about_header">
+    {% if section.settings.title != blank %}
+    <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+    
+    {% if section.settings.quote != blank %}
+    <p class="about_quote text_14 text_italic">{{ section.settings.quote }}</p>
+    {% endif %}
+  </div>
+  {% endif %}  
+  
+
+  <div class="grid grid_first">
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'text_right_block' %}
+    <div class="grid__item medium-up--one-whole">
+      <div class="grid d-flex align-items-center">
+        <div class="grid__item grid_item_second medium-up--one-half">
+          <div class="about_imgwrapper text-right">
+            <img class="ab_img" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt }}">
+          </div>
+        </div>
+        <div class="grid__item grid_item_second medium-up--one-half">
+          <div class="about_contentwrapper about_contentwrapper1">
+            <p class="ab_content">{{ block.settings.content | newline_to_br }}</p>
+          </div>
+        </div>
+      </div>      
+    </div>
+
+    {% when 'text_left_block' %}
+    <div class="grid__item medium-up--one-whole text_left_block">
+      <div class="grid d-flex align-items-center">
+        <div class="grid__item grid_item_second medium-up--one-half">
+          <div class="about_contentwrapper">
+            <p class="ab_content text-right">{{ block.settings.content | newline_to_br }}</p>
+          </div>
+        </div>
+
+        <div class="grid__item grid_item_second medium-up--one-half">
+          <div class="about_imgwrapper about_img2">
+            <img class="ab_img ab_img2" src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.image.alt }}">
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+{% schema %}
+  {
+    "name": "About page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "ABOUT US"
+      },
+      {
+        "type": "text",
+        "id": "quote",
+        "label": "Quote",
+        "default": "“My focus has always been on curating only the best in fashion, alongside providing a luxury shopping environment both online and offline.”"
+      }
+	],
+    "blocks": [
+      {
+        "type": "text_right_block",
+        "name": "Text Right Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      },
+      {
+        "type": "text_left_block",
+        "name": "Text Left Block",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

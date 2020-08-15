@@ -1,0 +1,268 @@
+{% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
+{% form 'product', product, id: form_id, class: 'product-single__form' %}
+  {% unless product.has_only_default_variant %}
+    {% for option in product.options_with_values %}
+      {% if settings.variant_type == 'button' %}
+        {% include 'variant-button', section_id: section_id, option_drop: option %}
+      {% else %}
+        {% include 'variant-dropdown', section_id: section_id %}
+      {% endif %}
+    {% endfor %}
+  {% endunless %}
+
+  <select name="id" id="ProductSelect-{{ section_id }}" class="product-single__variants no-js">
+    {% for variant in product.variants %}
+      {% if variant.available %}
+        <option {% if variant == product.selected_or_first_available_variant %}
+          selected="selected" {% endif %}
+          value="{{ variant.id }}">
+          {{ variant.title }} - {{ variant.price | money_with_currency }}
+        </option>
+      {% else %}
+        <option disabled="disabled">
+          {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+        </option>
+      {% endif %}
+    {% endfor %}
+  </select>
+
+  <!-- <label class="variant__label" for="">Custom Sizing</label> -->
+  {% if product.type == 'Clothing' or product.type == 'clothing' or product.tags contains 'Clothing' or product.tags contains 'clothing' %}
+    <div class="product_custom_sizing">
+      <div class="size_wrpper">
+        <label class="variant__label custom_sizing_label" for="">Complimentary Custom Size</label>
+        <div id="size_guide">
+          <img src="{{ 'ruler-1.png' | asset_url }}" alt="ruler-icon"> 
+          <span class="size_t">Size Guide</span>
+        </div>
+      </div>
+      <div class="grid grid--small hide">
+        <div class="grid__item medium-up--one-third">
+            <label for="">My Height</label>
+            <input type="text" class="input-full textbox_selected" name="properties[My Height (inches)]" placeholder="My Height (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Shoulder</label>
+            <input type="text" class="input-full textbox_selected" name="properties[Shoulder (inches)]" placeholder="Shoulder (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Upper Bust</label>
+            <input type="text" class="input-full" name="properties[Upper Bust (inches)]" placeholder="Upper Bust (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Bust</label>
+            <input type="text" class="input-full" name="properties[Bust (inches)]" placeholder="Bust (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Under Bust</label>
+            <input type="text" class="input-full" name="properties[Under Bust (inches)]" placeholder="Under Bust (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Arm Hole</label>
+            <input type="text" class="input-full" name="properties[Arm Hole (inches)]" placeholder="Arm Hole (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Sleeve Length</label>
+            <input type="text" class="input-full" name="properties[Sleeve Length (inches)]" placeholder="Sleeve Length (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Bicep</label>
+            <input type="text" class="input-full" name="properties[Bicep (inches)]" placeholder="Bicep (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Elbow Round</label>
+            <input type="text" class="input-full" name="properties[Elbow Round (inches)]" placeholder="Elbow Round (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Wrist</label>
+            <input type="text" class="input-full" name="properties[Wrist (inches)]" placeholder="Wrist (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Waist</label>
+            <input type="text" class="input-full" name="properties[Waist (inches)]" placeholder="Waist (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Lower Waist</label>
+            <input type="text" class="input-full" name="properties[Lower Waist (inches)]" placeholder="Lower Waist (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Hips</label>
+            <input type="text" class="input-full" name="properties[Hips (inches)]" placeholder="Hips (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Full Length</label>
+            <input type="text" class="input-full" name="properties[Full Length (inches)]" placeholder="Full Length (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Bottom Length</label>
+            <input type="text" class="input-full" name="properties[Bottom Length (inches)]" placeholder="Bottom Length (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Blouse Yoke Length</label>
+            <input type="text" class="input-full" name="properties[Blouse Yoke Length (inches)]" placeholder="Blouse Yoke Length (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Front Next Depth</label>
+            <input type="text" class="input-full" name="properties[Front Next Depth (inches)]" placeholder="Front Next Depth (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Back Neck Depth</label>
+            <input type="text" class="input-full" name="properties[Back Neck Depth (inches)]" placeholder="Back Neck Depth (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Crotch Length</label>
+            <input type="text" class="input-full" name="properties[Crotch Length (inches)]" placeholder="Crotch Length (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Thigh Round</label>
+            <input type="text" class="input-full" name="properties[Thigh Round (inches)]" placeholder="Thigh Round (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Knee Round</label>
+            <input type="text" class="input-full" name="properties[Knee Round (inches)]" placeholder="Knee Round (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Calf</label>
+            <input type="text" class="input-full" name="properties[Calf (inches)]" placeholder="Calf (inches)">
+        </div>
+        <div class="grid__item medium-up--one-third">
+            <label for="">Ankle Round</label>
+            <input type="text" class="input-full" name="properties[Ankle Round (inches)]" placeholder="Ankle Round (inches)">
+        </div>  
+      </div>
+    </div>
+  {% endif %}
+
+
+  {% if settings.quantity_enable %}
+    <div class="product__quantity product__quantity--{{ settings.variant_type }}">
+      <label for="Quantity-{{ section_id }}">{{ 'products.product.quantity' | t }}</label>
+      {% include 'quantity-input', id: section_id, qty: 1, min: 1 %}
+    </div>
+  {% endif %}
+
+  {%- assign inventory_visible = false -%}
+  {%- if settings.inventory_enable and current_variant.inventory_management == 'shopify' -%}
+    {%- if current_variant.inventory_quantity <= settings.inventory_threshold and current_variant.inventory_quantity >= 0 -%}
+      {%- assign inventory_visible = true -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- if current_variant.inventory_quantity == 0 -%}
+    {%- assign inventory_visible = false -%}
+  {%- endif -%}
+
+  <div
+    id="ProductInventory-{{ section_id }}"
+    class="product__inventory {% unless inventory_visible %}hide{% endunless %}"
+    >
+    {% if current_variant.available %}
+      {{ 'products.product.stock_label' | t: count: current_variant.inventory_quantity }}
+    {% endif %}
+  </div>
+
+  {%- if settings.inventory_transfers_enable -%}
+    <div
+      id="ProductIncomingInventory-{{ section_id }}"
+      class="product__inventory{% if inventory_visible %} hide{% endif %}">
+      {%- if current_variant.incoming and inventory_visible == false -%}
+        {%- if current_variant.next_incoming_date -%}
+          {% assign date = current_variant.next_incoming_date | date: format: 'date' %}
+          {%- if current_variant.available -%}
+            {{ 'products.product.will_not_ship_until' | t: date: date }}
+          {%- else -%}
+            {{ 'products.product.will_be_in_stock_after' | t: date: date }}
+          {%- endif -%}
+        {%- else -%}
+          {{ 'products.product.waiting_for_stock' | t }}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+{% comment %}
+<div class="shippingearn_area pricematch_area">
+  <div id="aivaForm" class="price_item shipping_area">
+    <div class="price_match_btn">
+<!--       <img src="{{ 'pricematch.png' | asset_url }}" alt="price-match-icon"> -->
+      <?xml version="1.0"?>
+<svg class="price_match_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><g id="money_&#xB7;_ecommerce_&#xB7;_buy_&#xB7;_bag_&#xB7;_shopping" data-name="money &#xB7; ecommerce  &#xB7; buy &#xB7; bag &#xB7; shopping"><path d="M61,14H56V13A10.987,10.987,0,0,0,40,3.21,10.987,10.987,0,0,0,24,13v1H15a1,1,0,0,0-1,1V34.05c-.33-.03-.66-.05-1-.05A10.989,10.989,0,0,0,6.7,54H5a3.009,3.009,0,0,0-3,3v2a3.009,3.009,0,0,0,3,3H23a3.01,3.01,0,0,0,2.82-2H43a3.009,3.009,0,0,0,3-3V56h9a7.008,7.008,0,0,0,7-7V15A1,1,0,0,0,61,14ZM45,4a9.014,9.014,0,0,1,9,9v1H46V13a10.988,10.988,0,0,0-4-8.48A9.048,9.048,0,0,1,45,4Zm0,19a1,1,0,0,0,1-1V20.28a2,2,0,1,1-2,0V22A1,1,0,0,0,45,23ZM40,5.52A9.01,9.01,0,0,1,44,13v1H36V13A9.01,9.01,0,0,1,40,5.52ZM26,13A8.987,8.987,0,0,1,38,4.52,10.988,10.988,0,0,0,34,13v1H26ZM25,23a1,1,0,0,0,1-1V20.28a2,2,0,1,1-2,0V22A1,1,0,0,0,25,23ZM4,45a9,9,0,1,1,9,9A9.014,9.014,0,0,1,4,45ZM24,59a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V57a1,1,0,0,1,1-1H23a1,1,0,0,1,1,1Zm-1.82-5H19.3a10.97,10.97,0,0,0,4.27-6h.61A3,3,0,0,0,24,49v2a3.02,3.02,0,0,0,.22,1.12A2.981,2.981,0,0,0,22.18,54ZM41,42a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H23.95c.03-.33.05-.66.05-1a10.665,10.665,0,0,0-.43-3ZM26,39V37a1,1,0,0,1,1-1H45a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1H27A1,1,0,0,1,26,39ZM44,57a1,1,0,0,1-1,1H26V57a3,3,0,0,0-1.71-2.7A1,1,0,0,1,25,54H43a1,1,0,0,1,1,1Zm1-5H27a1,1,0,0,1-1-1V49a1,1,0,0,1,1-1H45a1,1,0,0,1,1,1v2A1,1,0,0,1,45,52Zm4,2H45.82a.564.564,0,0,1-.04-.12A2.994,2.994,0,0,0,48,51V49a3.009,3.009,0,0,0-3-3H43.82A3,3,0,0,0,44,45V43a3,3,0,0,0-.18-1H45a3.009,3.009,0,0,0,3-3V37a3.009,3.009,0,0,0-3-3H27a3.009,3.009,0,0,0-3,3v2a3,3,0,0,0,.18,1H22.79A11.026,11.026,0,0,0,16,34.43V16h8v2.14a4,4,0,1,0,2,0V16H44v2.14a4,4,0,1,0,2,0V16h8V49A5,5,0,0,1,49,54Zm11-5a5,5,0,0,1-5,5H53.89A6.97,6.97,0,0,0,56,49V16h4Z"/><path d="M12,42h2a1,1,0,0,1,1,1,1,1,0,0,0,2,0,3,3,0,0,0-3-3V39a1,1,0,0,0-2,0v1a3,3,0,0,0,0,6h2a1,1,0,0,1,0,2H12a1,1,0,0,1-1-1,1,1,0,0,0-2,0,3,3,0,0,0,3,3v1a1,1,0,0,0,2,0V50a3,3,0,0,0,0-6H12a1,1,0,0,1,0-2Z"/></g></svg>
+
+      <span>Price Match</span>
+    </div>
+  </div>
+  <div class="price_item shipping_area">
+    <span>Get a 20% discount on your<br> order using code: <strong>SALE20</strong></span>
+  </div>
+</div>
+{% endcomment %}
+
+{% include 'product-callout' %}
+
+<div class="shippingearn_area">
+  <div class="shipping_area">
+    <div class="simg">
+      <img src="{{ 'airplane.png' | file_img_url }}" alt="shipping" id="simg">
+    </div>
+    <span>FREE SHIPPING</span>
+  </div>
+  <div class="earn_area shipping_area">
+    <div class="simg eimg">
+      <img src="{{ 'premium_rewards.png' | file_img_url }}" alt="rewards" id="rimg">
+    </div>
+    <span>EARN <span id="reward-point"></span> REWARD POINTS</span>
+  </div>
+</div>
+
+
+
+  {%- assign enable_dynamic_buttons = false -%}
+  {% if settings.enable_payment_button and template != 'product.preorder' %}
+    {%- assign enable_dynamic_buttons = true -%}
+  {% endif %}
+
+  {% if enable_dynamic_buttons %}
+    <div class="payment-buttons">
+  {% endif %}
+
+    <button
+      {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
+      name="add"
+      id="AddToCart-{{ section_id }}"
+      class="btn btn--full add-to-cart{% if enable_dynamic_buttons %} btn--secondary{% endif %}"
+      {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+      <span id="AddToCartText-{{ section_id }}">
+        {% if current_variant.available %}
+          {% if template == 'product.preorder' %}
+            {{ 'products.product.preorder' | t }}
+          {% else %}
+            ADD TO CART
+          {% endif %}
+        {% else %}
+          {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </span>
+    </button>
+      
+      <div class="my_wishlist_btn">
+        {% capture the_snippet_fave %}{% render 'socialshopwave-widget-fave' %}{% endcapture %}{% unless the_snippet_fave contains 'Liquid error' %}{{ the_snippet_fave }}{% endunless %}
+      </div>
+      
+      
+    {% if enable_dynamic_buttons %}
+      {{ form | payment_button }}
+    {% endif %}
+
+  {% if enable_dynamic_buttons %}
+    </div>
+  {% endif %}
+
+  <div id="VariantsJson-{{ section_id }}" class="hide" aria-hidden="true">
+    {{ product.variants | json }}
+  </div>
+  {% if product.options.size > 1 %}
+    <div id="CurrentVariantJson-{{ section_id }}" class="hide" aria-hidden="true">
+      {{ current_variant | json }}
+    </div>
+  {% endif %}
+
+{% endform %}

@@ -1,0 +1,128 @@
+<h6 class="add_book">Measurements (in inches)</h6>
+
+<form id="metafields_form">
+  <input type="hidden" name="customer[id]" value="{{ customer.id }}" />
+  <div class="metafield_wrapper">
+    <div class="metafield_content">
+      <p>
+        <label>My Height</label>
+        <input type="text" id="my_height" name="metafield[accentuate.my_height]"
+               value="{{customer.metafields.accentuate.my_height}}" placeholder="My Height">
+      </p>
+      <p>
+        <label>Shoulder</label>
+        <input type="text" name="metafield[accentuate.shoulder]"
+               value="{{customer.metafields.accentuate.shoulder}}" placeholder="Shoulder">
+      </p>
+      <p>
+        <label>Upper Bust</label>
+        <input type="text" name="metafield[accentuate.upper_bust]"
+               value="{{customer.metafields.accentuate.upper_bust}}" placeholder="Upper Bust">
+      </p>
+      <p>
+        <label>Bust</label>
+        <input type="text" name="metafield[accentuate.bust]" value="{{customer.metafields.accentuate.bust}}"
+               placeholder="Bust">
+      </p>
+      <p>
+        <label>Under Bust</label>
+        <input type="text" name="metafield[accentuate.under_bust]"
+               value="{{customer.metafields.accentuate.under_bust}}" placeholder="Under Bust">
+      </p>
+      <p>
+        <label>Arm Hole</label>
+        <input type="text" name="metafield[accentuate.arm_hole]"
+               value="{{customer.metafields.accentuate.arm_hole}}" placeholder="Arm Hole">
+      </p>
+      <p>
+        <label>Sleeve Length</label>
+        <input type="text" name="metafield[accentuate.sleeve_length]"
+               value="{{customer.metafields.accentuate.sleeve_length}}" placeholder="Sleeve Length">
+      </p>
+      <p>
+        <label>Bicep</label>
+        <input type="text" name="metafield[accentuate.bicep]"
+               value="{{customer.metafields.accentuate.bicep}}" placeholder="Bicep">
+      </p>
+      <p>
+        <label>Elbow Round</label>
+        <input type="text" name="metafield[accentuate.elbow_round]"
+               value="{{customer.metafields.accentuate.elbow_round}}" placeholder="Elbow Round">
+      </p>
+      <p>
+        <label>Waist</label>
+        <input type="text" name="metafield[accentuate.waist]"
+               value="{{customer.metafields.accentuate.waist}}" placeholder="Waist">
+      </p>
+      <p>
+        <label>Lower Waist</label>
+        <input type="text" name="metafield[accentuate.lower_waist]"
+               value="{{customer.metafields.accentuate.lower_waist}}" placeholder="Lower Waist">
+      </p>
+      <p>
+        <label>Hips</label>
+        <input type="text" name="metafield[accentuate.hips]" value="{{customer.metafields.accentuate.hips}}"
+               placeholder="Hips">
+      </p>
+      <p>
+        <label>Full Length</label>
+        <input type="text" name="metafield[accentuate.full_length]"
+               value="{{customer.metafields.accentuate.full_length}}" placeholder="Full Length">
+      </p>
+      <p>
+        <label>Bottom Length</label>
+        <input type="text" name="metafield[accentuate.bottom_length]"
+               value="{{customer.metafields.accentuate.bottom_length}}" placeholder="Bottom Length">
+      </p>
+      <p>
+        <label>Blouse Yoke Length</label>
+        <input type="text" name="metafield[accentuate.blouse_yoke_length]"
+               value="{{customer.metafields.accentuate.blouse_yoke_length}}" placeholder="Blouse Yoke Length">
+      </p>
+      <p>
+        <label>Front Next Depth</label>
+        <input type="text" name="metafield[accentuate.front_neck_depth]"
+               value="{{customer.metafields.accentuate.front_neck_depth}}" placeholder="Front Next Depth">
+      </p>
+      <p>
+        <label>Back Neck Depth</label>
+        <input type="text" name="metafield[accentuate.back_neck_depth]"
+               value="{{customer.metafields.accentuate.back_neck_depth}}" placeholder="Back Neck Depth">
+      </p>
+      <p>
+        <label>Crotch Length</label>
+        <input type="text" name="metafield[accentuate.crotch_length]"
+               value="{{customer.metafields.accentuate.crotch_length}}" placeholder="Crotch Length">
+      </p>
+      <p>
+        <label>Thigh Round</label>
+        <input type="text" name="metafield[accentuate.thigh_round]"
+               value="{{customer.metafields.accentuate.thigh_round}}" placeholder="Thigh Round">
+      </p>
+      <p>
+        <label>Knee Round</label>
+        <input type="text" name="metafield[accentuate.knee_round]"
+               value="{{customer.metafields.accentuate.knee_round}}" placeholder="Knee Round">
+      </p>
+      <p>
+        <label>Calf</label>
+        <input type="text" name="metafield[accentuate.calf]" value="{{customer.metafields.accentuate.calf}}"
+               placeholder="Calf">
+      </p>
+      <p>
+        <label>Ankle Round</label>
+        <input type="text" name="metafield[accentuate.ankle_round]"
+               value="{{customer.metafields.accentuate.ankle_round}}" placeholder="Ankle Round">
+      </p>
+    </div>
+
+    <div class="metafield_submit">
+      <input type="submit">
+    </div>
+  </div>
+</form>
+
+<script src="https://app.accentuate.io/dist/proxy.js"></script>
+<script>
+  Accentuate(jQuery("#metafields_form"), function (data) { console.log(data.status, data.message); alert(data.message); });
+</script>
